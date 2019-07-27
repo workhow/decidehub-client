@@ -6,11 +6,11 @@ import RegisterStepTwo from "./Register/RegisterStepTwo/RegisterStepTwo"
 class AccountLayout extends React.Component {
     render() {
         return <div>
-            <div className="flex">
-                <div className="w-2/5 h-screen p-20">
+            <div className="flex flex-col lg:flex-row">
+                <div className="w-full lg:w-2/5 h-screen p-20">
                     <RegisterStepTwo />
                 </div>
-                <div className="w-3/5 h-screen">
+                <div className="order-first lg:order-last w-full lg:w-3/5 h-screen">
                     <AccountRightPanel />
                 </div>
             </div>
