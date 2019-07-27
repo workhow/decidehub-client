@@ -8,7 +8,7 @@ class MiddleText extends React.Component {
 
     render() {
         const chosenText = sloganTr[this.chooseRandom()];
-        return <div className="text-5xl w-3/4 m-auto flex justify-center"><p className="slogan font-light"> {chosenText} </p></div>
+        return <div className="text-white text-5xl w-3/4 m-auto flex justify-center"><p className="slogan font-light"> {chosenText} </p></div>
     }
 }
 
