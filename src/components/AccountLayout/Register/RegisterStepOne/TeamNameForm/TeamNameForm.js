@@ -6,7 +6,7 @@ import ButtonSubtext from "../../ButtonSubtext/ButtonSubtext"
 
 class TeamNameForm extends React.Component {
     render () {
-        return   <div className="flex flex-wrap -mx-3 mb-6">
+        return   <div className="flex flex-wrap -mx-3 mb-6 bg-white">
         <div className="w-full px-3">
           <FormSuffix suffixText=".decidehub.com" labelText="Team Name" placeholderText="Enter your team name"/>
           <Button text="Devam Et"/>

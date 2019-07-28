@@ -4,7 +4,7 @@ import Button from "../Register/Button/Button"
 
 class ResetPassword extends React.Component {
     render () {
-        return <div className="flex flex-wrap mx-3 mb-6">
+        return <div className="flex flex-wrap mx-3 mb-6 bg-white">
         <div className="w-full px-3 mt-20">
             <p className="text-2xl mb-10 mt-5 text-gray-dark">Şifre Kurtarma</p>
             <div className="mb-5">

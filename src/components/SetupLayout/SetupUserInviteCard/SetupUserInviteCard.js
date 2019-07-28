@@ -2,7 +2,9 @@ import React from "react";
 
 class SetupUserInviteCard extends React.Component {
     render () {
-        return 
+        return <div>
+            <p>Hello from card</p>
+        </div>
     }
 }
 
