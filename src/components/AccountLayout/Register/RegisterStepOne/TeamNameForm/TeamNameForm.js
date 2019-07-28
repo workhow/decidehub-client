@@ -10,7 +10,7 @@ class TeamNameForm extends React.Component {
         <div className="w-full px-3">
           <FormSuffix suffixText=".decidehub.com" labelText="Team Name" placeholderText="Enter your team name"/>
           <Button text="Devam Et"/>
-          <ButtonSubtext textOne="Zaten bir hesabınız mı var?" textTwo="Giriş Yapın"/>
+          <ButtonSubtext text="Zaten bir hesabınız mı var?" linkText="Giriş Yapın" linkUrl="/login"/>
         </div>
       </div>
     }

@@ -31,7 +31,7 @@ class UserInfoForm extends React.Component {
         
         <div className="w-full px-3">
           <Button text="Hesap Oluştur" />
-          <ButtonSubtext textOne="Zaten bir hesabınız mı var?" textTwo="Giriş Yapın" />
+          <ButtonSubtext text="Zaten bir hesabınız mı var?" textLink="Giriş Yapın" linkUrl="/login"/>
         </div>
       </div>
     }
