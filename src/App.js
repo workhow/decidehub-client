@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import Loader from './components/Loader/Loader';
+import NotFoundLayout from './components/NotFoundLayout/NotFoundLayout';
 
 function App() {
-  return <Loader />
+  return <NotFoundLayout />
 }
 
 export default App;
