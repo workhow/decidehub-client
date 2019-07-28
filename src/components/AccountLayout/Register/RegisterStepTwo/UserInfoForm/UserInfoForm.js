@@ -8,7 +8,7 @@ import FormBlockTwo from "../../FormBlockTwo/FormBlockTwo"
 
 class UserInfoForm extends React.Component {
     render () {
-        return <div className="flex flex-wrap -mx-3 mb-6">
+        return <div className="flex flex-wrap -mx-3 mb-6 bg-white">
         <div className="w-1/2 px-3 my-5">
           <FormBlockTwo labelText="Yönetici Adı" placeholderText="Ad"/>
         </div>
@@ -31,7 +31,7 @@ class UserInfoForm extends React.Component {
         
         <div className="w-full px-3">
           <Button text="Hesap Oluştur" />
-          <ButtonSubtext textOne="Zaten bir hesabınız mı var?" textTwo="Giriş Yapın" />
+          <ButtonSubtext text="Zaten bir hesabınız mı var?" textLink="Giriş Yapın" linkUrl="/login"/>
         </div>
       </div>
     }
