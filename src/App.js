@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import AccountLayout from './components/AccountLayout/AccountLayout'
+import Loader from './components/Loader/Loader';
 
 function App() {
-  return <AccountLayout />
+  return <Loader />
 }
 
 export default App;
