@@ -13,7 +13,7 @@ class ResetPassword extends React.Component {
 
                 <FormBlock labelText="Kodunuzu girin" placeholderText=" - - - - - - "/>
                 <p className="text-xs mt-5 text-gray-dark text-right">Tekrar Gönder</p>
-                <div>
+                <div className="mt-12">
                     <Button text="Devam Et"/>
                 </div>
             </div>

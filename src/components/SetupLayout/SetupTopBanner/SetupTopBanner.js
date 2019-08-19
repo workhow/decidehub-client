@@ -8,7 +8,7 @@ class SetupTopBanner extends React.Component {
             <img src={logo} alt="decidehub colored logo" className="p-12"/>
             <div className="w-3/5 m-auto">
                 <p className="text-gray-dark text-2xl">{this.props.text}</p>
-                <p className="text-gray-text text-sm mt-4 mb-12">{this.props.subText}</p>
+                <p className="text-gray-text text-sm mt-4 mb-12">{this.props.subtext}</p>
             </div>
         </div>
     }
