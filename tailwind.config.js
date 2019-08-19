@@ -6,7 +6,8 @@ module.exports = {
           text: "#98A9BC",
           bg: "#F4F6F5",
           border: "#E8ECEF",
-          dark: "#323A4A"
+          dark: "#323A4A",
+          light: "#EFF0F6",
         }
       },
     }
