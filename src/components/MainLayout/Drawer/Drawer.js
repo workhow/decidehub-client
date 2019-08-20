@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   list: {
-    width: 500,
+    width: 250,
   },
   fullList: {
     width: 'auto',
@@ -44,6 +44,7 @@ export default function TemporaryDrawer() {
       <Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>
         {sideList('right')}
       </Drawer>
+
     </div>
   );
 }

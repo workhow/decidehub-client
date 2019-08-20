@@ -18,3 +18,11 @@
     }
   }
 
+.MuiDrawer-paper{
+  width:33%;
+}
+
+.MuiButton-label{
+  color: #98A9BC;
+  margin-left: 1rem;
+}

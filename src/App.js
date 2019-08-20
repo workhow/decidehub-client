@@ -9,6 +9,7 @@ import ResetPasswordLayout from './components/AccountLayout/ResetPasswordLayout'
 import SetupLayout from './components/SetupLayout/SetupLayout';
 import MainLayout from './components/MainLayout/MainLayout';
 import UsersLayout from './components/MainLayout/Users/UsersLayout';
+import SettingsLayout from './components/MainLayout/Settings/SettingsLayout'
 import Drawer from './components/MainLayout/Drawer/Drawer';
 
 const App = () => <Router>
@@ -22,7 +23,7 @@ const App = () => <Router>
             <Route exact path="/setup" component={SetupLayout}/>
             <Route exact path="/main" component={MainLayout}/>
             <Route exact path="/users" component={UsersLayout}/>
-            <Route exact path="/drawer" component={Drawer}/>
+            <Route exact path="/settings" component={SettingsLayout}/>
         </Switch>
     </Fragment>
 </Router>

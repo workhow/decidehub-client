@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
+import MenuLogo from '../menu.svg';
 
 class Card extends Component {
 
     render() {
         return (
             <div
-                className='flex flex-col items-center bg-white py-5 border border-gray-light m-5'>
+                className='bg-white py-5 border border-gray-light m-5'>
+                <Link to="!#">
+                    <img src={MenuLogo} alt="menu logo" className="flex flex row ml-auto mr-5"/>
+                </Link>
+                <div className="flex flex-col items-center">
                 <img
                     src={this.props.imgLink}
                     alt='profile pic'
@@ -16,6 +21,7 @@ class Card extends Component {
                         <h3 className='text-xl text-gray-dark'>{this.props.name}</h3>
                         <p className=' text-sm lg:text-base text-gray-text py-5'>{this.props.email}</p>
                     </div>
+                </div>
                 </div>
             </div>
         )
