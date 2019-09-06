@@ -24,7 +24,7 @@ class SignIn extends React.Component {
                     <p className="text-xs text-gray-dark font-bold text-right">Şifremi Unuttum</p>
                 </div>
             </div>
-            <div>
+            <div className="mt-16">
                 <Button text="Devam Et"/>
             </div>
 			<ButtonSubtext text="Don't have an account?" linkText="Sign up here" linkUrl="/login"/>

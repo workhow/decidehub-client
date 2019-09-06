@@ -13,7 +13,6 @@ class NotFoundLayout extends React.Component {
             <div className="flex flex-wrap w-2/12 m-auto">
                 <Button text="ANA SAYFAYA DÖN"/>
             </div>
-
         </div>
     }   
 }

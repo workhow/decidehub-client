@@ -29,7 +29,7 @@ class UserInfoForm extends React.Component {
 
         <Checkbox text="Okudum, onaylıyorum."/>
         
-        <div className="w-full px-3">
+        <div className="w-full px-3 mt-16">
           <Button text="Hesap Oluştur" />
           <ButtonSubtext text="Zaten bir hesabınız mı var?" textLink="Giriş Yapın" linkUrl="/login"/>
         </div>
