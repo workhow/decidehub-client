@@ -9,8 +9,8 @@ import ResetPasswordLayout from './components/AccountLayout/ResetPasswordLayout'
 import SetupLayout from './components/SetupLayout/SetupLayout';
 import MainLayout from './components/MainLayout/MainLayout';
 import UsersLayout from './components/MainLayout/Users/UsersLayout';
-import SettingsLayout from './components/MainLayout/Settings/SettingsLayout'
-import Drawer from './components/MainLayout/Drawer/Drawer';
+import SettingsLayout from './components/MainLayout/Settings/SettingsLayout';
+
 
 const App = () => <Router>
     <Fragment>

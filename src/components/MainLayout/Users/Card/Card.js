@@ -9,7 +9,7 @@ class Card extends Component {
             <div
                 className='bg-white py-5 border border-gray-light m-5'>
                 <Link to="!#">
-                    <img src={MenuLogo} alt="menu logo" className="flex flex row ml-auto mr-5"/>
+                    <img src={MenuLogo} alt="menu logo" className="ml-auto mr-5"/>
                 </Link>
                 <div className="flex flex-col items-center">
                 <img

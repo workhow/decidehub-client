@@ -27,7 +27,7 @@ class SetupUserInviteCard extends React.Component {
                 </div>
 
             </div>
-                <div className="flex flex-col justify-center">
+                <div>
                     {this.defineUser()}
                 </div>
         </div>
