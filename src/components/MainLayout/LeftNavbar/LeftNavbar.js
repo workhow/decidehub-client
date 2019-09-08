@@ -17,16 +17,16 @@ class LeftNavbar extends Component {
                         className="navbar-logo m-12"/>
 
                     <div className="flex flex-col mx-auto items-start">
-                        <Link to="/main" className="my-4">
+                        <Link to="/main" className="my-4 navbar-icon">
                             <img src={MainLogo} alt="main page logo"/>
                         </Link>
-                        <Link to="/policy" className="my-4">
+                        <Link to="/policy" className="my-4 navbar-icon">
                             <img src={PolicyLogo} alt="policy page logo"/>
                         </Link>
-                        <Link to="/polls" className="my-4">
+                        <Link to="/polls" className="my-4 navbar-icon">
                             <img src={PollLogo} alt="poll page logo"/>
                         </Link>
-                        <Link to="/users" className="my-4">
+                        <Link to="/users" className="my-4 navbar-icon">
                             <img src={UsersLogo} alt="users page logo"/>
                         </Link>
                     </div>

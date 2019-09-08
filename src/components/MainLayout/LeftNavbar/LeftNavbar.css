@@ -1,3 +1,7 @@
 .navbar-logo {
     width: 2rem;
 }
+
+.navbar-icon img path {
+    stroke: red
+}

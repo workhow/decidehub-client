@@ -1,19 +1,23 @@
 .red {
-    background-color: linear-gradient(15.19deg, #FF5B8D 0%, #FF92B4 100%);
+    background: linear-gradient(15.19deg, #FF5B8D 0%, #FF92B4 100%);
 }
 
 .orange {
-    background-color: linear-gradient(15.19deg, #FFDDC3 0%, #FFE5D3 100%);
+    background: linear-gradient(15.19deg, #FFDDC3 0%, #FFE5D3 100%);
 }
 
 .blue {
-    background-color: linear-gradient(15.19deg, #98B9FF 0%, #A2C7FF 100%);
+    background: linear-gradient(15.19deg, #98B9FF 0%, #A2C7FF 100%);
 }
 
 .green {
-    background-color: linear-gradient(195.19deg, #9DE988 0%, #9AE9A0 100%);
+    background: linear-gradient(195.19deg, #9DE988 0%, #9AE9A0 100%);
 }
 
 .pink {
-    background-color: linear-gradient(15.19deg, #FFA7C9 0%, #FFCDBE 100%);
+    background: linear-gradient(15.19deg, #FFA7C9 0%, #FFCDBE 100%);
+}
+
+.decidehub {
+    background: linear-gradient(180deg, #FF7E72 0%, #FF5E5E 100%);
 }
