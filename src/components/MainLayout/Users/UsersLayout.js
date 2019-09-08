@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function MainLayout() {
+export default function UsersLayout() {
     const classes = useStyles();
     const [state,
         setState] = React.useState({right: false});
@@ -73,10 +73,15 @@ export default function MainLayout() {
                 onClose={toggleDrawer('right', false)}>
                 {sideList('right')}
                 <div className="m-4 md:m-12 lg:m-16 mb-6 bg-white">
-                    <img src={CloseLogo} alt="cross logo for closing the modal" className="flex flex row ml-auto cursor-pointer" onClick={toggleDrawer('right', false)}/>
+                    <img
+                        src={CloseLogo}
+                        alt="cross logo for closing the modal"
+                        className="flex flex row ml-auto cursor-pointer"
+                        onClick={toggleDrawer('right', false)}/>
                     <div className="flex flex-col text-center px-3 mt-20">
                         <p className="text-2xl mb-24 mt-5 text-gray-dark">Yeni Kullanıcı Davet Et</p>
-                        <p className="text-base mb-10 mt-5 text-gray-dark">Bi bakalım.. Katılımcılar tamam, ayarlarıda kontol ettik artık hızlıca başlayabiliriz.</p>
+                        <p className="text-base mb-10 mt-5 text-gray-dark">Bi bakalım.. Katılımcılar
+                            tamam, ayarlarıda kontol ettik artık hızlıca başlayabiliriz.</p>
                         <div className="mb-5">
                             <FormBlock labelText="E-mail" placeholderText="example@decidehub.com"/>
                         </div>
