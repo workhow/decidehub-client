@@ -11,6 +11,7 @@ import InfoLogo from "./info.svg";
 import PuzzleLogo from "./paylasim.svg";
 import ManagerLogo from "./yonetici.svg";
 import AuthorithyLogoOne from "./yetki.svg";
+import AuthorithyLogoTwo from "./yetki2.svg";
 
 class MainLayout extends React.Component {
     render() {
@@ -28,7 +29,26 @@ class MainLayout extends React.Component {
                         <a href="!#"><img src={LogoutLogo} alt="logout logo" className="ml-10"/></a>
                     </div>
                 </div>
-                <div className='flex flex-row m-auto w-2/3 mt-16 text-sm'>
+                <div className="m-auto w-2/3 mt-16 text-sm">
+                    <Header text="Oylama Başlat"/>
+                    <div className="flex flex-row w-full bg-white border border-gray-light py-1 h-32 mt-8">
+                        <div className="flex items-center w-1/12">
+                            <img src={AuthorithyLogoTwo} alt="puzzle logo" className="w-16 mx-5"/>
+                        </div>
+                        <div className="flex flex-col w-11/12 items-left justify-center">
+                            <div className="ml-5">
+                                <Header text="Yetki Dağılımı Oylaması"/>
+                            </div>
+                            <div className="ml-5">
+                                <SubHeader text="Oylamalardaki birim güç oranlarını belirlemek için belirli periyotlarla yenilenen oylamadır."/>
+                            </div>
+                        </div>
+                        <div>
+                            <img src={InfoLogo} alt="question mark" className="ml-auto mr-5 mt-5"/>
+                        </div>  
+                    </div>
+                </div>
+                <div className="flex flex-row m-auto w-2/3 mt-8 text-sm">
                     <div className="flex flex-col bg-white border border-gray-light w-1/2 h-64 mr-8">
                         <img src={InfoLogo} alt="question mark" className="ml-auto mr-5 mt-5"/>
                         <div className="w-3/5">
