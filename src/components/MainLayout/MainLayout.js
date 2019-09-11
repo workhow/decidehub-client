@@ -15,6 +15,7 @@ import AuthorithyLogoTwo from "./yetki2.svg";
 import DrawerModal from "./DrawerModal/DrawerModal";
 import {Link} from "react-router-dom";
 import FinalCongratsModal from "./Polls/FinalCongratsModal/FinalCongratsModal";
+import Notifications from "./Notifications/Notifications";
 
 export default function MainLayout() {
 
@@ -59,6 +60,22 @@ export default function MainLayout() {
 
     }
 
+    const [anchorEl,
+        setAnchorEl] = React.useState(null);
+
+    function handleNotificationClick(event) {
+        setAnchorEl(event.currentTarget);
+    }
+
+    function handleNotificationClose() {
+        setAnchorEl(null);
+    }
+
+    const open = Boolean(anchorEl);
+    const id = open
+        ? 'simple-popover'
+        : undefined;
+
     return <div className="pb-64">
         <LeftNavbar/>
         <div className="ml-24">
@@ -69,7 +86,10 @@ export default function MainLayout() {
                         color="decidehub"/>
                 </div>
                 <div className="flex flex-row items-center mr-10">
-                    <a href="!#"><img src={NotificationLogo} alt="notification logo"/></a>
+                    <div
+                        aria-describedby={id}
+                        variant="contained"
+                        onClick={handleNotificationClick}><img src={NotificationLogo} alt="notification logo"/></div>
                     <a href="!#"><img src={LogoutLogo} alt="logout logo" className="ml-10"/></a>
                 </div>
             </div>
@@ -177,6 +197,12 @@ export default function MainLayout() {
             title={state.modalTitle}
             text={state.modalText}
             closeModal={closeModal}/>
+
+        <Notifications
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleNotificationClose}/>
     </div>
 
 }
