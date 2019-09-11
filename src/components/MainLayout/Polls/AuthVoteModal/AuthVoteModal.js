@@ -13,14 +13,18 @@ class AuthVoteModal extends Component {
                     <StatusIndicator color="blue" text="Başlıyor (14dk)"/>
                 </div>
                 <div className="flex flex-row mb-24">
-                    <SubHeader text="Sonlanma Tarihi"/> 
+                    <SubHeader text="Sonlanma Tarihi"/>
                     <p className="text-gray-dark text-base ml-16">23 Tem 2018</p>
                 </div>
                 <VoteRange name="Erdem Tonyalı"/>
                 <VoteRange name="Çağakan Bağcı"/>
                 <VoteRange name="Kadir Köymen"/>
                 <div className="flex flex-col w-1/2 mt-24">
-                    <Button text="Devam Et"/>
+                    <Button
+                        text="Devam Et"
+                        onClick={this
+                        .props
+                        .openModal("Tebrikler! Harika!", "Oyunu kullandın.")}/>
                 </div>
             </div>
         )

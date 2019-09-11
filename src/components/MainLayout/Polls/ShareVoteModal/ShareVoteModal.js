@@ -24,7 +24,11 @@ class ShareVoteModal extends Component {
                 <VoteRange name="Çağakan Bağcı"/>
                 <VoteRange name="Kadir Köymen"/>
                 <div className="flex flex-col w-1/2 mt-24">
-                    <Button text="Devam Et"/>
+                <Button
+                        text="Devam Et"
+                        onClick={this
+                        .props
+                        .openModal("Tebrikler! Harika!", "Oyunu kullandın.")}/>
                 </div>
             </div>
         )
