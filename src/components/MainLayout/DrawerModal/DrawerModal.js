@@ -22,13 +22,13 @@ export default function DrawerModal(props) {
                 return <ManagerPollModal toggleDrawer={props.toggleDrawer}/>;
 
             case 'managervotemodal':
-                return <ManagerVoteModal toggleDrawer={props.toggleDrawer}/>;
+                return <ManagerVoteModal toggleDrawer={props.toggleDrawer} openModal={props.openModal} closeModal={props.closeModal} type={props.type}/>;
 
             case 'sharepollmodal':
                 return <SharePollModal toggleDrawer={props.toggleDrawer}/>;
 
             case 'sharevotemodal':
-                return <ShareVoteModal toggleDrawer={props.toggleDrawer}/>;
+                return <ShareVoteModal toggleDrawer={props.toggleDrawer} openModal={props.openModal} closeModal={props.closeModal}/>;
 
             case 'congratsauthmodal':
                 return <CongratsAuthModal toggleDrawer={props.toggleDrawer}/>;
@@ -40,7 +40,7 @@ export default function DrawerModal(props) {
                 return <CongratsManagerModal toggleDrawer={props.toggleDrawer}/>;
 
             case 'authvotemodal':
-                return <AuthVoteModal/>;
+                return <AuthVoteModal openModal={props.openModal} closeModal={props.closeModal}/>;
 
             default:
                 break;
