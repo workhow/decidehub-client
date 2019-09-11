@@ -10,6 +10,7 @@ import SetupLayout from './components/SetupLayout/SetupLayout';
 import MainLayout from './components/MainLayout/MainLayout';
 import UsersLayout from './components/MainLayout/Users/UsersLayout';
 import SettingsLayout from './components/MainLayout/Settings/SettingsLayout';
+import CurrentPollsLayout from './components/MainLayout/Polls/CurrentPollsLayout/CurrentPollsLayout';
 
 
 const App = () => <Router>
@@ -24,6 +25,7 @@ const App = () => <Router>
             <Route exact path="/main" component={MainLayout}/>
             <Route exact path="/users" component={UsersLayout}/>
             <Route exact path="/settings" component={SettingsLayout}/>
+            <Route exact path="/polls" component={CurrentPollsLayout}/>
         </Switch>
     </Fragment>
 </Router>
