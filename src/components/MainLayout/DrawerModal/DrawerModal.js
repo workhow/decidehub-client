@@ -10,6 +10,9 @@ import CongratsAuthModal from '../Polls/CongratsAuthModal/CongratsAuthModal';
 import AuthVoteModal from '../Polls/AuthVoteModal/AuthVoteModal';
 import CongratsShareModal from '../Polls/CongratsShareModal/CongratsShareModal';
 import CongratsManagerModal from '../Polls/CongratsManagerModal/CongratsManagerModal';
+import ChangePolicyModal from '../Policies/ChangePolicyModal/ChangePolicyModal';
+import CongratsPolicyModal from '../Policies/CongratsPolicyModal/CongratsPolicyModal';
+import PolicyVoteModal from '../Policies/PolicyVoteModal/PolicyVoteModal';
 
 export default function DrawerModal(props) {
 
@@ -22,13 +25,20 @@ export default function DrawerModal(props) {
                 return <ManagerPollModal toggleDrawer={props.toggleDrawer}/>;
 
             case 'managervotemodal':
-                return <ManagerVoteModal toggleDrawer={props.toggleDrawer} openModal={props.openModal} closeModal={props.closeModal} type={props.type}/>;
+                return <ManagerVoteModal
+                    toggleDrawer={props.toggleDrawer}
+                    openModal={props.openModal}
+                    closeModal={props.closeModal}
+                    type={props.type}/>;
 
             case 'sharepollmodal':
                 return <SharePollModal toggleDrawer={props.toggleDrawer}/>;
 
             case 'sharevotemodal':
-                return <ShareVoteModal toggleDrawer={props.toggleDrawer} openModal={props.openModal} closeModal={props.closeModal}/>;
+                return <ShareVoteModal
+                    toggleDrawer={props.toggleDrawer}
+                    openModal={props.openModal}
+                    closeModal={props.closeModal}/>;
 
             case 'congratsauthmodal':
                 return <CongratsAuthModal toggleDrawer={props.toggleDrawer}/>;
@@ -41,6 +51,15 @@ export default function DrawerModal(props) {
 
             case 'authvotemodal':
                 return <AuthVoteModal openModal={props.openModal} closeModal={props.closeModal}/>;
+
+            case 'changepolicymodal':
+                return <ChangePolicyModal toggleDrawer={props.toggleDrawer}/>;
+
+            case 'congratspolicymodal':
+                return <CongratsPolicyModal toggleDrawer={props.toggleDrawer}/>;
+
+            case 'policyvotemodal':
+                return <PolicyVoteModal openModal={props.openModal} closeModal={props.closeModal}/>;
 
             default:
                 break;
