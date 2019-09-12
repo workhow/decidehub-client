@@ -11,7 +11,7 @@ import MainLayout from './components/MainLayout/MainLayout';
 import UsersLayout from './components/MainLayout/Users/UsersLayout';
 import SettingsLayout from './components/MainLayout/Settings/SettingsLayout';
 import CurrentPollsLayout from './components/MainLayout/Polls/CurrentPollsLayout/CurrentPollsLayout';
-
+import PolicyLayout from './components/MainLayout/Policies/PolicyLayout';
 
 const App = () => <Router>
     <Fragment>
@@ -26,6 +26,7 @@ const App = () => <Router>
             <Route exact path="/users" component={UsersLayout}/>
             <Route exact path="/settings" component={SettingsLayout}/>
             <Route exact path="/polls" component={CurrentPollsLayout}/>
+            <Route exact path="/policy" component={PolicyLayout}/>
         </Switch>
     </Fragment>
 </Router>

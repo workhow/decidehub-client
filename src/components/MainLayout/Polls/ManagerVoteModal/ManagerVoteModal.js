@@ -22,9 +22,15 @@ class ManagerVoteModal extends Component {
                         işe alım süreçlerinin yönetiminden sorumludur.kararlarını genel müdür ve
                         departman yardımcıları ile ortak alır.</p>
                 </div>
-                <Checkbox text="Doğukan Nomak"/>
-                <Checkbox text="Çağakan Bağcı"/>
-                <Checkbox text="Erdem Tonyalı"/>
+                <div className="hover:bg-gray-light">
+                    <Checkbox text="Doğukan Nomak"/>
+                </div>
+                <div className="hover:bg-gray-light">
+                    <Checkbox text="Çağakan Bağcı"/>
+                </div>
+                <div className="hover:bg-gray-light">
+                    <Checkbox text="Erdem Tonyalı"/>
+                </div>
                 <div className="flex flex-col w-1/2 mt-24">
                     <Button
                         text="Devam Et"
