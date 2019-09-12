@@ -1,5 +1,5 @@
 import React, {Component} from 'react'; 
-import TextArea from "../../../AccountLayout/Register/TextArea/TextArea";
+import TextArea from "./TextArea/TextArea";
 import Button from "../../../AccountLayout/Register/Button/Button";
 
 class ChangePolicyModal extends Component {

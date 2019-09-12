@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
+
 class TextEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '<h1>İlk Karar</h1><h2>Kurum / Topluluk Yönetmeliği</h2><br/><p>1.Bu topluluk/şirket Decide Hub’da almış olduğu kararlara göre yönetilecektir.</p>'
+            text: ""
         }
         this.handleChange = this
             .handleChange

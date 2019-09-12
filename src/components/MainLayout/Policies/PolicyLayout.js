@@ -71,7 +71,7 @@ export default function PolicyLayout() {
     return <div>
         <LeftNavbar/>
         <div className="flex flex-row">
-            <div className="ml-24 w-full">
+            <div className="ml-24 w-4/5">
                 <div className="flex flex-row justify-end pt-12 mr-32 ml-8 text-sm">
                     <div className="flex flex-row items-center">
                         <div
@@ -93,7 +93,7 @@ export default function PolicyLayout() {
                     </div>
                 </div>
             </div>
-            <div className="justify-end w-1/6">
+            <div className="justify-end">
                 <History/>
             </div>
         </div>

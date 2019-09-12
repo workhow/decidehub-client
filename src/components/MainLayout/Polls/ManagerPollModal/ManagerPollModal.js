@@ -14,7 +14,7 @@ class ManagerPollModal extends Component {
                         labelText="Başlık"
                         placeholderText=""/>
                 </div>
-                <div className="mb-8">
+                <div className="mb-8 ">
                     <TextArea
                         className="text-base text-gray-dark"
                         labelText="Açıklama"

@@ -5,7 +5,7 @@ import './History.css';
 class History extends Component {
     render() {
         return (
-            <div className="fixed top-0 bottom-0 right-0">
+            <div className="fixed top-0 bottom-0 right-0 overflow-scroll w-1/6">
                 <div className="bg-gray-dark text-white py-4 px-8">
                     <p className="text-lg">Geçmiş</p>
                 </div>
