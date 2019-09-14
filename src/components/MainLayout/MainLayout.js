@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Util from "../../util";
+import { Redirect } from "react-router-dom";
 import LeftNavbar from "./LeftNavbar/LeftNavbar";
 import StatusIndicator from "../SetupLayout/StatusIndicator/StatusIndicator";
 import NotificationLogo from "./Settings/bildirim.svg";
@@ -52,6 +53,15 @@ class MainLayout extends React.Component {
         this.setState({
           nextAuthorityPollDate: response.data
         });
+      })
+      .catch(error => {
+        if (error.response.status === 401) {
+          Util.signOut();
+          this.setState({
+            ...this.state,
+            refresh: true
+          });
+        }
       });
   }
 
@@ -125,6 +135,9 @@ class MainLayout extends React.Component {
   }
 
   render() {
+    if (this.state.refresh) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="pb-64">
         <LeftNavbar />

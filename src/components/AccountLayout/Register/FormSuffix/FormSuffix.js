@@ -12,6 +12,7 @@ class FormSuffix extends React.Component {
             className="appearance-none block w-full text-gray-900 border border-gray-border py-3 px-4 leading-tight z-2 text-right"
             type="text"
             onChange={this.props.handleInputChange}
+            readOnly={this.props.readOnly}
             name={this.props.name}
             placeholder={this.props.placeholderText}
             value={this.props.value}

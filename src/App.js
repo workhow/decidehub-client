@@ -6,6 +6,7 @@ import NotFoundLayout from "./components/NotFoundLayout/NotFoundLayout";
 import SignInLayout from "./components/AccountLayout/SignInLayout";
 import RegisterLayout from "./components/AccountLayout/RegisterLayout";
 import ResetPasswordLayout from "./components/AccountLayout/ResetPasswordLayout";
+import ForgotPasswordLayout from "./components/AccountLayout/ForgotPasswordLayout";
 import ConfirmEmailLayout from "./components/AccountLayout/ConfirmEmailLayout";
 import SetupLayout from "./components/SetupLayout/SetupLayout";
 import MainLayout from "./components/MainLayout/MainLayout";
@@ -22,6 +23,7 @@ const App = () => (
         <Route exact path="/login" component={SignInLayout} />
         <Route exact path="/signup" component={RegisterLayout} />
         <Route exact path="/confirm-email" component={ConfirmEmailLayout} />
+        <Route exact path="/forgot-password" component={ForgotPasswordLayout} />
         <Route exact path="/reset-password" component={ResetPasswordLayout} />
         <Route exact path="/404" component={NotFoundLayout} />
         <PrivateRoute exact path="/setup" component={SetupLayout} />

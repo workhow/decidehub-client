@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import FormBlock from "../Register/FormBlock/FormBlock";
 import FormSuffix from "../Register/FormSuffix/FormSuffix";
 import Button from "../Register/Button/Button";
@@ -91,7 +91,7 @@ class SignIn extends React.Component {
             </div>
             <div className="inline-block">
               <p className="text-xs text-gray-dark font-bold text-right">
-                <a href="/reset-password">Şifremi Unuttum</a>
+                <Link to="/forgot-password">Şifremi Unuttum</Link>
               </p>
             </div>
           </div>

@@ -6,23 +6,14 @@ import Button from "../Register/Button/Button";
 import Util from "../../../util";
 import axios from "axios";
 
-class ResetPassword extends React.Component {
+class ForgotPassword extends React.Component {
   constructor(props) {
     super(props);
-
-    const queryParams = Util.getQueryParams();
-
     this.state = {
       subdomain: Util.getSubdomain(),
-      email: queryParams.email,
-      password: "",
-      confirmPassword: "",
-      userId: queryParams.userId,
-      code: queryParams.token,
-      gen: queryParams.gen,
-      passwordReset: false
+      email: "",
+      mailSent: false
     };
-
     this.handleInputChange = this.handleInputChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
   }
@@ -37,21 +28,17 @@ class ResetPassword extends React.Component {
   submitForm() {
     const resetPasswordPath = Util.pathForSubdomain(
       this.state.subdomain,
-      "account/resetPassword"
+      "account/forgotPassword"
     );
 
     axios
       .post(resetPasswordPath, {
-        password: this.state.password,
-        confirmPassword: this.state.confirmPassword,
         email: this.state.email,
-        userId: this.state.userId,
-        code: this.state.code,
         subdomain: this.state.subdomain
       })
       .then(response => {
         if (response.data) {
-          this.setState({ ...this.state, passwordReset: true });
+          this.setState({ ...this.state, mailSent: true });
         }
       })
       .catch(error => {
@@ -64,7 +51,7 @@ class ResetPassword extends React.Component {
   }
 
   render() {
-    if (this.state.passwordReset) {
+    if (this.state.mailSent) {
       return <Redirect to="/" />;
     }
     return (
@@ -76,36 +63,19 @@ class ResetPassword extends React.Component {
             <FormSuffix
               labelText="Takım Adı"
               name="subdomain"
-              readOnly={true}
               value={this.state.subdomain}
+              handleInputChange={this.handleInputChange}
               suffixText=".decidehub.com"
               placeholderText="Takım adınızı buraya girin"
             />
           </div>
           <div className="mb-5">
             <FormBlock
-              readOnly={true}
               name="email"
               value={this.state.email}
-              labelText="Email"
-            />
-          </div>
-          <div className="mb-5">
-            <FormBlock
-              name="password"
-              value={this.state.password}
-              type="password"
               handleInputChange={this.handleInputChange}
-              labelText="Şifre"
-            />
-          </div>
-          <div className="mb-5">
-            <FormBlock
-              name="confirmPassword"
-              value={this.state.confirmPassword}
-              type="password"
-              handleInputChange={this.handleInputChange}
-              labelText="Şifre Doğrula"
+              labelText="E-mail"
+              placeholderText="example@decidehub.com"
             />
           </div>
 
@@ -118,4 +88,4 @@ class ResetPassword extends React.Component {
   }
 }
 
-export default ResetPassword;
+export default ForgotPassword;
