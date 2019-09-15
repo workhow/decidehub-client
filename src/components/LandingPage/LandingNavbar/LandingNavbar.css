@@ -1,0 +1,18 @@
+.main-nav {
+	margin-top: 5px;
+}
+
+.logo a,
+.main-nav a {
+	text-align: center;
+}
+
+.main-nav a:hover {
+	color: #5639cb;
+	text-decoration:underline;
+	transition-duration: 0.5s;
+}
+
+.navbar-main {
+    background:#f8f8f8ef;
+}

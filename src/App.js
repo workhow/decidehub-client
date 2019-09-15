@@ -12,11 +12,12 @@ import UsersLayout from './components/MainLayout/Users/UsersLayout';
 import SettingsLayout from './components/MainLayout/Settings/SettingsLayout';
 import CurrentPollsLayout from './components/MainLayout/Polls/CurrentPollsLayout/CurrentPollsLayout';
 import PolicyLayout from './components/MainLayout/Policies/PolicyLayout';
+import LandingPage from './components/LandingPage/LandingPage';
 
 const App = () => <Router>
     <Fragment>
         <Switch>
-            <Route exact path="/" component={SignInLayout}/>
+            <Route exact path="/signin" component={SignInLayout}/>
             <Route exact path="/signup-step1" component={RegisterStepOne}/>
             <Route exact path="/signup-step2" component={RegisterStepTwo}/>
             <Route exact path="/reset-password" component={ResetPasswordLayout}/>
@@ -27,6 +28,7 @@ const App = () => <Router>
             <Route exact path="/settings" component={SettingsLayout}/>
             <Route exact path="/polls" component={CurrentPollsLayout}/>
             <Route exact path="/policy" component={PolicyLayout}/>
+            <Route exact path="/"component={LandingPage}/>
         </Switch>
     </Fragment>
 </Router>
