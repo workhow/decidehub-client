@@ -17,7 +17,7 @@ class VoteRange extends Component {
   render() {
     return (
       <form name="voteForm" className="flex flex-row my-4 justify-between">
-        <div className=" w-full align-left">
+        <div className="w-full align-left">
           <p className="text-lg text-gray-dark">{this.props.name}</p>
         </div>
         <div className="w-2/3">

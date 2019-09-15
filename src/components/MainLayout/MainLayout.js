@@ -157,7 +157,7 @@ class MainLayout extends React.Component {
               <div variant="contained" onClick={this.handleNotificationClick}>
                 <img src={NotificationLogo} alt="notification logo" />
               </div>
-              <a href="/" onClick={Util.signOut}>
+              <a href="/home" onClick={Util.signOut}>
                 <img src={LogoutLogo} alt="logout logo" className="ml-10" />
               </a>
             </div>

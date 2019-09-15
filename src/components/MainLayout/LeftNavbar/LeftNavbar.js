@@ -16,7 +16,7 @@ class LeftNavbar extends Component {
         <img src={Logo} alt="decidehub logo" className="navbar-logo m-12" />
 
         <div className="flex flex-col mx-auto items-start">
-          <Link to="/" className="my-4 navbar-icon">
+          <Link to="/home" className="my-4 navbar-icon">
             <img src={MainLogo} alt="main page logo" />
           </Link>
           <Link to="/policy" className="my-4 navbar-icon">

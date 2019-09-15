@@ -36,7 +36,7 @@ class ConfirmEmailLayout extends React.Component {
       });
   }
   render() {
-    return <div>{this.state.verified ? <Redirect to="/" /> : <div />}</div>;
+    return <div>{this.state.verified ? <Redirect to="/home" /> : <div />}</div>;
   }
 }
 

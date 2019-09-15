@@ -17,11 +17,14 @@ class Card extends Component {
           />
           <div>
             <div className="p-2 md:p-4 flex flex-col text-center">
-              <h3 className="text-xl text-gray-dark">{this.props.name}</h3>
-              <p className=" text-sm lg:text-base text-gray-text">
+              <h3 className="text-xl text-gray-dark">
+                {this.props.name}
+                {this.props.active || ` (Onay Bekliyor)`}
+              </h3>
+              <p className="text-sm lg:text-base text-gray-text">
                 Başlangıç Yetki Puanı: {this.props.initialAuthorityScore}
               </p>
-              <p className=" text-sm lg:text-base text-gray-text py-5">
+              <p className="text-sm lg:text-base text-gray-text py-5">
                 {this.props.email}
               </p>
             </div>

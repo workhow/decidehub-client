@@ -12,6 +12,7 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentSubdomain: Util.getSubdomain(),
       subdomain: Util.getSubdomain(),
       token: localStorage.currentUserToken
     };
@@ -27,6 +28,14 @@ class SignIn extends React.Component {
   }
 
   submitForm() {
+    if (
+      !this.state.subdomain ||
+      this.state.currentSubdomain !== this.state.subdomain
+    ) {
+      Util.setSubdomain(this.state.subdomain);
+      return;
+    }
+
     const signInPath = Util.pathForSubdomain(this.state.subdomain, "");
     axios
       .post(signInPath, {
@@ -36,8 +45,13 @@ class SignIn extends React.Component {
       })
       .then(response => {
         if (response.data.token) {
-          localStorage.currentUserToken = response.data.token;
-          this.setState({ ...this.state, token: response.data.token });
+          if (this.state.currentSubdomain !== this.state.subdomain) {
+            Util.setSubdomain(this.state.subdomain);
+            return;
+          } else {
+            localStorage.currentUserToken = response.data.token;
+            this.setState({ ...this.state, token: response.data.token });
+          }
         }
       })
       .catch(error => {
@@ -65,36 +79,41 @@ class SignIn extends React.Component {
               placeholderText="Takım adınızı buraya girin"
             />
           </div>
-          <div className="mb-5">
-            <FormBlock
-              labelText="E-mail"
-              name="email"
-              handleInputChange={this.handleInputChange}
-              placeholderText="example@decidehub.com"
-            />
-          </div>
-          <div className="mb-5">
-            <FormBlock
-              labelText="Şifre"
-              name="password"
-              type="password"
-              handleInputChange={this.handleInputChange}
-            />
-          </div>
-          <div className="w-full flex justify-between items-baseline">
-            <div className="inline-block">
-              <Checkbox
-                name="rememberMe"
-                handleInputChange={this.handleInputChange}
-                text="Beni hatırla"
-              />
-            </div>
-            <div className="inline-block">
-              <p className="text-xs text-gray-dark font-bold text-right">
-                <Link to="/forgot-password">Şifremi Unuttum</Link>
-              </p>
-            </div>
-          </div>
+          {this.state.currentSubdomain &&
+            this.state.currentSubdomain === this.state.subdomain && (
+              <div>
+                <div className="mb-5">
+                  <FormBlock
+                    labelText="E-mail"
+                    name="email"
+                    handleInputChange={this.handleInputChange}
+                    placeholderText="example@decidehub.com"
+                  />
+                </div>
+                <div className="mb-5">
+                  <FormBlock
+                    labelText="Şifre"
+                    name="password"
+                    type="password"
+                    handleInputChange={this.handleInputChange}
+                  />
+                </div>
+                <div className="w-full flex justify-between items-baseline">
+                  <div className="inline-block">
+                    <Checkbox
+                      name="rememberMe"
+                      handleInputChange={this.handleInputChange}
+                      text="Beni hatırla"
+                    />
+                  </div>
+                  <div className="inline-block">
+                    <p className="text-xs text-gray-dark font-bold text-right">
+                      <Link to="/forgot-password">Şifremi Unuttum</Link>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           <div className="mt-16">
             <Button text="Devam Et" onClick={this.submitForm} />
           </div>

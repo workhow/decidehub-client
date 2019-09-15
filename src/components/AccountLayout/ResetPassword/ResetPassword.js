@@ -65,7 +65,7 @@ class ResetPassword extends React.Component {
 
   render() {
     if (this.state.passwordReset) {
-      return <Redirect to="/" />;
+      return <Redirect to="/home" />;
     }
     return (
       <div className="flex flex-wrap mx-3 mb-6 bg-white">
