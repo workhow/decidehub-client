@@ -1,79 +1,136 @@
 import React from "react";
+import axios from "axios";
+import Util from "../../../../util";
 import LeftNavbar from "../../LeftNavbar/LeftNavbar";
 import NotificationLogo from "../../Settings/bildirim.svg";
 import LogoutLogo from "../../Settings/cikis.svg";
 import Header from "../../Settings/Header/Header";
 import PollCard from "../../Polls/PollCard/PollCard";
 import PuzzleLogo from "../../paylasim.svg";
-import AuthorithyLogoOne from "../../yetki.svg";
+import AuthorityLogo from "../../yetki.svg";
 import PolicyLogo from "../../yonetmelik.svg";
 import ManagerLogo from "../../yonetici.svg";
 import Notifications from "../../Notifications/Notifications";
 
-export default function CurrentPollsLayout() {
+const logoForPollType = type => {
+  switch (type) {
+    case "AuthorityPoll":
+      return AuthorityLogo;
+    case "MultipleChoicePoll":
+      return ManagerLogo;
+    case "PolicyChangePoll":
+      return PolicyLogo;
+    case "SharePoll":
+      return PuzzleLogo;
+    default:
+      return;
+  }
+};
 
-    const [anchorEl,
-        setAnchorEl] = React.useState(null);
+const statusTextForListType = listType => {
+  switch (listType) {
+    case "completed":
+      return "Tamamlandı";
+    case "userNotVoted":
+    case "userVoted":
+      return "Devam ediyor";
+    case "waiting":
+      return "Başlıyor...";
+    default:
+      return "";
+  }
+};
 
-    function handleNotificationClick(event) {
-        setAnchorEl(event.currentTarget);
-    }
+const statusColorForListType = listType => {
+  switch (listType) {
+    case "completed":
+      return "red";
+    case "userNotVoted":
+      return "orange";
+    case "userVoted":
+      return "orange";
+    case "waiting":
+      return "blue";
+    default:
+      return "";
+  }
+};
 
-    function handleNotificationClose() {
-        setAnchorEl(null);
-    }
+class CurrentPollsLayout extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      anchorEl: null,
+      polls: []
+    };
+    this.handleNotificationClick = this.handleNotificationClick.bind(this);
+    this.handleNotificationClose = this.handleNotificationClose.bind(this);
+  }
 
-    const open = Boolean(anchorEl);
-    const id = open
-        ? 'simple-popover'
-        : undefined;
+  handleNotificationClick(event) {
+    this.setState({ ...this.state, anchorEl: event.currentTarget });
+  }
 
-    return <div className="pb-64">
-        <LeftNavbar/>
+  handleNotificationClose() {
+    this.setState({ ...this.state, anchorEl: null });
+  }
+
+  componentDidMount() {
+    this.updatePollList();
+  }
+
+  updatePollList() {
+    const listPollsPath = Util.pathForCurrentSubdomain("poll/list");
+
+    axios
+      .get(listPollsPath, {
+        headers: Util.authenticationHeaders()
+      })
+      .then(response => {
+        this.setState({
+          ...this.state,
+          polls: response.data
+        });
+      });
+  }
+
+  render() {
+    return (
+      <div className="pb-64">
+        <LeftNavbar />
         <div className="ml-24">
-            <div className="flex flex-row justify-end pt-12 status-bar text-sm">
-                <div className="flex flex-row items-center mr-10">
-                    <div
-                        aria-describedby={id}
-                        variant="contained"
-                        onClick={handleNotificationClick}><img src={NotificationLogo} alt="notification logo"/></div>
-                    <a href="!#"><img src={LogoutLogo} alt="logout logo" className="ml-10"/></a>
-                </div>
+          <div className="flex flex-row justify-end pt-12 status-bar text-sm">
+            <div className="flex flex-row items-center mr-10">
+              <div variant="contained" onClick={this.handleNotificationClick}>
+                <img src={NotificationLogo} alt="notification logo" />
+              </div>
+              <a href="!#">
+                <img src={LogoutLogo} alt="logout logo" className="ml-10" />
+              </a>
             </div>
-            <div className="w-2/3 m-auto mt-32 mb-6">
-                <Header text="Oylamalar"/>
-            </div>
+          </div>
+          <div className="w-2/3 m-auto mt-32 mb-6">
+            <Header text="Oylamalar" />
+          </div>
+          {this.state.polls.map(poll => (
             <PollCard
-                logo={PolicyLogo}
-                pollName="12 Tem Yönetmelik Değişikliği"
-                pollEndDate="23 Tem 2018"
-                statusText="Devam ediyor "
-                statusColor="orange"/>
-            <PollCard
-                logo={ManagerLogo}
-                pollName="Brand Manager Seçimi"
-                pollEndDate="23 Tem 2018"
-                statusText="Devam ediyor "
-                statusColor="orange"/>
-            <PollCard
-                logo={AuthorithyLogoOne}
-                pollName="2. Yetki Dağılımı Oylaması"
-                pollEndDate="23 Tem 2018"
-                statusText="Başlıyor.. "
-                statusColor="blue"/>
-            <PollCard
-                logo={PuzzleLogo}
-                pollName="2. Yetki Dağılımı Oylaması"
-                pollEndDate="23 Tem 2018"
-                statusText="Tamamlandı "
-                statusColor="red"/>
+              logo={logoForPollType(poll.Type)}
+              key={poll.pollId}
+              pollName={poll.name}
+              statusText={statusTextForListType(poll.listType)}
+              statusColor={statusColorForListType(poll.listType)}
+            />
+          ))}
         </div>
 
         <Notifications
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleNotificationClose}/>
-    </div>
-
+          open={Boolean(this.state.anchorEl)}
+          anchorEl={this.state.anchorEl}
+          onClose={this.handleNotificationClose}
+        />
+      </div>
+    );
+  }
 }
+
+export default CurrentPollsLayout;

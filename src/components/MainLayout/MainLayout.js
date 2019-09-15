@@ -13,12 +13,56 @@ import PolicyLogo from "./yonetmelik.svg";
 import InfoLogo from "./info.svg";
 import PuzzleLogo from "./paylasim.svg";
 import ManagerLogo from "./yonetici.svg";
-import AuthorithyLogoOne from "./yetki.svg";
-import AuthorithyLogoTwo from "./yetki2.svg";
+import AuthorityLogo from "./yetki.svg";
+import AuthorityLogoTwo from "./yetki2.svg";
 import DrawerModal from "./DrawerModal/DrawerModal";
 import { Link } from "react-router-dom";
 import FinalCongratsModal from "./Polls/FinalCongratsModal/FinalCongratsModal";
 import Notifications from "./Notifications/Notifications";
+
+const logoForPollType = type => {
+  switch (type) {
+    case "AuthorityPoll":
+      return AuthorityLogo;
+    case "MultipleChoicePoll":
+      return ManagerLogo;
+    case "PolicyChangePoll":
+      return PolicyLogo;
+    case "SharePoll":
+      return PuzzleLogo;
+    default:
+      return;
+  }
+};
+
+const statusTextForListType = listType => {
+  switch (listType) {
+    case "completed":
+      return "Tamamlandı";
+    case "userNotVoted":
+    case "userVoted":
+      return "Devam ediyor";
+    case "waiting":
+      return "Başlıyor...";
+    default:
+      return "";
+  }
+};
+
+const statusColorForListType = listType => {
+  switch (listType) {
+    case "completed":
+      return "red";
+    case "userNotVoted":
+      return "orange";
+    case "userVoted":
+      return "orange";
+    case "waiting":
+      return "blue";
+    default:
+      return "";
+  }
+};
 
 class MainLayout extends React.Component {
   constructor(props) {
@@ -30,7 +74,8 @@ class MainLayout extends React.Component {
       modalText: "",
       modalOpen: false,
       notificationOpen: false,
-      anchorEl: null
+      anchorEl: null,
+      polls: []
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -41,6 +86,11 @@ class MainLayout extends React.Component {
   }
 
   componentDidMount() {
+    this.getNextAuthorityPollDate();
+    this.updatePollList();
+  }
+
+  getNextAuthorityPollDate() {
     const nextAuthorityPollDatePath = Util.pathForCurrentSubdomain(
       "poll/AuthorityPoll/nextDate"
     );
@@ -62,6 +112,21 @@ class MainLayout extends React.Component {
             refresh: true
           });
         }
+      });
+  }
+
+  updatePollList() {
+    const listPollsPath = Util.pathForCurrentSubdomain("poll/list");
+
+    axios
+      .get(listPollsPath, {
+        headers: Util.authenticationHeaders()
+      })
+      .then(response => {
+        this.setState({
+          ...this.state,
+          polls: response.data
+        });
       });
   }
 
@@ -169,7 +234,7 @@ class MainLayout extends React.Component {
               onClick={this.toggleDrawer("authpollmodal", "right", true)}>
               <div className="flex items-center w-1/12">
                 <img
-                  src={AuthorithyLogoTwo}
+                  src={AuthorityLogoTwo}
                   alt="puzzle logo"
                   className="w-16 mx-5"
                 />
@@ -268,20 +333,16 @@ class MainLayout extends React.Component {
           <div className="w-2/3 m-auto mt-12 mb-6">
             <Header text="Oylamalar" />
           </div>
-          <PollCard
-            logo={AuthorithyLogoOne}
-            pollName="2. Yetki Dağılımı Oylaması"
-            pollEndDate="23 Tem 2018"
-            statusText="Başlıyor.. "
-            statusColor="blue"
-          />
-          <PollCard
-            logo={PuzzleLogo}
-            pollName="2. Yetki Dağılımı Oylaması"
-            pollEndDate="23 Tem 2018"
-            statusText="Tamamlandı "
-            statusColor="red"
-          />
+
+          {this.state.polls.map(poll => (
+            <PollCard
+              logo={logoForPollType(poll.Type)}
+              key={poll.pollId}
+              pollName={poll.name}
+              statusText={statusTextForListType(poll.listType)}
+              statusColor={statusColorForListType(poll.listType)}
+            />
+          ))}
         </div>
 
         <DrawerModal
