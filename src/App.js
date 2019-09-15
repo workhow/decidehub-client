@@ -14,6 +14,7 @@ import SettingsLayout from './components/MainLayout/Settings/SettingsLayout';
 import CurrentPollsLayout from './components/MainLayout/Polls/CurrentPollsLayout/CurrentPollsLayout';
 import PolicyLayout from './components/MainLayout/Policies/PolicyLayout';
 import LandingPage from './components/LandingPage/LandingPage';
+import ConfirmEmailLayout from './components/AccountLayout/ConfirmEmailLayout';
 
 const App = () => (
   <Router>
