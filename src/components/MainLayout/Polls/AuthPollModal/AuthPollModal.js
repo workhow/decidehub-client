@@ -5,13 +5,14 @@ import Button from "../../../AccountLayout/Register/Button/Button";
 class AuthPollModal extends Component {
   render() {
     return (
-      <div className="flex flex-col pr-3 mt-8">
-        <p className="text-2xl text-gray-dark w-1/2 align-left pl-2">
+      <div className="flex flex-col pr-3">
+        <p className="text-2xl text-gray-dark w-full align-left pl-2">
           Yetki Dağılımı Oylaması Başlat
         </p>
-        <div className="flex flex-col justify-center mt-12 px-4">
+        <div className="flex flex-col justify-center mt-12 px-4 items-center">
           <img
             className="w-full"
+            style={{ maxWidth: 500 }}
             src={VotingPeople}
             alt="illustration of voting people"
           />
