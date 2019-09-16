@@ -30,6 +30,7 @@ export default function DrawerModal(props) {
             openModal={props.openModal}
             closeModal={props.closeModal}
             type={props.type}
+            poll={props.poll}
           />
         );
 
@@ -42,6 +43,7 @@ export default function DrawerModal(props) {
             toggleDrawer={props.toggleDrawer}
             openModal={props.openModal}
             closeModal={props.closeModal}
+            poll={props.poll}
           />
         );
 
@@ -59,6 +61,7 @@ export default function DrawerModal(props) {
           <AuthVoteModal
             openModal={props.openModal}
             closeModal={props.closeModal}
+            poll={props.poll}
           />
         );
 
@@ -73,6 +76,7 @@ export default function DrawerModal(props) {
           <PolicyVoteModal
             openModal={props.openModal}
             closeModal={props.closeModal}
+            poll={props.poll}
           />
         );
 

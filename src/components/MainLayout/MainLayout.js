@@ -19,17 +19,33 @@ import DrawerModal from "./DrawerModal/DrawerModal";
 import { Link } from "react-router-dom";
 import FinalCongratsModal from "./Polls/FinalCongratsModal/FinalCongratsModal";
 import Notifications from "./Notifications/Notifications";
+import Loader from "../Loader/Loader";
 
 const logoForPollType = type => {
   switch (type) {
-    case "AuthorityPoll":
+    case "authorityPoll":
       return AuthorityLogo;
-    case "MultipleChoicePoll":
+    case "multipleChoicePoll":
       return ManagerLogo;
-    case "PolicyChangePoll":
+    case "policyChangePoll":
       return PolicyLogo;
-    case "SharePoll":
+    case "sharePoll":
       return PuzzleLogo;
+    default:
+      return;
+  }
+};
+
+const drawerForPollType = type => {
+  switch (type) {
+    case "authorityPoll":
+      return "authvotemodal";
+    case "multipleChoicePoll":
+      return "managervotemodal";
+    case "policyChangePoll":
+      return "policyvotemodal";
+    case "sharePoll":
+      return "sharevotemodal";
     default:
       return;
   }
@@ -75,7 +91,8 @@ class MainLayout extends React.Component {
       modalOpen: false,
       notificationOpen: false,
       anchorEl: null,
-      polls: []
+      polls: [],
+      loaded: false
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -83,11 +100,29 @@ class MainLayout extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.handleNotificationClick = this.handleNotificationClick.bind(this);
     this.handleNotificationClose = this.handleNotificationClose.bind(this);
+    this.refreshData = this.refreshData.bind(this);
+    this.vote = this.vote.bind(this);
   }
 
   componentDidMount() {
+    this.refreshData();
+  }
+
+  refreshData() {
     this.getNextAuthorityPollDate();
     this.updatePollList();
+
+    setTimeout(this.refreshData, 60000);
+  }
+
+  vote(pollId) {
+    return event => {
+      const poll = this.state.polls.filter(poll => poll.pollId === pollId)[0];
+      this.setState({ ...this.state, votingPoll: poll });
+      if (poll) {
+        this.toggleDrawer(drawerForPollType(poll.type), "right", true)(event);
+      }
+    };
   }
 
   getNextAuthorityPollDate() {
@@ -125,7 +160,8 @@ class MainLayout extends React.Component {
       .then(response => {
         this.setState({
           ...this.state,
-          polls: response.data
+          polls: response.data,
+          loaded: true
         });
       });
   }
@@ -202,6 +238,8 @@ class MainLayout extends React.Component {
   render() {
     if (this.state.refresh) {
       return <Redirect to="/" />;
+    } else if (!this.state.loaded) {
+      return <Loader />;
     }
     return (
       <div className="pb-64">
@@ -229,32 +267,35 @@ class MainLayout extends React.Component {
           </div>
           <div className="m-auto w-2/3 mt-16 text-sm">
             <Header text="Oylama Başlat" />
-            <div
-              className="flex flex-row w-full bg-white border border-gray-light py-1 h-32 mt-8"
-              onClick={this.toggleDrawer("authpollmodal", "right", true)}>
-              <div className="flex items-center w-1/12">
-                <img
-                  src={AuthorityLogoTwo}
-                  alt="puzzle logo"
-                  className="w-16 mx-5"
-                />
-              </div>
-              <div className="flex flex-col w-11/12 items-left justify-center">
-                <div className="ml-5">
-                  <Header text="Yetki Dağılımı Oylaması" />
+            {this.state.polls.filter(poll => poll.type === "authorityPoll")
+              .length === 0 && (
+              <div
+                className="flex flex-row w-full bg-white border border-gray-light py-1 h-32 mt-8"
+                onClick={this.toggleDrawer("authpollmodal", "right", true)}>
+                <div className="flex items-center w-1/12">
+                  <img
+                    src={AuthorityLogoTwo}
+                    alt="puzzle logo"
+                    className="w-16 mx-5"
+                  />
                 </div>
-                <div className="ml-5">
-                  <SubHeader text="Oylamalardaki birim güç oranlarını belirlemek için belirli periyotlarla yenilenen oylamadır." />
+                <div className="flex flex-col w-11/12 items-left justify-center">
+                  <div className="ml-5">
+                    <Header text="Yetki Dağılımı Oylaması" />
+                  </div>
+                  <div className="ml-5">
+                    <SubHeader text="Oylamalardaki birim güç oranlarını belirlemek için belirli periyotlarla yenilenen oylamadır." />
+                  </div>
+                </div>
+                <div>
+                  <img
+                    src={InfoLogo}
+                    alt="question mark"
+                    className="ml-auto mr-5 mt-5"
+                  />
                 </div>
               </div>
-              <div>
-                <img
-                  src={InfoLogo}
-                  alt="question mark"
-                  className="ml-auto mr-5 mt-5"
-                />
-              </div>
-            </div>
+            )}
           </div>
           <div className="flex flex-row m-auto w-2/3 mt-8 text-sm">
             <Link
@@ -336,11 +377,14 @@ class MainLayout extends React.Component {
 
           {this.state.polls.map(poll => (
             <PollCard
-              logo={logoForPollType(poll.Type)}
+              logo={logoForPollType(poll.type)}
               key={poll.pollId}
+              id={poll.pollId}
               pollName={poll.name}
+              pollEndDate={poll.deadline}
               statusText={statusTextForListType(poll.listType)}
               statusColor={statusColorForListType(poll.listType)}
+              vote={this.vote}
             />
           ))}
         </div>
@@ -350,6 +394,7 @@ class MainLayout extends React.Component {
           right={this.state.right}
           toggleDrawer={this.toggleDrawer}
           openModal={this.openModal}
+          poll={this.state.votingPoll}
         />
 
         <FinalCongratsModal

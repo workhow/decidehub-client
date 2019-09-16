@@ -35,9 +35,9 @@ class LeftNavbar extends Component {
             className="text-gray-text hover:text-gray-dark text-2xl mb-6">
             <img src={SettingsLogo} alt="settings logo" />
           </Link>
-          <Link to="/profile" className="navbar-logo mb-12">
+          <div className="navbar-logo mb-12">
             <img src={ProfilePicture} alt="main page logo" />
-          </Link>
+          </div>
         </div>
       </div>
     );

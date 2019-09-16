@@ -11,16 +11,17 @@ import AuthorityLogo from "../../yetki.svg";
 import PolicyLogo from "../../yonetmelik.svg";
 import ManagerLogo from "../../yonetici.svg";
 import Notifications from "../../Notifications/Notifications";
+import Loader from "../../../Loader/Loader";
 
 const logoForPollType = type => {
   switch (type) {
-    case "AuthorityPoll":
+    case "authorityPoll":
       return AuthorityLogo;
-    case "MultipleChoicePoll":
+    case "multipleChoicePoll":
       return ManagerLogo;
-    case "PolicyChangePoll":
+    case "policyChangePoll":
       return PolicyLogo;
-    case "SharePoll":
+    case "sharePoll":
       return PuzzleLogo;
     default:
       return;
@@ -61,7 +62,8 @@ class CurrentPollsLayout extends React.Component {
     super(props);
     this.state = {
       anchorEl: null,
-      polls: []
+      polls: [],
+      loaded: false
     };
     this.handleNotificationClick = this.handleNotificationClick.bind(this);
     this.handleNotificationClose = this.handleNotificationClose.bind(this);
@@ -89,12 +91,16 @@ class CurrentPollsLayout extends React.Component {
       .then(response => {
         this.setState({
           ...this.state,
-          polls: response.data
+          polls: response.data,
+          loaded: true
         });
       });
   }
 
   render() {
+    if (!this.state.loaded) {
+      return <Loader />;
+    }
     return (
       <div className="pb-64">
         <LeftNavbar />
@@ -114,8 +120,9 @@ class CurrentPollsLayout extends React.Component {
           </div>
           {this.state.polls.map(poll => (
             <PollCard
-              logo={logoForPollType(poll.Type)}
+              logo={logoForPollType(poll.type)}
               key={poll.pollId}
+              pollEndDate={poll.deadline}
               pollName={poll.name}
               statusText={statusTextForListType(poll.listType)}
               statusColor={statusColorForListType(poll.listType)}

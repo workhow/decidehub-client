@@ -1,8 +1,34 @@
 import React, { Component } from "react";
+import axios from "axios";
+import Util from "../../../../util";
 import VotingPeople from "./Group 10.svg";
 import Button from "../../../AccountLayout/Register/Button/Button";
 
 class AuthPollModal extends Component {
+  constructor(props) {
+    super(props);
+    this.startPoll = this.startPoll.bind(this);
+  }
+
+  startPoll(event) {
+    const startAuthPollPath = Util.pathForCurrentSubdomain(
+      "poll/AuthorityPoll/startPoll"
+    );
+
+    axios
+      .get(startAuthPollPath, { headers: Util.authenticationHeaders() })
+      .then(response => {
+        this.props.toggleDrawer("congratsauthmodal", "right", true)(event);
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 401) {
+          Util.signOut();
+        } else {
+          alert(error.response.data[0].description);
+        }
+      });
+  }
+
   render() {
     return (
       <div className="flex flex-col pr-3">
@@ -22,14 +48,7 @@ class AuthPollModal extends Component {
           </p>
         </div>
         <div className="flex flex-col self-center w-1/2 mt-24">
-          <Button
-            text="Devam Et"
-            onClick={this.props.toggleDrawer(
-              "congratsauthmodal",
-              "right",
-              true
-            )}
-          />
+          <Button text="Devam Et" onClick={this.startPoll} />
         </div>
       </div>
     );

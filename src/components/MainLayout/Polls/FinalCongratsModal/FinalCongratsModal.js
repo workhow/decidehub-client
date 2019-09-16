@@ -24,7 +24,7 @@ export default function FinalCongratsModal(props) {
             <div className="self-center w-1/3">
               <button
                 className="bg-gray-dark text-white font-bold uppercase py-3 px-4 text-xs w-full"
-                onClose={props.closeModal()}>
+                onClick={props.closeModal()}>
                 Devam Et
               </button>
             </div>

@@ -10,11 +10,12 @@ class FormBlockTwo extends React.Component {
         <div className="block text-gray-700 w-full flex">
           <input
             name={this.props.name}
-            className="appearance-none block w-full border border-gray-border py-3 px-4 leading-tight text-xs text-gray-text"
+            className="appearance-none block w-full border border-gray-border py-3 px-4 leading-tight text-xs text-gray-dark"
             type={this.props.type || "text"}
             minLength={this.props.minLength || 0}
             onChange={this.props.handleInputChange}
             placeholder={this.props.placeholderText}
+            value={this.props.value}
           />
         </div>
       </div>

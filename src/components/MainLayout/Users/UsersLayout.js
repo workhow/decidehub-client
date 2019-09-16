@@ -16,10 +16,16 @@ import Loader from "../../Loader/Loader";
 class UsersLayout extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { right: false, users: [] };
+    this.state = {
+      right: false,
+      users: [],
+      isAdmin: localStorage.isAdmin === "1"
+    };
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.inviteUser = this.inviteUser.bind(this);
+    this.addOrUpdateUser = this.addOrUpdateUser.bind(this);
+    this.addUser = this.addUser.bind(this);
+    this.editUser = this.editUser.bind(this);
   }
 
   componentDidMount() {
@@ -47,22 +53,57 @@ class UsersLayout extends React.Component {
     this.setState({ [name]: value });
   }
 
-  inviteUser() {
+  addUser() {
+    this.editUser(null);
+  }
+
+  editUser(id) {
+    const selectedUser = this.state.users.filter(d => d.id === id)[0];
+
+    if (selectedUser) {
+      this.setState({
+        ...this.state,
+        addEditUserId: id,
+        addEditUserFirstName: selectedUser.firstName,
+        addEditUserLastName: selectedUser.lastName,
+        addEditUserEmail: selectedUser.email,
+        addEditUserInitialAuthorityPercent:
+          selectedUser.initialAuthorityPercent,
+        right: true
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        addEditUserId: null,
+        addEditUserFirstName: "",
+        addEditUserLastName: "",
+        addEditUserEmail: "",
+        addEditUserInitialAuthorityPercent: 0,
+        right: true
+      });
+    }
+  }
+
+  addOrUpdateUser() {
     if (
-      this.state.inviteEmail &&
-      this.state.inviteFirstName &&
-      this.state.inviteLastName
+      this.state.addEditUserEmail &&
+      this.state.addEditUserFirstName &&
+      this.state.addEditUserLastName
     ) {
-      const inviteUserPath = Util.pathForCurrentSubdomain("users/addEdit");
+      const addEditUserPath = Util.pathForCurrentSubdomain("users/addEdit");
 
       axios
         .post(
-          inviteUserPath,
+          addEditUserPath,
           {
-            email: this.state.inviteEmail,
-            firstName: this.state.inviteFirstName,
-            lastName: this.state.inviteLastName,
-            tenantId: Util.getSubdomain()
+            email: this.state.addEditUserEmail,
+            firstName: this.state.addEditUserFirstName,
+            lastName: this.state.addEditUserLastName,
+            initialAuthorityPercent: parseInt(
+              this.state.addEditUserInitialAuthorityPercent
+            ),
+            tenantId: Util.getSubdomain(),
+            id: this.state.addEditUserId
           },
           { headers: Util.authenticationHeaders() }
         )
@@ -115,27 +156,28 @@ class UsersLayout extends React.Component {
         <div className="ml-24">
           <div className="flex flex-row ml-16 md:ml-32 xl:ml-48 mt-16 lg:mt-32 m-8">
             <div>
-              <p
-                className="text-2xl text-gray-dark inline ml-5"
-                onClick={this.toggleDrawer("right", true)}>
-                Üyeler
-              </p>
-              <DrawerButton
-                onClick={this.toggleDrawer("right", true)}
-                className="text-base text-gray-text ml-8 inline">
-                Yeni Ekle
-              </DrawerButton>
+              <p className="text-2xl text-gray-dark inline ml-5">Üyeler</p>
+              {this.state.isAdmin && (
+                <DrawerButton
+                  onClick={this.addUser}
+                  className="text-base text-gray-text ml-8 inline">
+                  Yeni Ekle
+                </DrawerButton>
+              )}
             </div>
           </div>
           <div className="user-container mx-16 md:mx-32 xl:mx-48 mt-8">
             {this.state.users.map(user => (
               <Card
+                editable={this.state.isAdmin}
                 key={user.id}
                 name={`${user.firstName} ${user.lastName}`}
                 email={user.email}
                 imgLink={ProfilePic}
                 active={user.isActive}
                 initialAuthorityScore={user.initialAuthorityPercent}
+                editUser={this.editUser}
+                id={user.id}
               />
             ))}
           </div>
@@ -154,7 +196,9 @@ class UsersLayout extends React.Component {
             />
             <div className="flex flex-col text-center px-3 mt-20">
               <p className="text-2xl mb-24 mt-5 text-gray-dark">
-                Yeni Kullanıcı Davet Et
+                {this.state.addEditUserId
+                  ? "Kullanıcı Bilgilerini Düzenle"
+                  : "Yeni Kullanıcı Davet Et"}
               </p>
               <p className="text-base mb-10 mt-5 text-gray-dark">
                 Bi bakalım.. Katılımcılar tamam, ayarlarıda kontol ettik artık
@@ -164,7 +208,8 @@ class UsersLayout extends React.Component {
                 <div className="w-1/2 pr-3 my-5">
                   <FormBlockTwo
                     handleInputChange={this.handleInputChange}
-                    name="inviteFirstName"
+                    name="addEditUserFirstName"
+                    value={this.state.addEditUserFirstName}
                     labelText="Adı"
                     placeholderText="Ad"
                   />
@@ -172,7 +217,8 @@ class UsersLayout extends React.Component {
                 <div className="w-1/2 pl-3 my-5">
                   <FormBlockTwo
                     handleInputChange={this.handleInputChange}
-                    name="inviteLastName"
+                    value={this.state.addEditUserLastName}
+                    name="addEditUserLastName"
                     labelText="Soyadı"
                     placeholderText="Soyad"
                   />
@@ -180,14 +226,32 @@ class UsersLayout extends React.Component {
               </div>
               <div className="mb-5">
                 <FormBlock
+                  labelText="Başlangıç Yetki Puanı"
+                  name="addEditUserInitialAuthorityPercent"
+                  type="number"
+                  value={this.state.addEditUserInitialAuthorityPercent}
+                  handleInputChange={this.handleInputChange}
+                  placeholderText="0"
+                />
+              </div>
+              <div className="mb-5">
+                <FormBlock
                   labelText="E-mail"
-                  name="inviteEmail"
+                  name="addEditUserEmail"
+                  value={this.state.addEditUserEmail}
                   handleInputChange={this.handleInputChange}
                   placeholderText="example@decidehub.com"
                 />
               </div>
               <div className="mt-12">
-                <Button text="Davet Et" onClick={this.inviteUser} />
+                <Button
+                  text={
+                    this.state.addEditUserId
+                      ? "Değişiklikleri Kaydet"
+                      : "Davet Et"
+                  }
+                  onClick={this.addOrUpdateUser}
+                />
               </div>
             </div>
           </div>

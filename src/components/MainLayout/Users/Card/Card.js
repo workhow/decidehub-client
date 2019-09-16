@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import MenuLogo from "../menu.svg";
 
 class Card extends Component {
   render() {
     return (
       <div className="bg-white py-5 border border-gray-light m-5">
-        <Link to="!#">
-          <img src={MenuLogo} alt="menu logo" className="ml-auto mr-5" />
-        </Link>
+        {this.props.editable && (
+          <img
+            src={MenuLogo}
+            alt="menu logo"
+            className="ml-auto mr-5"
+            onClick={() => this.props.editUser(this.props.id)}
+          />
+        )}
         <div className="flex flex-col items-center">
           <img
             src={this.props.imgLink}

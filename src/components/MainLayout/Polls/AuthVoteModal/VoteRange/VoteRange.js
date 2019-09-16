@@ -1,44 +1,35 @@
 import React, { Component } from "react";
+import "./VoteRange.css";
 
 class VoteRange extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { amount: 0 };
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({ [name]: value });
-  }
-
   render() {
     return (
-      <form name="voteForm" className="flex flex-row my-4 justify-between">
-        <div className="w-full align-left">
+      <form
+        name="voteForm"
+        className="flex flex-row my-4 justify-between items-center">
+        <div className="w-1/2 align-left">
           <p className="text-lg text-gray-dark">{this.props.name}</p>
         </div>
-        <div className="w-2/3">
-          <input
-            type="range"
-            name="amount"
-            min="0"
-            max="100"
-            value={this.state.amount}
-            onChange={this.handleInputChange}
-          />
-          <input
-            type="number"
-            name="amount"
-            min="0"
-            max="100"
-            value={this.state.amount}
-            onChange={this.handleInputChange}
-            className="ml-4"
-          />
-        </div>
+        <input
+          className="flex-grow slider"
+          type="range"
+          name="amount"
+          min="0"
+          data-userid={this.props.userId}
+          max={this.props.max}
+          value={this.props.value}
+          onChange={this.props.onChange}
+        />
+        <input
+          type="number"
+          name="amount"
+          min="0"
+          data-userid={this.props.userId}
+          max={this.props.max}
+          value={this.props.value}
+          onChange={this.props.onChange}
+          className="ml-4"
+        />
       </form>
     );
   }

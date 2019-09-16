@@ -19,7 +19,7 @@ class ResetPassword extends React.Component {
       confirmPassword: "",
       userId: queryParams.userId,
       code: queryParams.token,
-      gen: queryParams.gen,
+      gen: parseInt(queryParams.gen),
       passwordReset: false
     };
 
@@ -47,7 +47,8 @@ class ResetPassword extends React.Component {
         email: this.state.email,
         userId: this.state.userId,
         code: this.state.code,
-        subdomain: this.state.subdomain
+        subdomain: this.state.subdomain,
+        gen: this.state.gen
       })
       .then(response => {
         if (response.data) {
