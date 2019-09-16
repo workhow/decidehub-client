@@ -56,6 +56,7 @@ const statusTextForListType = listType => {
     case "completed":
       return "Tamamlandı";
     case "userNotVoted":
+      return "Oyunuzu bekliyor";
     case "userVoted":
       return "Devam ediyor";
     case "waiting":
@@ -70,7 +71,7 @@ const statusColorForListType = listType => {
     case "completed":
       return "red";
     case "userNotVoted":
-      return "orange";
+      return "green";
     case "userVoted":
       return "orange";
     case "waiting":
@@ -118,9 +119,18 @@ class MainLayout extends React.Component {
   vote(pollId) {
     return event => {
       const poll = this.state.polls.filter(poll => poll.pollId === pollId)[0];
+
+      if (poll.listType === "userVoted") return;
+
       this.setState({ ...this.state, votingPoll: poll });
+
+      if (poll.listType === "completed") {
+        return this.toggleDrawer("pollresultmodal", "right", true)(event);
+      }
       if (poll) {
-        this.toggleDrawer(drawerForPollType(poll.type), "right", true)(event);
+        return this.toggleDrawer(drawerForPollType(poll.type), "right", true)(
+          event
+        );
       }
     };
   }
@@ -184,6 +194,7 @@ class MainLayout extends React.Component {
   }
 
   openModal(modalTitle, modalText) {
+    this.updatePollList();
     return event => {
       if (
         event.type === "keydown" &&
@@ -250,7 +261,9 @@ class MainLayout extends React.Component {
               <StatusIndicator
                 text={
                   this.state.nextAuthorityPollDate
-                    ? `Bir Sonraki Yetki Dağılımı Oylaması: ${this.state.nextAuthorityPollDate}`
+                    ? `Bir Sonraki Yetki Dağılımı Oylaması: ${new Date(
+                        this.state.nextAuthorityPollDate
+                      ).toLocaleDateString()}`
                     : "Yetki Dağılım Oylaması Bekleniyor"
                 }
                 color="decidehub"

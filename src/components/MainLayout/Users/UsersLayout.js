@@ -200,10 +200,6 @@ class UsersLayout extends React.Component {
                   ? "Kullanıcı Bilgilerini Düzenle"
                   : "Yeni Kullanıcı Davet Et"}
               </p>
-              <p className="text-base mb-10 mt-5 text-gray-dark">
-                Bi bakalım.. Katılımcılar tamam, ayarlarıda kontol ettik artık
-                hızlıca başlayabiliriz.
-              </p>
               <div className="flex">
                 <div className="w-1/2 pr-3 my-5">
                   <FormBlockTwo

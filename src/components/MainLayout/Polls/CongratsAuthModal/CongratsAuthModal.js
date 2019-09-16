@@ -15,7 +15,7 @@ class CongratsAuthModal extends Component {
             Bu kadar demokrasi düşkünü olduğun için seni tebrik ederiz.
           </p>
         </div>
-        <div className="flex flex-col self-center w-1/2 mt-24">
+        <div className="flex flex-col self-center w-full mt-24">
           <Button
             text="Devam Et"
             onClick={this.props.toggleDrawer("authvotemodal", "right", true)}

@@ -10,10 +10,44 @@ class AuthVoteModal extends Component {
     super(props);
     this.state = { users: [], sum: 0 };
     this.voteChanged = this.voteChanged.bind(this);
+    this.submitVote = this.submitVote.bind(this);
   }
 
   componentDidMount() {
     this.updateUserList();
+  }
+
+  submitVote(event) {
+    if (this.state.sum !== 1000) {
+      return alert(
+        "Tüm yetkinizi dağıtmamışsınız. Lütfen oylarınızın tamamı 1000 olacak şekilde yeniden dağıtınız."
+      );
+    }
+
+    const votePath = Util.pathForCurrentSubdomain("poll/AuthorityPoll/vote");
+
+    axios
+      .post(
+        votePath,
+        {
+          pollId: this.props.poll.pollId,
+          votes: Object.entries(this.state.votes).map(([key, value]) => ({
+            userId: key,
+            value: value
+          }))
+        },
+        { headers: Util.authenticationHeaders() }
+      )
+      .then(response => {
+        this.props.openModal("Tebrikler! Harika!", "Oyunu kullandın.")(event);
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 401) {
+          Util.signOut();
+        } else {
+          alert(error.response.data[0].description);
+        }
+      });
   }
 
   voteChanged(event) {
@@ -21,8 +55,8 @@ class AuthVoteModal extends Component {
     let value = parseInt(target.value);
     const userId = target.dataset.userid;
 
-    if (this.state.sum + value - this.state.votes[userId] > 100) {
-      value = 100 - this.state.sum + this.state.votes[userId];
+    if (this.state.sum + value - this.state.votes[userId] > 1000) {
+      value = 1000 - this.state.sum + this.state.votes[userId];
     }
 
     const newVotes = { ...this.state.votes, [userId]: value };
@@ -84,20 +118,14 @@ class AuthVoteModal extends Component {
             name={`${user.firstName} ${user.lastName}`}
             userId={user.id}
             key={user.id}
-            max="100"
+            max="1000"
             value={this.state.votes[user.id]}
             onChange={this.voteChanged}
           />
         ))}
 
-        <div className="flex flex-col w-1/2 mt-24">
-          <Button
-            text="Gönder"
-            onClick={this.props.openModal(
-              "Tebrikler! Harika!",
-              "Oyunu kullandın."
-            )}
-          />
+        <div className="flex flex-col w-full mt-24">
+          <Button text="Gönder" onClick={this.submitVote} />
         </div>
       </div>
     );

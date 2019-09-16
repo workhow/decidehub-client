@@ -47,7 +47,7 @@ class AuthPollModal extends Component {
             üyenin oy gücünü belirlemek için yapılıyor.
           </p>
         </div>
-        <div className="flex flex-col self-center w-1/2 mt-24">
+        <div className="flex flex-col self-center w-full mt-24">
           <Button text="Devam Et" onClick={this.startPoll} />
         </div>
       </div>

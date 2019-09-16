@@ -13,6 +13,7 @@ import CongratsManagerModal from "../Polls/CongratsManagerModal/CongratsManagerM
 import ChangePolicyModal from "../Policies/ChangePolicyModal/ChangePolicyModal";
 import CongratsPolicyModal from "../Policies/CongratsPolicyModal/CongratsPolicyModal";
 import PolicyVoteModal from "../Policies/PolicyVoteModal/PolicyVoteModal";
+import PollResultModal from "../Polls/PollResultModal/PollResultModal";
 
 export default function DrawerModal(props) {
   const renderSwitch = () => {
@@ -76,6 +77,13 @@ export default function DrawerModal(props) {
           <PolicyVoteModal
             openModal={props.openModal}
             closeModal={props.closeModal}
+            poll={props.poll}
+          />
+        );
+      case "pollresultmodal":
+        return (
+          <PollResultModal
+            toggleDrawer={props.toggleDrawer}
             poll={props.poll}
           />
         );
