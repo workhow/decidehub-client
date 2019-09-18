@@ -1,17 +1,19 @@
 import React from "react";
+import "./Checkbox.css";
 
 class Checkbox extends React.Component {
   render() {
     return (
-      <div className="w-full px-3 flex items-baseline">
+      <label className="checkbox-container w-full flex items-baseline text-xs text-gray-dark">
+        {this.props.text}
         <input
           name={this.props.name}
           type="checkbox"
           className="mr-2"
           onChange={this.props.handleInputChange}
         />
-        <label className="text-xs text-gray-text">{this.props.text}</label>
-      </div>
+        <span class="checkmark"></span>
+      </label>
     );
   }
 }
