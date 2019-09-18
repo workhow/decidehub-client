@@ -13,6 +13,8 @@ class SharePollModal extends Component {
   }
 
   startPoll(event) {
+    event.persist();
+
     const startSharePollPath = Util.pathForCurrentSubdomain(
       "poll/sharePoll/startPoll"
     );

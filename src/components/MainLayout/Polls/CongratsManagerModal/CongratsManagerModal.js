@@ -18,7 +18,7 @@ class CongratsManagerModal extends Component {
         <div className="flex flex-col self-center w-full mt-24">
           <Button
             text="Devam Et"
-            onClick={this.props.toggleDrawer("managervotemodal", "right", true)}
+            onClick={this.props.toggleDrawer("", "right", false)}
           />
         </div>
       </div>

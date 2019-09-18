@@ -11,6 +11,8 @@ class AuthPollModal extends Component {
   }
 
   startPoll(event) {
+    event.persist();
+
     const startAuthPollPath = Util.pathForCurrentSubdomain(
       "poll/AuthorityPoll/startPoll"
     );

@@ -93,7 +93,8 @@ class MainLayout extends React.Component {
       notificationOpen: false,
       anchorEl: null,
       polls: [],
-      loaded: false
+      loaded: false,
+      votingPoll: null
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -118,20 +119,21 @@ class MainLayout extends React.Component {
 
   vote(pollId) {
     return event => {
+      event.persist();
+
       const poll = this.state.polls.filter(poll => poll.pollId === pollId)[0];
+      this.setState({ ...this.state, votingPoll: poll }, () => {
+        if (poll.listType === "userVoted") return;
 
-      if (poll.listType === "userVoted") return;
-
-      this.setState({ ...this.state, votingPoll: poll });
-
-      if (poll.listType === "completed") {
-        return this.toggleDrawer("pollresultmodal", "right", true)(event);
-      }
-      if (poll) {
-        return this.toggleDrawer(drawerForPollType(poll.type), "right", true)(
-          event
-        );
-      }
+        if (poll.listType === "completed") {
+          return this.toggleDrawer("pollresultmodal", "right", true)(event);
+        }
+        if (poll) {
+          return this.toggleDrawer(drawerForPollType(poll.type), "right", true)(
+            event
+          );
+        }
+      });
     };
   }
 
@@ -150,7 +152,7 @@ class MainLayout extends React.Component {
         });
       })
       .catch(error => {
-        if (error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
           Util.signOut();
           this.setState({
             ...this.state,
