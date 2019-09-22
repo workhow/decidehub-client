@@ -52,6 +52,7 @@ class SignIn extends React.Component {
             localStorage.currentUserToken = response.data.token;
             localStorage.isAdmin = response.data.isAdmin ? "1" : "0";
             localStorage.userId = response.data.id;
+            localStorage.userImage = response.data.userImage;
             this.setState({ ...this.state, token: response.data.token });
           }
         }

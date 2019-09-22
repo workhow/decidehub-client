@@ -173,9 +173,9 @@ class UsersLayout extends React.Component {
                 key={user.id}
                 name={`${user.firstName} ${user.lastName}`}
                 email={user.email}
-                imgLink={ProfilePic}
+                imgLink={user.userImage || ProfilePic}
                 active={user.isActive}
-                initialAuthorityScore={user.initialAuthorityPercent}
+                initialAuthorityPercent={user.initialAuthorityPercent}
                 editUser={this.editUser}
                 id={user.id}
               />

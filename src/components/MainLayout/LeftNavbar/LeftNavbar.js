@@ -36,7 +36,11 @@ class LeftNavbar extends Component {
             <img src={SettingsLogo} alt="settings logo" />
           </Link>
           <div className="navbar-logo mb-12">
-            <img src={ProfilePicture} alt="main page logo" />
+            <img
+              className="rounded-full"
+              src={localStorage.userImage || ProfilePicture}
+              alt="main page logo"
+            />
           </div>
         </div>
       </div>

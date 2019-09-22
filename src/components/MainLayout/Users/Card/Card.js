@@ -17,7 +17,7 @@ class Card extends Component {
           <img
             src={this.props.imgLink}
             alt="profile pic"
-            className="rounded-full h-auto p-2 md:p-4"
+            className="rounded-full w-40 h-40"
           />
           <div>
             <div className="p-2 md:p-4 flex flex-col text-center">
@@ -26,7 +26,7 @@ class Card extends Component {
                 {this.props.active || ` (Onay Bekliyor)`}
               </h3>
               <p className="text-sm lg:text-base text-gray-text">
-                Başlangıç Yetki Puanı: {this.props.initialAuthorityScore}
+                Başlangıç Yetki Puanı: {this.props.initialAuthorityPercent}
               </p>
               <p className="text-sm lg:text-base text-gray-text py-5">
                 {this.props.email}
