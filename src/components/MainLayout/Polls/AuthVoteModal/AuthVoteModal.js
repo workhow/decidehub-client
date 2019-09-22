@@ -74,7 +74,7 @@ class AuthVoteModal extends Component {
   }
 
   updateUserList() {
-    const listUserPath = Util.pathForCurrentSubdomain("users");
+    const listUserPath = Util.pathForCurrentSubdomain("users?noImage=true");
 
     axios
       .get(listUserPath, {

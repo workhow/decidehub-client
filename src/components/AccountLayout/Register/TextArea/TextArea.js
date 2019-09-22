@@ -12,6 +12,8 @@ class TextArea extends React.Component {
             className="appearance-none block w-full border border-gray-border py-3 px-4 leading-tight text-xs text-gray-dark"
             id="poll-explanation"
             rows="4"
+            name={this.props.name}
+            onChange={this.props.handleInputChange}
             placeholder={this.props.placeholderText}></textarea>
         </div>
       </div>
