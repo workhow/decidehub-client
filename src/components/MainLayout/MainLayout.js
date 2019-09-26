@@ -92,8 +92,6 @@ class MainLayout extends React.Component {
       modalOpen: false,
       notificationOpen: false,
       anchorEl: null,
-      polls: [],
-      loaded: false,
       votingPoll: null
     };
 
@@ -163,6 +161,11 @@ class MainLayout extends React.Component {
   }
 
   updatePollList() {
+    this.setState({
+      ...this.state,
+      polls: null
+    });
+
     const listPollsPath = Util.pathForCurrentSubdomain("poll/list");
 
     axios
@@ -172,8 +175,7 @@ class MainLayout extends React.Component {
       .then(response => {
         this.setState({
           ...this.state,
-          polls: response.data,
-          loaded: true
+          polls: response.data
         });
       });
   }
@@ -196,7 +198,6 @@ class MainLayout extends React.Component {
   }
 
   openModal(modalTitle, modalText) {
-    this.updatePollList();
     return event => {
       if (
         event.type === "keydown" &&
@@ -251,7 +252,7 @@ class MainLayout extends React.Component {
   render() {
     if (this.state.refresh) {
       return <Redirect to="/" />;
-    } else if (!this.state.loaded) {
+    } else if (!this.state.polls) {
       return <Loader />;
     }
     return (
@@ -410,6 +411,7 @@ class MainLayout extends React.Component {
           toggleDrawer={this.toggleDrawer}
           openModal={this.openModal}
           poll={this.state.votingPoll}
+          refreshData={this.refreshData}
         />
 
         <FinalCongratsModal

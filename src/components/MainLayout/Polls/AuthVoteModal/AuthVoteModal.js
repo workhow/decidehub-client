@@ -40,6 +40,7 @@ class AuthVoteModal extends Component {
       )
       .then(response => {
         this.props.openModal("Tebrikler! Harika!", "Oyunu kullandın.")(event);
+        this.props.refreshData();
       })
       .catch(error => {
         if (error.response && error.response.status === 401) {

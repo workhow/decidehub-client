@@ -12,7 +12,7 @@ class Checkbox extends React.Component {
               checked={this.props.checked}
               readOnly={Boolean(this.props.readOnly)}
             />
-            <span class="checkmark"></span>
+            <span className="checkmark"></span>
           </label>
         )}
       </div>

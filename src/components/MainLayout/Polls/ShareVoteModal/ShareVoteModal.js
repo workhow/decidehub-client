@@ -4,11 +4,12 @@ import Util from "../../../../util";
 import Button from "../../../AccountLayout/Register/Button/Button";
 import VoteRange from "../AuthVoteModal/VoteRange/VoteRange";
 import SubHeader from "../../Settings/SubHeader/SubHeader";
+import Loader from "../../../Loader/Loader";
 
 class ShareVoteModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { users: [], sum: 0 };
+    this.state = { sum: 0 };
     this.voteChanged = this.voteChanged.bind(this);
     this.submitVote = this.submitVote.bind(this);
   }
@@ -40,6 +41,7 @@ class ShareVoteModal extends Component {
       )
       .then(response => {
         this.props.openModal("Tebrikler! Harika!", "Oyunu kullandın.")(event);
+        this.props.refreshData();
       })
       .catch(error => {
         if (error.response && error.response.status === 401) {
@@ -100,6 +102,9 @@ class ShareVoteModal extends Component {
   }
 
   render() {
+    if (!this.state.users) {
+      return <Loader />;
+    }
     return (
       <div className="flex flex-col mt-8">
         <div className="flex flex-row justify-between mb-8">

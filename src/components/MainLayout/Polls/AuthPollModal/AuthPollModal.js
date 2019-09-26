@@ -21,6 +21,7 @@ class AuthPollModal extends Component {
       .get(startAuthPollPath, { headers: Util.authenticationHeaders() })
       .then(response => {
         this.props.toggleDrawer("congratsauthmodal", "right", true)(event);
+        this.props.refreshData();
       })
       .catch(error => {
         if (error.response && error.response.status === 401) {

@@ -30,6 +30,7 @@ class SharePollModal extends Component {
       )
       .then(response => {
         this.props.toggleDrawer("congratssharemodal", "right", true)(event);
+        this.props.refreshData();
       })
       .catch(error => {
         if (error.response && error.response.status === 401) {
@@ -71,7 +72,7 @@ class SharePollModal extends Component {
             placeholderText=""
           />
         </div>
-        <div className="w-1/3 mt-32">
+        <div className="w-full mt-32">
           <Button text="Oylamayı Başlat" onClick={this.startPoll} />
         </div>
       </div>

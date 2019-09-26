@@ -19,15 +19,26 @@ export default function DrawerModal(props) {
   const renderSwitch = () => {
     switch (props.type) {
       case "authpollmodal":
-        return <AuthPollModal toggleDrawer={props.toggleDrawer} />;
+        return (
+          <AuthPollModal
+            refreshData={props.refreshData}
+            toggleDrawer={props.toggleDrawer}
+          />
+        );
 
       case "managerpollmodal":
-        return <ManagerPollModal toggleDrawer={props.toggleDrawer} />;
+        return (
+          <ManagerPollModal
+            refreshData={props.refreshData}
+            toggleDrawer={props.toggleDrawer}
+          />
+        );
 
       case "managervotemodal":
         return (
           <ManagerVoteModal
             toggleDrawer={props.toggleDrawer}
+            refreshData={props.refreshData}
             openModal={props.openModal}
             closeModal={props.closeModal}
             type={props.type}
@@ -36,12 +47,18 @@ export default function DrawerModal(props) {
         );
 
       case "sharepollmodal":
-        return <SharePollModal toggleDrawer={props.toggleDrawer} />;
+        return (
+          <SharePollModal
+            refreshData={props.refreshData}
+            toggleDrawer={props.toggleDrawer}
+          />
+        );
 
       case "sharevotemodal":
         return (
           <ShareVoteModal
             toggleDrawer={props.toggleDrawer}
+            refreshData={props.refreshData}
             openModal={props.openModal}
             closeModal={props.closeModal}
             poll={props.poll}
@@ -60,6 +77,7 @@ export default function DrawerModal(props) {
       case "authvotemodal":
         return (
           <AuthVoteModal
+            refreshData={props.refreshData}
             openModal={props.openModal}
             closeModal={props.closeModal}
             poll={props.poll}
@@ -67,7 +85,12 @@ export default function DrawerModal(props) {
         );
 
       case "changepolicymodal":
-        return <ChangePolicyModal toggleDrawer={props.toggleDrawer} />;
+        return (
+          <ChangePolicyModal
+            refreshData={props.refreshData}
+            toggleDrawer={props.toggleDrawer}
+          />
+        );
 
       case "congratspolicymodal":
         return <CongratsPolicyModal toggleDrawer={props.toggleDrawer} />;
@@ -75,6 +98,7 @@ export default function DrawerModal(props) {
       case "policyvotemodal":
         return (
           <PolicyVoteModal
+            refreshData={props.refreshData}
             openModal={props.openModal}
             closeModal={props.closeModal}
             poll={props.poll}

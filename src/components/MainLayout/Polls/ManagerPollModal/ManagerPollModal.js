@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+import Util from "../../../../util";
 import FormBlock from "../../../AccountLayout/Register/FormBlock/FormBlock";
 import TextArea from "../../../AccountLayout/Register/TextArea/TextArea";
 import Button from "../../../AccountLayout/Register/Button/Button";
@@ -16,6 +18,37 @@ class ManagerPollModal extends Component {
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.addOption = this.addOption.bind(this);
     this.removeOption = this.removeOption.bind(this);
+    this.startPoll = this.startPoll.bind(this);
+  }
+
+  startPoll(event) {
+    event.persist();
+
+    const startManagerPollPath = Util.pathForCurrentSubdomain(
+      "poll/multipleChoice/startPoll"
+    );
+
+    axios
+      .post(
+        startManagerPollPath,
+        {
+          name: this.state.name,
+          description: this.state.description,
+          options: this.state.options
+        },
+        { headers: Util.authenticationHeaders() }
+      )
+      .then(response => {
+        this.props.toggleDrawer("congratsmanagermodal", "right", true)(event);
+        this.props.refreshData();
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 401) {
+          Util.signOut();
+        } else {
+          alert(error.response.data[0].description);
+        }
+      });
   }
 
   handleInputChange(event) {
@@ -106,14 +139,7 @@ class ManagerPollModal extends Component {
         </button>
 
         <div className="w-full mt-4">
-          <Button
-            text="Oylama Başlat"
-            onClick={this.props.toggleDrawer(
-              "congratsmanagermodal",
-              "right",
-              true
-            )}
-          />
+          <Button text="Oylamayı Başlat" onClick={this.startPoll} />
         </div>
       </div>
     );
