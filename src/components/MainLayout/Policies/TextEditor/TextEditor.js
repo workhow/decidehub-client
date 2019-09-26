@@ -4,14 +4,6 @@ import "react-quill/dist/quill.snow.css";
 import "./TextEditor.css";
 
 class TextEditor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: ""
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
   modules = {
     toolbar: [
       [
@@ -53,19 +45,15 @@ class TextEditor extends Component {
     "image"
   ];
 
-  handleChange(value) {
-    this.setState({ text: value });
-  }
-
   render() {
     return (
       <div>
         <ReactQuill
           theme="snow"
-          onChange={this.handleChange}
-          value={this.state.text}
+          onChange={this.props.onChange}
           modules={TextEditor.modules}
           formats={TextEditor.formats}
+          value={this.props.value}
           bounds={".app"}
           scrollingContainer=".text-editor"
           placeholder={this.props.placeholder}

@@ -13,6 +13,7 @@ import UsersLayout from "./components/MainLayout/Users/UsersLayout";
 import SettingsLayout from "./components/MainLayout/Settings/SettingsLayout";
 import CurrentPollsLayout from "./components/MainLayout/Polls/CurrentPollsLayout/CurrentPollsLayout";
 import PolicyLayout from "./components/MainLayout/Policies/PolicyLayout";
+import PolicyDiffLayout from "./components/MainLayout/Policies/PolicyDiffLayout";
 import LandingPage from "./components/LandingPage/LandingPage";
 import ConfirmEmailLayout from "./components/AccountLayout/ConfirmEmailLayout";
 
@@ -33,6 +34,11 @@ const App = () => (
         <PrivateRoute exact path="/settings" component={SettingsLayout} />
         <PrivateRoute exact path="/polls" component={CurrentPollsLayout} />
         <PrivateRoute exact path="/policy" component={PolicyLayout} />
+        <PrivateRoute
+          exact
+          path="/policy/diff/:id"
+          component={PolicyDiffLayout}
+        />
       </Switch>
     </Fragment>
   </Router>

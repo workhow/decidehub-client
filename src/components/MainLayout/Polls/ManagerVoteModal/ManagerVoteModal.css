@@ -1,3 +1,7 @@
 .bg-option-selected {
   background: rgba(191, 237, 145, 0.2);
 }
+
+.bg-option-negative-selected {
+  background: rgba(237, 145, 145, 0.2);
+}

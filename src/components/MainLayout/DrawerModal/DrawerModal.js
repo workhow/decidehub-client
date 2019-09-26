@@ -87,6 +87,7 @@ export default function DrawerModal(props) {
       case "changepolicymodal":
         return (
           <ChangePolicyModal
+            draftBody={props.draftBody}
             refreshData={props.refreshData}
             toggleDrawer={props.toggleDrawer}
           />

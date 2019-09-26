@@ -51,7 +51,7 @@ class AuthPollModal extends Component {
           </p>
         </div>
         <div className="flex flex-col self-center w-full mt-24">
-          <Button text="Devam Et" onClick={this.startPoll} />
+          <Button text="Oylamayı Başlat" onClick={this.startPoll} />
         </div>
       </div>
     );

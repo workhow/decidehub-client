@@ -407,7 +407,7 @@ export class SettingsLayout extends React.Component {
           <div className="w-1/6 ml-auto save-button mt-4">
             <Button onClick={this.updateProfile} text="Kaydet" />
           </div>
-          {this.state.isAdmin && (
+          {this.state.isAdmin && false && (
             <div>
               <div className="w-2/3 m-auto mt-12">
                 <Header text="Ödeme Yöntemlerim" />

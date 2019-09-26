@@ -12,6 +12,8 @@ import PolicyLogo from "../../yonetmelik.svg";
 import ManagerLogo from "../../yonetici.svg";
 import Notifications from "../../Notifications/Notifications";
 import Loader from "../../../Loader/Loader";
+import DrawerModal from "../../DrawerModal/DrawerModal";
+import FinalCongratsModal from "../FinalCongratsModal/FinalCongratsModal";
 
 const logoForPollType = type => {
   switch (type) {
@@ -28,11 +30,27 @@ const logoForPollType = type => {
   }
 };
 
+const drawerForPollType = type => {
+  switch (type) {
+    case "authorityPoll":
+      return "authvotemodal";
+    case "multipleChoicePoll":
+      return "managervotemodal";
+    case "policyChangePoll":
+      return "policyvotemodal";
+    case "sharePoll":
+      return "sharevotemodal";
+    default:
+      return;
+  }
+};
+
 const statusTextForListType = listType => {
   switch (listType) {
     case "completed":
       return "Tamamlandı";
     case "userNotVoted":
+      return "Oyunuzu bekliyor";
     case "userVoted":
       return "Devam ediyor";
     case "waiting":
@@ -47,7 +65,7 @@ const statusColorForListType = listType => {
     case "completed":
       return "red";
     case "userNotVoted":
-      return "orange";
+      return "green";
     case "userVoted":
       return "orange";
     case "waiting":
@@ -61,12 +79,23 @@ class CurrentPollsLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      right: false,
+      modalType: "",
+      modalTitle: "",
+      modalText: "",
+      modalOpen: false,
+      notificationOpen: false,
       anchorEl: null,
-      polls: [],
-      loaded: false
+      votingPoll: null
     };
+
+    this.toggleDrawer = this.toggleDrawer.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.handleNotificationClick = this.handleNotificationClick.bind(this);
     this.handleNotificationClose = this.handleNotificationClose.bind(this);
+    this.refreshData = this.refreshData.bind(this);
+    this.vote = this.vote.bind(this);
   }
 
   handleNotificationClick(event) {
@@ -77,8 +106,70 @@ class CurrentPollsLayout extends React.Component {
     this.setState({ ...this.state, anchorEl: null });
   }
 
+  toggleDrawer(modalType, side, open) {
+    return event => {
+      if (
+        event.type === "keydown" &&
+        (event.key === "Tab" || event.key === "Shift")
+      ) {
+        return;
+      }
+
+      this.setState({
+        ...this.state,
+        [side]: open,
+        modalType: modalType
+      });
+    };
+  }
+
+  openModal(modalTitle, modalText) {
+    return event => {
+      if (
+        event.type === "keydown" &&
+        (event.key === "Tab" || event.key === "Shift")
+      ) {
+        return;
+      }
+
+      this.setState({
+        ...this.state,
+        modalTitle: modalTitle,
+        modalText: modalText,
+        modalOpen: true,
+        right: false,
+        nextAuthorityPollDate: ""
+      });
+    };
+  }
+
+  closeModal() {
+    return event => {
+      if (
+        event.type === "keydown" &&
+        (event.key === "Tab" || event.key === "Shift")
+      ) {
+        return;
+      }
+
+      this.setState({
+        ...this.state,
+        modalOpen: false
+      });
+    };
+  }
+
   componentDidMount() {
+    this.refreshData();
+    this.refreshTimer = setInterval(this.refreshData, 60000);
+  }
+
+  refreshData() {
     this.updatePollList();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.refreshTimer);
   }
 
   updatePollList() {
@@ -91,14 +182,33 @@ class CurrentPollsLayout extends React.Component {
       .then(response => {
         this.setState({
           ...this.state,
-          polls: response.data,
-          loaded: true
+          polls: response.data
         });
       });
   }
 
+  vote(pollId) {
+    return event => {
+      event.persist();
+
+      const poll = this.state.polls.filter(poll => poll.pollId === pollId)[0];
+      this.setState({ ...this.state, votingPoll: poll }, () => {
+        if (poll.listType === "userVoted") return;
+
+        if (poll.listType === "completed") {
+          return this.toggleDrawer("pollresultmodal", "right", true)(event);
+        }
+        if (poll) {
+          return this.toggleDrawer(drawerForPollType(poll.type), "right", true)(
+            event
+          );
+        }
+      });
+    };
+  }
+
   render() {
-    if (!this.state.loaded) {
+    if (!this.state.polls) {
       return <Loader />;
     }
     return (
@@ -122,16 +232,35 @@ class CurrentPollsLayout extends React.Component {
             <PollCard
               logo={logoForPollType(poll.type)}
               key={poll.pollId}
-              pollEndDate={poll.deadline}
+              id={poll.pollId}
               pollName={poll.name}
+              pollEndDate={poll.deadline}
               statusText={statusTextForListType(poll.listType)}
               statusColor={statusColorForListType(poll.listType)}
+              vote={this.vote}
             />
           ))}
         </div>
 
+        <DrawerModal
+          type={this.state.modalType}
+          right={this.state.right}
+          toggleDrawer={this.toggleDrawer}
+          openModal={this.openModal}
+          poll={this.state.votingPoll}
+          refreshData={this.refreshData}
+        />
+
+        <FinalCongratsModal
+          open={this.state.modalOpen}
+          title={this.state.modalTitle}
+          text={this.state.modalText}
+          closeModal={this.closeModal}
+        />
+
         <Notifications
-          open={Boolean(this.state.anchorEl)}
+          id={this.id}
+          open={this.state.notificationOpen}
           anchorEl={this.state.anchorEl}
           onClose={this.handleNotificationClose}
         />

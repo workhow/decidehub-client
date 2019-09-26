@@ -136,7 +136,7 @@ class ShareVoteModal extends Component {
           />
         ))}
         <div className="flex flex-col w-full mt-24">
-          <Button text="Devam Et" onClick={this.submitVote} />
+          <Button text="Gönder" onClick={this.submitVote} />
         </div>
       </div>
     );

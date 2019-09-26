@@ -12,7 +12,7 @@ class Checkbox extends React.Component {
           className="mr-2"
           onChange={this.props.handleInputChange}
         />
-        <span class="checkmark"></span>
+        <span className="checkmark"></span>
       </label>
     );
   }

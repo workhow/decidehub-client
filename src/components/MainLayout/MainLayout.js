@@ -106,13 +106,16 @@ class MainLayout extends React.Component {
 
   componentDidMount() {
     this.refreshData();
+    this.refreshTimer = setInterval(this.refreshData, 60000);
   }
 
   refreshData() {
     this.getNextAuthorityPollDate();
     this.updatePollList();
+  }
 
-    setTimeout(this.refreshData, 60000);
+  componentWillUnmount() {
+    clearInterval(this.refreshTimer);
   }
 
   vote(pollId) {
