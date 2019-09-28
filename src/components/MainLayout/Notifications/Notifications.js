@@ -21,8 +21,7 @@ export default function SimplePopover(props) {
         }}>
         <div className="p-8">
           <p className="pb-4">Decidehub BETA yayında.</p>
-          <SubHeader text="26 Eylül 2019" />
-          <HorizontalRule />
+          <SubHeader text="28 Eylül 2019" />
         </div>
       </Popover>
     </div>

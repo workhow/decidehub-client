@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import moment from "moment";
 import Util from "../../../util";
 import Loader from "../../Loader/Loader";
 import LeftNavbar from "../LeftNavbar/LeftNavbar";
@@ -25,6 +26,7 @@ export class PolicyLayout extends React.Component {
       modalOpen: false,
       anchorEl: null,
       currentPolicy: null,
+      selectedPolicy: null,
       draftBody: ""
     };
 
@@ -35,6 +37,7 @@ export class PolicyLayout extends React.Component {
     this.handleNotificationClose = this.handleNotificationClose.bind(this);
     this.editClicked = this.editClicked.bind(this);
     this.textChanged = this.textChanged.bind(this);
+    this.policySelected = this.policySelected.bind(this);
   }
 
   componentDidMount() {
@@ -58,6 +61,24 @@ export class PolicyLayout extends React.Component {
     this.setState({ draftBody: newText });
   }
 
+  policySelected(policyId) {
+    if (policyId === this.state.currentPolicy.id) {
+      this.setState({
+        selectedPolicy: this.state.currentPolicy
+      });
+    } else {
+      const selectedPolicy = this.state.policyHistory.filter(
+        p => p.id === policyId
+      )[0];
+
+      if (selectedPolicy) {
+        this.setState({
+          selectedPolicy: selectedPolicy
+        });
+      }
+    }
+  }
+
   getCurrentPolicy() {
     const currentPolicyPath = Util.pathForCurrentSubdomain("policy");
 
@@ -68,8 +89,8 @@ export class PolicyLayout extends React.Component {
       .then(response => {
         this.setState({
           currentPolicy: response.data,
-          editing: response.data.id === 0,
-          editable: true
+          selectedPolicy: response.data,
+          editing: response.data.id === 0
         });
       })
       .catch(error => {
@@ -165,7 +186,7 @@ export class PolicyLayout extends React.Component {
   }
 
   render() {
-    if (!this.state.currentPolicy) {
+    if (!this.state.selectedPolicy) {
       return <Loader />;
     }
     return (
@@ -207,13 +228,24 @@ export class PolicyLayout extends React.Component {
                 </div>
               ) : (
                 <div>
-                  <Header text="Yönetmelik" />
+                  <Header
+                    text={
+                      this.state.selectedPolicy.id ===
+                      this.state.currentPolicy.id
+                        ? "Mevcut Yönetmelik"
+                        : `${moment
+                            .utc(this.state.selectedPolicy.createdAt)
+                            .local()
+                            .format("DD MMMM YYYY")} tarihli Yönetmelik`
+                    }
+                  />
                   <div
                     className="mt-8 bg-white p-8"
                     dangerouslySetInnerHTML={{
-                      __html: this.state.currentPolicy.body
+                      __html: this.state.selectedPolicy.body
                     }}></div>
-                  {this.state.editable && (
+                  {this.state.selectedPolicy.id ===
+                    this.state.currentPolicy.id && (
                     <div className="w-1/6 ml-auto py-4">
                       <Button text="Düzenle" onClick={this.editClicked} />
                     </div>
@@ -223,7 +255,11 @@ export class PolicyLayout extends React.Component {
             </div>
           </div>
           <div className="justify-end">
-            <History policyHistory={this.state.policyHistory} />
+            <History
+              currentPolicy={this.state.currentPolicy}
+              policyHistory={this.state.policyHistory}
+              policySelected={this.policySelected}
+            />
           </div>
         </div>
         <Notifications
