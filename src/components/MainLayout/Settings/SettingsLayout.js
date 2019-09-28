@@ -212,7 +212,11 @@ export class SettingsLayout extends React.Component {
         }
       )
       .then(response => {
-        localStorage.userImage = response.data.userImage;
+        if (response.data.userImage) {
+          localStorage.userImage = response.data.userImage;
+        } else {
+          localStorage.removeItem("userImage");
+        }
         this.setState({
           ...this.state,
           profile: response.data
