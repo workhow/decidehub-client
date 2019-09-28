@@ -11,6 +11,13 @@ import "./LandingPage.css";
 import Util from "../../util";
 
 class LandingPage extends Component {
+  componentDidMount() {
+    const subdomain = Util.getSubdomain();
+    if (!subdomain && localStorage.currentUserToken) {
+      localStorage.clear();
+    }
+  }
+
   render() {
     const subdomain = Util.getSubdomain();
     if (subdomain) {

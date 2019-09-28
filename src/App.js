@@ -28,7 +28,6 @@ const App = () => (
         <Route exact path="/confirm-email" component={ConfirmEmailLayout} />
         <Route exact path="/forgot-password" component={ForgotPasswordLayout} />
         <Route exact path="/reset-password" component={ResetPasswordLayout} />
-        <Route exact path="/404" component={NotFoundLayout} />
         <PrivateRoute exact path="/setup" component={SetupLayout} />
         <PrivateRoute exact path="/users" component={UsersLayout} />
         <PrivateRoute exact path="/settings" component={SettingsLayout} />
@@ -39,6 +38,7 @@ const App = () => (
           path="/policy/diff/:id"
           component={PolicyDiffLayout}
         />
+        <Route component={NotFoundLayout} />
       </Switch>
     </Fragment>
   </Router>
