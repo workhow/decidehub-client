@@ -99,11 +99,15 @@ class CurrentPollsLayout extends React.Component {
   }
 
   handleNotificationClick(event) {
-    this.setState({ ...this.state, anchorEl: event.currentTarget });
+    this.setState({
+      ...this.state,
+      anchorEl: event.currentTarget,
+      notificationOpen: true
+    });
   }
 
   handleNotificationClose() {
-    this.setState({ ...this.state, anchorEl: null });
+    this.setState({ ...this.state, anchorEl: null, notificationOpen: false });
   }
 
   toggleDrawer(modalType, side, open) {
@@ -266,7 +270,6 @@ class CurrentPollsLayout extends React.Component {
         />
 
         <Notifications
-          id={this.id}
           open={this.state.notificationOpen}
           anchorEl={this.state.anchorEl}
           onClose={this.handleNotificationClose}
