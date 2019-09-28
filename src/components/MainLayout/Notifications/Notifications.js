@@ -1,7 +1,6 @@
 import React from "react";
 import Popover from "@material-ui/core/Popover";
 import SubHeader from "../../MainLayout/Settings/SubHeader/SubHeader";
-import HorizontalRule from "./HorizontalRule/HorizontalRule";
 
 export default function SimplePopover(props) {
   return (
