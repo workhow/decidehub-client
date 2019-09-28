@@ -322,12 +322,7 @@ class MainLayout extends React.Component {
             <Link
               to="/policy"
               className="flex flex-col bg-white border border-gray-light w-1/2 h-64 mr-8">
-              <img
-                src={InfoLogo}
-                alt="question mark"
-                className="ml-auto mr-5 mt-5"
-              />
-              <div className="w-3/5">
+              <div className="w-3/5 my-10 mx-4">
                 <img src={PolicyLogo} alt="Policy Logo" className="w-16 mx-5" />
                 <div className="mx-5 mt-12">
                   <Header text="Yönetmelik" />
@@ -356,13 +351,6 @@ class MainLayout extends React.Component {
                     <SubHeader text="Gelir,mal,hak paylaşımı için oylama başlatın" />
                   </div>
                 </div>
-                <div>
-                  <img
-                    src={InfoLogo}
-                    alt="question mark"
-                    className="ml-auto mr-5 mt-5"
-                  />
-                </div>
               </div>
               <div
                 className="flex flex-row bg-white border border-gray-light py-1"
@@ -381,13 +369,6 @@ class MainLayout extends React.Component {
                   <div className="mx-5">
                     <SubHeader text="Belirli bir görev için lider seçin" />
                   </div>
-                </div>
-                <div>
-                  <img
-                    src={InfoLogo}
-                    alt="question mark"
-                    className="ml-auto mr-5 mt-5"
-                  />
                 </div>
               </div>
             </div>

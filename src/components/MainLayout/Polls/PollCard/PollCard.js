@@ -12,12 +12,12 @@ class PollCard extends React.Component {
           className="flex flex-row justify-between w-full py-2"
           onClick={this.props.vote(this.props.id)}>
           <div className="flex flex-row w-1/2">
-            <img src={this.props.logo} alt="related logo" className="w-16" />
+            <img src={this.props.logo} alt="related logo" className="w-16"/>
             <p className="p-5 text-gray-dark text-base">
               {this.props.pollName}
             </p>
           </div>
-          <div className="flex flex-row w-1/3 justify-between ml-8">
+          <div className="flex flex-row w-1/2 justify-between ml-8 md:ml-48">
             <div className="flex flex-col justify-center">
               <p className="text-gray-dark text-base">
                 {new Date(this.props.pollEndDate).toDateString()}
@@ -29,9 +29,6 @@ class PollCard extends React.Component {
                 text={this.props.statusText}
                 color={this.props.statusColor}
               />
-            </div>
-            <div className="flex items-center">
-              <img src={Options} alt="options logo" />
             </div>
           </div>
         </div>
