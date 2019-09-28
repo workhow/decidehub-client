@@ -164,15 +164,22 @@ class CurrentPollsLayout extends React.Component {
     this.refreshTimer = setInterval(this.refreshData, 60000);
   }
 
-  refreshData() {
-    this.updatePollList();
+  refreshData(withLoader) {
+    this.updatePollList(withLoader);
   }
 
   componentWillUnmount() {
     clearInterval(this.refreshTimer);
   }
 
-  updatePollList() {
+  updatePollList(withLoader) {
+    if (withLoader) {
+      this.setState({
+        ...this.state,
+        polls: null
+      });
+    }
+
     const listPollsPath = Util.pathForCurrentSubdomain("poll/list");
 
     axios

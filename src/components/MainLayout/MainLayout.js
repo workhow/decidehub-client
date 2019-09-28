@@ -109,9 +109,9 @@ class MainLayout extends React.Component {
     this.refreshTimer = setInterval(this.refreshData, 60000);
   }
 
-  refreshData() {
+  refreshData(withLoader) {
     this.getNextAuthorityPollDate();
-    this.updatePollList();
+    this.updatePollList(withLoader);
   }
 
   componentWillUnmount() {
@@ -163,11 +163,13 @@ class MainLayout extends React.Component {
       });
   }
 
-  updatePollList() {
-    this.setState({
-      ...this.state,
-      polls: null
-    });
+  updatePollList(withLoader) {
+    if (withLoader) {
+      this.setState({
+        ...this.state,
+        polls: null
+      });
+    }
 
     const listPollsPath = Util.pathForCurrentSubdomain("poll/list");
 

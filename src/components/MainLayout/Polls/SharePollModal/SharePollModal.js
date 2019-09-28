@@ -30,7 +30,7 @@ class SharePollModal extends Component {
       )
       .then(response => {
         this.props.toggleDrawer("congratssharemodal", "right", true)(event);
-        this.props.refreshData();
+        this.props.refreshData(true);
       })
       .catch(error => {
         if (error.response && error.response.status === 401) {
