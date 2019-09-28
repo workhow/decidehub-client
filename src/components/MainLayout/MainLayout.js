@@ -10,7 +10,6 @@ import Header from "./Settings/Header/Header";
 import SubHeader from "./Settings/SubHeader/SubHeader";
 import PollCard from "./Polls/PollCard/PollCard";
 import PolicyLogo from "./yonetmelik.svg";
-import InfoLogo from "./info.svg";
 import PuzzleLogo from "./paylasim.svg";
 import ManagerLogo from "./yonetici.svg";
 import AuthorityLogo from "./yetki.svg";
@@ -307,13 +306,6 @@ class MainLayout extends React.Component {
                   <div className="ml-5">
                     <SubHeader text="Oylamalardaki birim güç oranlarını belirlemek için belirli periyotlarla yenilenen oylamadır." />
                   </div>
-                </div>
-                <div>
-                  <img
-                    src={InfoLogo}
-                    alt="question mark"
-                    className="ml-auto mr-5 mt-5"
-                  />
                 </div>
               </div>
             )}

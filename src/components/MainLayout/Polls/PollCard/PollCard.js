@@ -2,7 +2,6 @@ import React from "react";
 import SettingsCard from "../../Settings/SettingsCard/SettingsCard";
 import StatusIndicator from "../../../SetupLayout/StatusIndicator/StatusIndicator";
 import SubHeader from "../../Settings/SubHeader/SubHeader";
-import Options from "../../../MainLayout/Users/menu.svg";
 
 class PollCard extends React.Component {
   render() {
