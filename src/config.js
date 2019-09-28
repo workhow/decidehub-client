@@ -1,3 +1,3 @@
 export default {
-  apiPath: "staging.mngly.com/api/v1"
+  apiPath: "mngly.com/api/v1"
 };
