@@ -40,7 +40,7 @@ class ManagerPollModal extends Component {
       )
       .then(response => {
         this.props.toggleDrawer("congratsmanagermodal", "right", true)(event);
-        this.props.refreshData();
+        this.props.refreshData(true);
       })
       .catch(error => {
         if (error.response && error.response.status === 401) {
