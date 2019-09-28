@@ -13,8 +13,11 @@ class LeftNavbar extends Component {
   render() {
     return (
       <div className="flex flex-col block justify-between items-center h-full w-24 fixed top-0 bottom-0 z-1 bg-white">
-        <img src={Logo} alt="decidehub logo" className="navbar-logo m-12" />
-
+        <div>
+          <Link to="/home" className="flex justify-center">
+            <img src={Logo} alt="decidehub logo" className="navbar-logo m-12" />
+          </Link>
+        </div>
         <div className="flex flex-col mx-auto items-start">
           <Link to="/home" className="my-4 navbar-icon">
             <img src={MainLogo} alt="main page logo" />
