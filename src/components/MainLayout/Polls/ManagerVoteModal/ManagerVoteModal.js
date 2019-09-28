@@ -5,6 +5,8 @@ import Button from "../../../AccountLayout/Register/Button/Button";
 import SubHeader from "../../Settings/SubHeader/SubHeader";
 import Checkbox from "./Checkbox/Checkbox";
 import "./ManagerVoteModal.css";
+import moment from "moment";
+import "moment/locale/tr";
 
 class ManagerVoteModal extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class ManagerVoteModal extends Component {
 
     this.selectOption = this.selectOption.bind(this);
     this.submitVote = this.submitVote.bind(this);
+    moment.locale("tr");
   }
 
   selectOption(optionIndex) {
@@ -58,7 +61,12 @@ class ManagerVoteModal extends Component {
         <div className="flex flex-row mb-8 justify-between">
           <SubHeader text="Sonlanma Tarihi" />
           <p className="text-gray-dark text-base w-2/3 text-left">
-            {new Date(this.props.poll.deadline).toLocaleString()}
+            {Util.capitalize(
+              moment
+                .utc(this.props.poll.deadline)
+                .local()
+                .calendar()
+            )}
           </p>
         </div>
         <div className="flex flex-row mb-24 justify-between">

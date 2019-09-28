@@ -5,6 +5,8 @@ import Util from "../../../../util";
 import Button from "../../../AccountLayout/Register/Button/Button";
 import SubHeader from "../../Settings/SubHeader/SubHeader";
 import Checkbox from "../../Polls/ManagerVoteModal/Checkbox/Checkbox";
+import moment from "moment";
+import "moment/locale/tr";
 
 class PolicyVoteModal extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class PolicyVoteModal extends Component {
 
     this.selectOption = this.selectOption.bind(this);
     this.submitVote = this.submitVote.bind(this);
+    moment.locale("tr");
   }
 
   selectOption(accepted) {
@@ -65,7 +68,12 @@ class PolicyVoteModal extends Component {
             <SubHeader text="Sonlanma Tarihi" />
           </div>
           <p className="text-gray-dark text-base w-2/3 text-left">
-            {new Date(this.props.poll.deadline).toLocaleString()}
+            {Util.capitalize(
+              moment
+                .utc(this.props.poll.deadline)
+                .local()
+                .calendar()
+            )}
           </p>
         </div>
         <div className="flex flex-row mb-8 justify-between">

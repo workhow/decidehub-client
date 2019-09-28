@@ -5,6 +5,8 @@ import Button from "../../../AccountLayout/Register/Button/Button";
 import VoteRange from "../AuthVoteModal/VoteRange/VoteRange";
 import SubHeader from "../../Settings/SubHeader/SubHeader";
 import Loader from "../../../Loader/Loader";
+import moment from "moment";
+import "moment/locale/tr";
 
 class ShareVoteModal extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class ShareVoteModal extends Component {
     this.state = { sum: 0 };
     this.voteChanged = this.voteChanged.bind(this);
     this.submitVote = this.submitVote.bind(this);
+    moment.locale("tr");
   }
 
   componentDidMount() {
@@ -115,7 +118,12 @@ class ShareVoteModal extends Component {
         <div className="flex flex-row mb-8 justify-between">
           <SubHeader text="Sonlanma Tarihi" />
           <p className="text-gray-dark text-base w-2/3 text-left">
-            {new Date(this.props.poll.deadline).toLocaleString()}
+            {Util.capitalize(
+              moment
+                .utc(this.props.poll.deadline)
+                .local()
+                .calendar()
+            )}
           </p>
         </div>
         <div className="flex flex-row mb-24 justify-between">

@@ -19,6 +19,8 @@ import { Link } from "react-router-dom";
 import FinalCongratsModal from "./Polls/FinalCongratsModal/FinalCongratsModal";
 import Notifications from "./Notifications/Notifications";
 import Loader from "../Loader/Loader";
+import moment from "moment";
+import "moment/locale/tr";
 
 const logoForPollType = type => {
   switch (type) {
@@ -101,6 +103,8 @@ class MainLayout extends React.Component {
     this.handleNotificationClose = this.handleNotificationClose.bind(this);
     this.refreshData = this.refreshData.bind(this);
     this.vote = this.vote.bind(this);
+
+    moment.locale("tr");
   }
 
   componentDidMount() {
@@ -268,9 +272,10 @@ class MainLayout extends React.Component {
               <StatusIndicator
                 text={
                   this.state.nextAuthorityPollDate
-                    ? `Bir Sonraki Yetki Dağılımı Oylaması: ${new Date(
-                        this.state.nextAuthorityPollDate
-                      ).toLocaleDateString()}`
+                    ? `Bir Sonraki Yetki Dağılımı Oylaması: ${moment
+                        .utc(this.state.nextAuthorityPollDate)
+                        .local()
+                        .format("DD MMMM YYYY HH:mm")}`
                     : "Yetki Dağılım Oylaması Bekleniyor"
                 }
                 color="decidehub"
