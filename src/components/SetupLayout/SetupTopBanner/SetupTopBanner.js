@@ -1,5 +1,4 @@
 import React from "react";
-import "./SetupTopBanner.css";
 import logo from "./logo.svg";
 
 class SetupTopBanner extends React.Component {
