@@ -9,6 +9,7 @@ import SettingsLogo from "./ayarlar.svg";
 import ProfilePicture from "../../AccountLayout/Register/RegisterStepOne/manager.svg";
 import "./LeftNavbar.css";
 
+
 class LeftNavbar extends Component {
   render() {
     return (

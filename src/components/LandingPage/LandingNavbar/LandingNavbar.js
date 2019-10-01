@@ -1,8 +1,39 @@
 import React, { Component } from "react";
 import Logo from "../logo.svg";
+import Bars from "./burger.svg";
+import LandingNavbarDrawer from "./LandingNavbarDrawer/LandingNavbarDrawer";
 import "./LandingNavbar.css";
 
 class LandingNavbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      right: false,
+      modalType: "",
+      modalTitle: "",
+      modalText: "",
+      modalOpen: false,
+    };
+
+    this.toggleDrawer = this.toggleDrawer.bind(this);
+  }
+  
+  toggleDrawer(side, open) {
+    return event => {
+      if (
+        event.type === "keydown" &&
+        (event.key === "Tab" || event.key === "Shift")
+      ) {
+        return;
+      }
+
+      this.setState({
+        ...this.state,
+        [side]: open,
+      });
+    };
+  }
+
   render() {
     return (
       <div className="fixed w-full z-50">
@@ -14,7 +45,15 @@ class LandingNavbar extends Component {
               className="text-2xl no-underline tracking-tight brand"
             />
           </a>
-          <div className="main-nav m-0 p-0 inline text-gray-dark">
+          <div className="main-nav m-0 p-0 inline md:hidden">
+              <img
+                className="text-2xl text-gray-dark"
+                src= {Bars} 
+                alt="menu bars logo"
+                onClick= {this.toggleDrawer("right", true)}
+                />
+          </div>
+          <div className="main-nav m-0 p-0 text-gray-dark hidden md:block">
             <span>
               <a
                 href="/signup"
@@ -45,6 +84,10 @@ class LandingNavbar extends Component {
             </span>
           </div>
         </nav>
+        <LandingNavbarDrawer
+          right={this.state.right}
+          toggleDrawer={this.toggleDrawer}
+        />
       </div>
     );
   }
