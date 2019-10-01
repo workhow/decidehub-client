@@ -7,10 +7,10 @@ class ResetPasswordLayout extends React.Component {
     return (
       <div>
         <div className="flex flex-col lg:flex-row bg-white">
-          <div className="w-full lg:w-2/5 h-screen p-20">
+          <div className="w-full lg:w-2/5 h-screen p-8 md:p-16 xl:p-20">
             <ResetPassword />
           </div>
-          <div className="order-first lg:order-last w-full lg:w-3/5 h-screen">
+          <div className="hidden lg:block w-full lg:w-3/5 h-screen">
             <AccountRightPanel />
           </div>
         </div>
