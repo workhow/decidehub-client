@@ -71,7 +71,7 @@ class ResetPassword extends React.Component {
     return (
       <div className="flex flex-wrap mx-3 mb-6 bg-white">
         <div className="w-full px-3 mt-16">
-          <p className="text-2xl mb-10 mt-5 text-gray-dark">Şifre Kurtarma</p>
+          <p className="text-2xl mb-10 mt-5 text-gray-dark font-light">Şifre Kurtarma</p>
 
           <div className="mb-5">
             <FormSuffix
