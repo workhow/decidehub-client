@@ -219,7 +219,7 @@ export class PolicyLayout extends React.Component {
                     <Button
                       text="Oylamayı başlat"
                       onClick={this.toggleDrawer(
-                        "changepolicymodal",
+                        "firstpolicymodal",
                         "right",
                         true
                       )}

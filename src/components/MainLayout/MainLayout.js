@@ -331,7 +331,7 @@ class MainLayout extends React.Component {
             <div className="flex flex-col justify-between w-full md:w-1/2 h-32 md:h-64 mt-8 md:mt-0">
               <div
                 className="flex flex-row bg-white border border-gray-light p-1"
-                onClick={this.toggleDrawer("sharepollmodal", "right", true)}>
+                onClick={this.toggleDrawer("firstsharepollmodal", "right", true)}>
                 <div className="w-24 py-2 mx-4">
                   <img
                     src={PuzzleLogo}
@@ -348,7 +348,7 @@ class MainLayout extends React.Component {
               </div>
               <div
                 className="flex flex-row bg-white border border-gray-light p-1 mt-8 md:mt-0"
-                onClick={this.toggleDrawer("managerpollmodal", "right", true)}>
+                onClick={this.toggleDrawer("firstmanagerpollmodal", "right", true)}>
                 <div className="w-24 py-2 mx-4">
                   <img
                     src={ManagerLogo}

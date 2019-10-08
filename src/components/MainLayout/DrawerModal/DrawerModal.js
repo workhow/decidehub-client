@@ -14,6 +14,9 @@ import ChangePolicyModal from "../Policies/ChangePolicyModal/ChangePolicyModal";
 import CongratsPolicyModal from "../Policies/CongratsPolicyModal/CongratsPolicyModal";
 import PolicyVoteModal from "../Policies/PolicyVoteModal/PolicyVoteModal";
 import PollResultModal from "../Polls/PollResultModal/PollResultModal";
+import FirstSharePollModal from "../Polls/FirstSharePollModal/FirstSharePollModal";
+import FirstManagerPollModal from "../Polls/FirstManagerPollModal/FirstManagerPollModal";
+import FirstPolicyModal from "../Policies/FirstPolicyModal/FirstPolicyModal";
 
 export default function DrawerModal(props) {
   const renderSwitch = () => {
@@ -52,6 +55,21 @@ export default function DrawerModal(props) {
             refreshData={props.refreshData}
             toggleDrawer={props.toggleDrawer}
           />
+        );
+      
+      case "firstsharepollmodal":
+        return (
+          <FirstSharePollModal toggleDrawer={props.toggleDrawer}/>
+        );
+
+      case "firstmanagerpollmodal":
+        return (
+          <FirstManagerPollModal toggleDrawer={props.toggleDrawer}/>
+        );
+      
+      case "firstpolicymodal":
+        return (
+          <FirstPolicyModal toggleDrawer={props.toggleDrawer}/>
         );
 
       case "sharevotemodal":
