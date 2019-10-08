@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Util from "../../../../util";
-import VotingPeople from "./Group 10.svg";
+import VotingPeople from "../../Asset 11.svg";
 import Button from "../../../AccountLayout/Register/Button/Button";
 
 class AuthPollModal extends Component {
@@ -38,19 +38,19 @@ class AuthPollModal extends Component {
         <p className="text-2xl text-gray-dark w-full align-left pl-2">
           Yetki Dağılımı Oylaması Başlat
         </p>
-        <div className="flex flex-col justify-center mt-12 px-4 items-center">
+        <div className="flex flex-col justify-center mt-12 px-4 items-center px-12">
           <img
             className="w-full"
             style={{ maxWidth: 500 }}
             src={VotingPeople}
             alt="illustration of voting people"
           />
-          <p className="text-base mt-12 text-gray-dark">
+          <p className="text-base mt-12 text-gray-dark text-center">
             90 gün arayla tekrarlanacak olan bu oylama aslında gruptaki her bir
             üyenin oy gücünü belirlemek için yapılıyor.
           </p>
         </div>
-        <div className="flex flex-col self-center w-full mt-24">
+        <div className="flex flex-col self-center w-2/3 mt-16">
           <Button text="Oylamayı Başlat" onClick={this.startPoll} />
         </div>
       </div>

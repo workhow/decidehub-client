@@ -13,7 +13,6 @@ import PolicyLogo from "./yonetmelik.svg";
 import PuzzleLogo from "./paylasim.svg";
 import ManagerLogo from "./yonetici.svg";
 import AuthorityLogo from "./yetki.svg";
-import AuthorityLogoTwo from "./yetki2.svg";
 import DrawerModal from "./DrawerModal/DrawerModal";
 import { Link } from "react-router-dom";
 import FinalCongratsModal from "./Polls/FinalCongratsModal/FinalCongratsModal";
@@ -266,7 +265,7 @@ class MainLayout extends React.Component {
     return (
       <div className="pb-64">
         <LeftNavbar />
-        <div className="ml-24">
+        <div className="md:ml-24">
           <div className="flex flex-row justify-end pt-12 status-bar text-sm">
             <div>
               <StatusIndicator
@@ -295,76 +294,72 @@ class MainLayout extends React.Component {
             {this.state.polls.filter(poll => poll.type === "authorityPoll")
               .length === 0 && (
               <div
-                className="flex flex-row w-full bg-white border border-gray-light py-1 h-32 mt-8"
+                className="flex flex-row w-full bg-white border border-gray-light p-1 h-32 mt-8"
                 onClick={this.toggleDrawer("authpollmodal", "right", true)}>
-                <div className="flex items-center w-1/12">
-                  <img
-                    src={AuthorityLogoTwo}
-                    alt="puzzle logo"
-                    className="w-16 mx-5"
-                  />
+                <div className="hidden lg:block">
+                  <div className="flex items-center w-24 py-2 mx-4">
+                    <img
+                      src={AuthorityLogo}
+                      alt="puzzle logo"
+                      className="w-full md:hidden lg:block"
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-col w-11/12 items-left justify-center">
-                  <div className="ml-5">
+                <div className="flex flex-col w-5/6 my-auto lg:ml-auto md:mx-auto">
                     <Header text="Yetki Dağılımı Oylaması" />
-                  </div>
-                  <div className="ml-5">
-                    <SubHeader text="Oylamalardaki birim güç oranlarını belirlemek için belirli periyotlarla yenilenen oylamadır." />
-                  </div>
+                    <SubHeader text="Oylamalardaki birim güç oranlarını belirlemek için belirli periyotlarla yenilenen oylamadır." className="hidden md:block"/>
                 </div>
               </div>
             )}
           </div>
-          <div className="flex flex-row m-auto w-2/3 mt-8 text-sm">
+          <div className="flex flex-col md:flex-row m-auto w-2/3 mt-8 text-sm">
             <Link
               to="/policy"
-              className="flex flex-col bg-white border border-gray-light w-1/2 h-64 mr-8">
-              <div className="w-3/5 my-10 mx-4">
-                <img src={PolicyLogo} alt="Policy Logo" className="w-16 mx-5" />
-                <div className="mx-5 mt-12">
-                  <Header text="Yönetmelik" />
+              className="flex flex-col bg-white border border-gray-light w-full md:w-1/2 h-24 md:h-64 mr-8">
+              <div className="flex flex-row md:flex-col p-1">
+                <div className="w-24 py-2 mx-4">
+                <img src={PolicyLogo} alt="Policy Logo" className="w-full block md:hidden lg:block" />
                 </div>
-                <div className="mx-5">
-                  <SubHeader text="Yönetmeliği düzenleyin" />
+                <div className="flex flex-col w-4/5 md:items-start justify-center">
+                  <div className="mx-5 mt-12">
+                    <Header text="Yönetmelik" />
+                    <SubHeader text="Yönetmeliği düzenleyin" className="hidden md:block"/>
+                  </div>
                 </div>
               </div>
             </Link>
-            <div className="flex flex-col justify-between w-1/2 h-64">
+            <div className="flex flex-col justify-between w-full md:w-1/2 h-32 md:h-64 mt-8 md:mt-0">
               <div
-                className="flex flex-row bg-white border border-gray-light py-1"
+                className="flex flex-row bg-white border border-gray-light p-1"
                 onClick={this.toggleDrawer("sharepollmodal", "right", true)}>
-                <div className="pl-8 pb-5 w-1/5 ">
+                <div className="w-24 py-2 mx-4">
                   <img
                     src={PuzzleLogo}
                     alt="puzzle logo"
-                    className="ml-auto mr-5 mt-5"
+                    className="w-full block md:hidden lg:block"
                   />
                 </div>
                 <div className="flex flex-col w-4/5 items-left justify-center">
                   <div className="ml-5">
                     <Header text="Paylaşım Oylaması" />
-                  </div>
-                  <div className="ml-5">
-                    <SubHeader text="Gelir,mal,hak paylaşımı için oylama başlatın" />
+                    <SubHeader text="Gelir,mal,hak paylaşımı için oylama başlatın" className="hidden md:block"/>
                   </div>
                 </div>
               </div>
               <div
-                className="flex flex-row bg-white border border-gray-light py-1"
+                className="flex flex-row bg-white border border-gray-light p-1 mt-8 md:mt-0"
                 onClick={this.toggleDrawer("managerpollmodal", "right", true)}>
-                <div className="pl-8 pb-5 w-1/5">
+                <div className="w-24 py-2 mx-4">
                   <img
                     src={ManagerLogo}
                     alt="manager logo"
-                    className="ml-auto mr-5 mt-5"
+                    className="w-full block md:hidden lg:block"
                   />
                 </div>
                 <div className="flex flex-col w-4/5 items-left justify-center">
-                  <div className="mx-5">
+                  <div className="ml-5">
                     <Header text="Yönetici Seç" />
-                  </div>
-                  <div className="mx-5">
-                    <SubHeader text="Belirli bir görev için lider seçin" />
+                    <SubHeader text="Belirli bir görev için lider seçin" className="hidden md:block"/>
                   </div>
                 </div>
               </div>

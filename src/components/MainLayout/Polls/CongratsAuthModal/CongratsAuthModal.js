@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Button from "../../../AccountLayout/Register/Button/Button";
-import AuthorityLogoTwo from "../../yetki2.svg";
+import AuthorityLogoTwo from "../../check.svg";
 
 class CongratsAuthModal extends Component {
   render() {
