@@ -7,17 +7,17 @@ class Footer extends React.Component {
       <div className="text-white text-md py-8 mx-10 flex justify-center items-baseline">
         <a
           className="m-3"
-          href="https://decidehub.com/static/gizlilik-politikasi.pdf">
+          href="https://decidehub.com/static/docs/gizlilik-politikasi.pdf">
           Gizlilik Politikası
         </a>
         <a
           className="m-3"
-          href="https://decidehub.com/static/kisisel-verilerin-islenmesi.pdf">
+          href="https://decidehub.com/static/docs/kisisel-verilerin-islenmesi.pdf">
           Kişisel Verilerin İşlenmesi
         </a>
         <a
           className="m-3"
-          href="https://decidehub.com/static/kisisel-verilerin-korunmasi.pdf">
+          href="https://decidehub.com/static/docs/kisisel-verilerin-korunmasi.pdf">
           Kişisel Verilerin Korunması
         </a>
         <a className="m-3 font-medium text-xl" href="https://www.workhow.com">

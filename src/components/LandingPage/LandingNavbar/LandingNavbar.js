@@ -12,12 +12,12 @@ class LandingNavbar extends Component {
       modalType: "",
       modalTitle: "",
       modalText: "",
-      modalOpen: false,
+      modalOpen: false
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
   }
-  
+
   toggleDrawer(side, open) {
     return event => {
       if (
@@ -29,7 +29,7 @@ class LandingNavbar extends Component {
 
       this.setState({
         ...this.state,
-        [side]: open,
+        [side]: open
       });
     };
   }
@@ -46,12 +46,12 @@ class LandingNavbar extends Component {
             />
           </a>
           <div className="main-nav m-0 p-0 inline md:hidden">
-              <img
-                className="text-2xl text-gray-dark"
-                src= {Bars} 
-                alt="menu bars logo"
-                onClick= {this.toggleDrawer("right", true)}
-                />
+            <img
+              className="text-2xl text-gray-dark"
+              src={Bars}
+              alt="menu bars logo"
+              onClick={this.toggleDrawer("right", true)}
+            />
           </div>
           <div className="main-nav m-0 p-0 text-gray-dark hidden md:block">
             <span>
@@ -73,13 +73,6 @@ class LandingNavbar extends Component {
                 href="#about-us"
                 className="text-sm sm:text-base md:text-lg no-underline inline navbar-link pr-4 sm:pr-8">
                 Hakkımızda
-              </a>
-            </span>
-            <span>
-              <a
-                href="https://support.workhow.com/hc/en-us/requests/new"
-                className="text-sm sm:text-base md:text-lg no-underline inline navbar-link">
-                Destek
               </a>
             </span>
           </div>
