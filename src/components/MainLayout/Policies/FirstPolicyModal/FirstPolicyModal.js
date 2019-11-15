@@ -3,7 +3,6 @@ import VotingPeople from "./Asset 9.svg";
 import Button from "../../../AccountLayout/Register/Button/Button";
 
 class FirstPolicyModal extends Component {
-
   render() {
     return (
       <div className="flex flex-col pr-3">
@@ -18,11 +17,18 @@ class FirstPolicyModal extends Component {
             alt="illustration of voting people"
           />
           <p className="text-base mt-12 text-gray-dark text-center">
-            Yönetmelik grubunuzun Dna’sı gibidir. şimdi buraya yeni birşeyler ekleme zamanı!
+            Yaptığınız yönetmelik değişimini oylamaya açmak üzeresiniz.
           </p>
         </div>
         <div className="flex flex-col self-center w-2/5 mt-16">
-          <Button text="Oylamayı Başlat" onClick={this.props.toggleDrawer("changepolicymodal", "right", true)}/>
+          <Button
+            text="Oylamayı Başlat"
+            onClick={this.props.toggleDrawer(
+              "changepolicymodal",
+              "right",
+              true
+            )}
+          />
         </div>
       </div>
     );

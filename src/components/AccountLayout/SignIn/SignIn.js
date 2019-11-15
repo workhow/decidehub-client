@@ -12,14 +12,17 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
-    const subdomain = Util.getSubdomain();
+    let subdomain = Util.getSubdomain();
+
+    if (subdomain === "www") subdomain = "";
+
     if (!subdomain && localStorage.currentUserToken) {
       localStorage.clear();
     }
 
     this.state = {
-      currentSubdomain: Util.getSubdomain(),
-      subdomain: Util.getSubdomain(),
+      currentSubdomain: subdomain,
+      subdomain: subdomain,
       token: localStorage.currentUserToken
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -83,7 +86,9 @@ class SignIn extends React.Component {
       <div className="flex flex-wrap mx-3 mb-6 bg-white">
         {this.state.token && <Redirect to="/home" />}
         <div className="w-full px-3 mt-20">
-          <p className="text-2xl mb-10 mt-5 text-gray-dark font-light">Giriş Yapın</p>
+          <p className="text-2xl mb-10 mt-5 text-gray-dark font-light">
+            Giriş Yapın
+          </p>
           <div className="mb-5">
             <FormSuffix
               labelText="Takım Adı"

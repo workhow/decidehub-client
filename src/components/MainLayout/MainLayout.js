@@ -294,7 +294,7 @@ class MainLayout extends React.Component {
             {this.state.polls.filter(poll => poll.type === "authorityPoll")
               .length === 0 && (
               <div
-                className="flex flex-row w-full bg-white border border-gray-light p-1 h-32 mt-8"
+                className="flex flex-row w-full bg-white border border-gray-light p-1 h-32 mt-8 cursor-pointer"
                 onClick={this.toggleDrawer("authpollmodal", "right", true)}>
                 <div className="hidden lg:block">
                   <div className="flex items-center w-24 py-2 mx-4">
@@ -306,8 +306,11 @@ class MainLayout extends React.Component {
                   </div>
                 </div>
                 <div className="flex flex-col w-5/6 my-auto lg:ml-auto md:mx-auto">
-                    <Header text="Yetki Dağılımı Oylaması" />
-                    <SubHeader text="Oylamalardaki birim güç oranlarını belirlemek için belirli periyotlarla yenilenen oylamadır." className="hidden md:block"/>
+                  <Header text="Yetki Dağılımı Oylaması" />
+                  <SubHeader
+                    text="Aşağıdaki oylamalarda, grubunuzdaki her bireyin ne kadar söz hakkı olacağını belirleyin."
+                    className="hidden md:block"
+                  />
                 </div>
               </div>
             )}
@@ -318,37 +321,31 @@ class MainLayout extends React.Component {
               className="flex flex-col bg-white border border-gray-light w-full md:w-1/2 h-24 md:h-64 mr-8">
               <div className="flex flex-row md:flex-col p-1">
                 <div className="w-24 py-2 mx-4">
-                <img src={PolicyLogo} alt="Policy Logo" className="w-full block md:hidden lg:block" />
+                  <img
+                    src={PolicyLogo}
+                    alt="Policy Logo"
+                    className="w-full block md:hidden lg:block"
+                  />
                 </div>
                 <div className="flex flex-col w-4/5 md:items-start justify-center">
                   <div className="mx-5 mt-12">
                     <Header text="Yönetmelik" />
-                    <SubHeader text="Yönetmeliği düzenleyin" className="hidden md:block"/>
+                    <SubHeader
+                      text="Yönetmeliği düzenleyin"
+                      className="hidden md:block"
+                    />
                   </div>
                 </div>
               </div>
             </Link>
             <div className="flex flex-col justify-between w-full md:w-1/2 h-32 md:h-64 mt-8 md:mt-0">
               <div
-                className="flex flex-row bg-white border border-gray-light p-1"
-                onClick={this.toggleDrawer("firstsharepollmodal", "right", true)}>
-                <div className="w-24 py-2 mx-4">
-                  <img
-                    src={PuzzleLogo}
-                    alt="puzzle logo"
-                    className="w-full block md:hidden lg:block"
-                  />
-                </div>
-                <div className="flex flex-col w-4/5 items-left justify-center">
-                  <div className="ml-5">
-                    <Header text="Paylaşım Oylaması" />
-                    <SubHeader text="Gelir,mal,hak paylaşımı için oylama başlatın" className="hidden md:block"/>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="flex flex-row bg-white border border-gray-light p-1 mt-8 md:mt-0"
-                onClick={this.toggleDrawer("firstmanagerpollmodal", "right", true)}>
+                className="flex flex-row bg-white border border-gray-light p-1 mt-8 md:mt-0 cursor-pointer"
+                onClick={this.toggleDrawer(
+                  "firstmanagerpollmodal",
+                  "right",
+                  true
+                )}>
                 <div className="w-24 py-2 mx-4">
                   <img
                     src={ManagerLogo}
@@ -359,15 +356,45 @@ class MainLayout extends React.Component {
                 <div className="flex flex-col w-4/5 items-left justify-center">
                   <div className="ml-5">
                     <Header text="Yönetici Seç" />
-                    <SubHeader text="Belirli bir görev için lider seçin" className="hidden md:block"/>
+                    <SubHeader
+                      text="Belirli bir görev için lider seçin"
+                      className="hidden md:block"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="flex flex-row bg-white border border-gray-light p-1 cursor-pointer"
+                onClick={this.toggleDrawer(
+                  "firstsharepollmodal",
+                  "right",
+                  true
+                )}>
+                <div className="w-24 py-2 mx-4">
+                  <img
+                    src={PuzzleLogo}
+                    alt="puzzle logo"
+                    className="w-full block md:hidden lg:block"
+                  />
+                </div>
+                <div className="flex flex-col w-4/5 items-left justify-center">
+                  <div className="ml-5">
+                    <Header text="Paylaşım Oylaması" />
+                    <SubHeader
+                      text="Gelir,mal,hak paylaşımı için oylama başlatın"
+                      className="hidden md:block"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="w-2/3 m-auto mt-12 mb-6">
-            <Header text="Oylamalar" />
-          </div>
+          {this.state.polls.length !== 0 && (
+            <div className="w-2/3 m-auto mt-12 mb-6">
+              <Header text="Oylamalar" />
+            </div>
+          )}
 
           {this.state.polls.map(poll => (
             <PollCard

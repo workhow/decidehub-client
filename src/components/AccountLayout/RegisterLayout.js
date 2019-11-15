@@ -40,7 +40,7 @@ class RegisterLayout extends React.Component {
             lang: "tr"
           })
           .then(() => {
-            alert("Success");
+            alert("Hesap başarı ile oluşturuldu.");
           })
           .catch(error => {
             if (error.response) {

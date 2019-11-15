@@ -155,14 +155,16 @@ class UsersLayout extends React.Component {
         <LeftNavbar />
         <div className="ml-24">
           <div className="flex flex-row ml-16 md:ml-32 xl:ml-48 mt-16 lg:mt-32 m-8">
-            <div>
-              <p className="text-2xl text-gray-dark inline ml-5">Üyeler</p>
+            <div className="flex items-center">
+              <div className="text-2xl text-gray-dark inline ml-5">Üyeler</div>
               {this.state.isAdmin && (
-                <DrawerButton
-                  onClick={this.addUser}
-                  className="text-base text-gray-text ml-8 inline">
-                  Yeni Ekle
-                </DrawerButton>
+                <div className="ml-4 border rounded border-green-500">
+                  <DrawerButton
+                    onClick={this.addUser}
+                    className="text-base text-gray-text inline">
+                    Yeni Ekle
+                  </DrawerButton>
+                </div>
               )}
             </div>
           </div>

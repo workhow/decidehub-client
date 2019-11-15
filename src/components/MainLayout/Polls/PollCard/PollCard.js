@@ -16,7 +16,7 @@ class PollCard extends React.Component {
     return (
       <SettingsCard>
         <div
-          className="flex flex-row justify-between w-full py-2"
+          className="flex flex-row justify-between w-full py-2 cursor-pointer"
           onClick={this.props.vote(this.props.id)}>
           <div className="flex flex-row w-1/2">
             <img src={this.props.logo} alt="related logo" className="w-16" />
@@ -27,14 +27,17 @@ class PollCard extends React.Component {
           <div className="flex flex-row w-1/2 justify-end ml-8">
             <div className="flex flex-col justify-center">
               <p className="text-gray-dark text-base text-right">
-                {Util.capitalize(
+                Sonlanma Tarihi
+              </p>
+              <SubHeader
+                className="text-right"
+                text={Util.capitalize(
                   moment
                     .utc(this.props.pollEndDate)
                     .local()
                     .calendar()
                 )}
-              </p>
-              <SubHeader className="text-right" text="Sonlanma Tarihi" />
+              />
             </div>
             <div className="flex h-full items-center ml-8">
               <StatusIndicator

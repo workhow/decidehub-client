@@ -56,7 +56,7 @@ class ChangePolicyModal extends Component {
           <TextArea
             name="pollDescription"
             className="text-base text-gray-dark"
-            labelText="Bu değişikliği neden yaptığını üyelere açıklar mısın?"
+            labelText="Bu değişikliği neden gerekli gördüğünü üyelere açıklar mısın?"
             handleInputChange={this.handleInputChange}
           />
         </div>

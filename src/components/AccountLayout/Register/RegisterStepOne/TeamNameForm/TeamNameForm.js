@@ -32,6 +32,8 @@ class TeamNameForm extends React.Component {
             name="subdomain"
             suffixText=".decidehub.com"
             labelText="Takım Adı"
+            minLength="5"
+            maxLength="100"
             placeholderText="Takım adınızı giriniz"
           />
           <div className="mt-12">
