@@ -9,6 +9,8 @@ import ProfilePic from "../../AccountLayout/Register/RegisterStepOne/manager.svg
 import FormBlock from "../../AccountLayout/Register/FormBlock/FormBlock";
 import FormBlockTwo from "../../AccountLayout/Register/FormBlockTwo/FormBlockTwo";
 import Button from "../../AccountLayout/Register/Button/Button";
+import RemoveButton from "../../AccountLayout/Register/RemoveButton/RemoveButton";
+import Checkbox from "../../AccountLayout/Register/Checkbox/Checkbox";
 import CloseLogo from "./kapat.svg";
 import "../Users/UsersLayout.css";
 import Loader from "../../Loader/Loader";
@@ -26,6 +28,7 @@ class UsersLayout extends React.Component {
     this.addOrUpdateUser = this.addOrUpdateUser.bind(this);
     this.addUser = this.addUser.bind(this);
     this.editUser = this.editUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +51,8 @@ class UsersLayout extends React.Component {
 
   handleInputChange(event) {
     const target = event.target;
-    const value = target.value;
+    const value =
+      target.type === "checkbox" ? target.value === "on" : target.value;
     const name = target.name;
     this.setState({ [name]: value });
   }
@@ -67,6 +71,7 @@ class UsersLayout extends React.Component {
         addEditUserFirstName: selectedUser.firstName,
         addEditUserLastName: selectedUser.lastName,
         addEditUserEmail: selectedUser.email,
+        addEditIsAdmin: selectedUser.isAdmin,
         addEditUserInitialAuthorityPercent:
           selectedUser.initialAuthorityPercent,
         right: true
@@ -78,6 +83,7 @@ class UsersLayout extends React.Component {
         addEditUserFirstName: "",
         addEditUserLastName: "",
         addEditUserEmail: "",
+        addEditIsAdmin: false,
         addEditUserInitialAuthorityPercent: 0,
         right: true
       });
@@ -102,6 +108,7 @@ class UsersLayout extends React.Component {
             initialAuthorityPercent: parseInt(
               this.state.addEditUserInitialAuthorityPercent
             ),
+            isAdmin: this.state.addEditIsAdmin,
             tenantId: Util.getSubdomain(),
             id: this.state.addEditUserId
           },
@@ -121,6 +128,39 @@ class UsersLayout extends React.Component {
             alert(error.response.data[0].description);
           }
         });
+    }
+  }
+
+  deleteUser() {
+    if (
+      window.confirm(
+        this.state.addEditUserFirstName +
+          " " +
+          this.state.addEditUserLastName +
+          " adlı kullanıcıyı silmek istediğinize emin misiniz?"
+      )
+    ) {
+      if (this.state.addEditUserId) {
+        const deleteUserPath = Util.pathForCurrentSubdomain(
+          "users/delete/" + this.state.addEditUserId
+        );
+
+        axios
+          .delete(deleteUserPath, { headers: Util.authenticationHeaders() })
+          .then(response => {
+            this.updateUserList();
+            this.setState({
+              right: false
+            });
+          })
+          .catch(error => {
+            if (error.response && error.response.status === 401) {
+              Util.signOut();
+            } else {
+              alert(error.response.data[0].description);
+            }
+          });
+      }
     }
   }
 
@@ -241,6 +281,15 @@ class UsersLayout extends React.Component {
                   placeholderText="example@decidehub.com"
                 />
               </div>
+
+              <div className="mb-5">
+                <Checkbox
+                  name="addEditIsAdmin"
+                  checked={this.state.addEditIsAdmin}
+                  text="Yönetici Yetkilerine Sahiptir"
+                  handleInputChange={this.handleInputChange}
+                />
+              </div>
               <div className="mt-12">
                 <Button
                   text={
@@ -251,6 +300,14 @@ class UsersLayout extends React.Component {
                   onClick={this.addOrUpdateUser}
                 />
               </div>
+              {this.state.addEditUserId ? (
+                <div>
+                  <RemoveButton
+                    text={"Kullanıcıyı Sil"}
+                    onClick={this.deleteUser}
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
         </Drawer>
