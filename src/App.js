@@ -16,6 +16,7 @@ import PolicyLayout from "./components/MainLayout/Policies/PolicyLayout";
 import PolicyDiffLayout from "./components/MainLayout/Policies/PolicyDiffLayout";
 import LandingPage from "./components/LandingPage/LandingPage";
 import ConfirmEmailLayout from "./components/AccountLayout/ConfirmEmailLayout";
+import PolicyPublicLayout from "./components/MainLayout/Policies/PolicyPublicLayout";
 
 const App = () => (
   <Router>
@@ -32,12 +33,14 @@ const App = () => (
         <PrivateRoute exact path="/users" component={UsersLayout} />
         <PrivateRoute exact path="/settings" component={SettingsLayout} />
         <PrivateRoute exact path="/polls" component={CurrentPollsLayout} />
-        <PrivateRoute exact path="/policy" component={PolicyLayout} />
         <PrivateRoute
           exact
           path="/policy/diff/:id"
           component={PolicyDiffLayout}
         />
+        <PrivateRoute exact path="/policy" component={PolicyLayout} />
+        <Route exact path="/yonetmelik" component={PolicyPublicLayout} />
+
         <Route component={NotFoundLayout} />
       </Switch>
     </Fragment>
