@@ -13,6 +13,7 @@ import History from "./History/History";
 import Button from "../../AccountLayout/Register/Button/Button";
 import DrawerModal from "../DrawerModal/DrawerModal";
 import FinalCongratsModal from "../Polls/FinalCongratsModal/FinalCongratsModal";
+import { withRouter } from "react-router-dom";
 
 export class PolicyLayout extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export class PolicyLayout extends React.Component {
       anchorEl: null,
       currentPolicy: null,
       selectedPolicy: null,
-      draftBody: ""
+      draftBody: "",
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -53,7 +54,7 @@ export class PolicyLayout extends React.Component {
     this.setState({
       ...this.state,
       editing: true,
-      draftBody: this.state.currentPolicy.body
+      draftBody: this.state.currentPolicy.body,
     });
   }
 
@@ -64,16 +65,16 @@ export class PolicyLayout extends React.Component {
   policySelected(policyId) {
     if (policyId === this.state.currentPolicy.id) {
       this.setState({
-        selectedPolicy: this.state.currentPolicy
+        selectedPolicy: this.state.currentPolicy,
       });
     } else {
       const selectedPolicy = this.state.policyHistory.filter(
-        p => p.id === policyId
+        (p) => p.id === policyId
       )[0];
 
       if (selectedPolicy) {
         this.setState({
-          selectedPolicy: selectedPolicy
+          selectedPolicy: selectedPolicy,
         });
       }
     }
@@ -84,20 +85,20 @@ export class PolicyLayout extends React.Component {
 
     axios
       .get(currentPolicyPath, {
-        headers: Util.authenticationHeaders()
+        headers: Util.authenticationHeaders(),
       })
-      .then(response => {
+      .then((response) => {
         this.setState({
           currentPolicy: response.data,
           selectedPolicy: response.data,
-          editing: response.data.id === 0
+          editing: response.data.id === 0,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 401) {
           Util.signOut();
           this.setState({
-            ...this.state
+            ...this.state,
           });
         }
       });
@@ -108,24 +109,24 @@ export class PolicyLayout extends React.Component {
 
     axios
       .get(historyPath, {
-        headers: Util.authenticationHeaders()
+        headers: Util.authenticationHeaders(),
       })
-      .then(response => {
+      .then((response) => {
         this.setState({
-          policyHistory: response.data
+          policyHistory: response.data,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 401) {
           Util.signOut();
           this.setState({
-            ...this.state
+            ...this.state,
           });
         }
       });
   }
 
-  toggleDrawer = (modalType, side, open) => event => {
+  toggleDrawer = (modalType, side, open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -136,11 +137,11 @@ export class PolicyLayout extends React.Component {
     this.setState({
       ...this.state,
       [side]: open,
-      modalType: modalType
+      modalType: modalType,
     });
   };
 
-  openModal = (modalTitle, modalText) => event => {
+  openModal = (modalTitle, modalText) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -153,11 +154,11 @@ export class PolicyLayout extends React.Component {
       modalTitle: modalTitle,
       modalText: modalText,
       modalOpen: true,
-      right: false
+      right: false,
     });
   };
 
-  closeModal = () => event => {
+  closeModal = () => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -167,21 +168,21 @@ export class PolicyLayout extends React.Component {
 
     this.setState({
       ...this.state,
-      modalOpen: false
+      modalOpen: false,
     });
   };
 
   handleNotificationClick(event) {
     this.setState({
       ...this.state,
-      anchorEl: event.currentTarget
+      anchorEl: event.currentTarget,
     });
   }
 
   handleNotificationClose() {
     this.setState({
       ...this.state,
-      anchorEl: null
+      anchorEl: null,
     });
   }
 
@@ -205,6 +206,28 @@ export class PolicyLayout extends React.Component {
               </div>
             </div>
             <div className="w-4/5 m-auto ">
+              <div
+                class="flex items-center bg-blue-500 text-white text-sm my-4 px-4 py-3"
+                role="alert"
+              >
+                <svg
+                  class="fill-current w-4 h-4 mr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z" />
+                </svg>
+                <p>
+                  Yönetmeliğin son halini{" "}
+                  <a
+                    href={`https://${Util.getSubdomain()}.decidehub.com/yonetmelik`}
+                  >
+                    https://{Util.getSubdomain()}
+                    .decidehub.com/yonetmelik
+                  </a>{" "}
+                  adresinden paylaşabilirsiniz.
+                </p>
+              </div>
               {this.state.editing ? (
                 <div>
                   <Header text="Yönetmelik" />
@@ -242,8 +265,9 @@ export class PolicyLayout extends React.Component {
                   <div
                     className="mt-8 bg-white p-8"
                     dangerouslySetInnerHTML={{
-                      __html: this.state.selectedPolicy.body
-                    }}></div>
+                      __html: this.state.selectedPolicy.body,
+                    }}
+                  ></div>
                   {this.state.selectedPolicy.id ===
                     this.state.currentPolicy.id && (
                     <div className="w-1/6 ml-auto py-4">
@@ -287,4 +311,4 @@ export class PolicyLayout extends React.Component {
   }
 }
 
-export default PolicyLayout;
+export default withRouter(PolicyLayout);
