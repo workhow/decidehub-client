@@ -11,8 +11,9 @@ class StatusIndicator extends React.Component {
               (this.props.className || "") +
               " rounded mr-12 text-white text-center"
             : this.props.className
-        }>
-        <div className="text-center py-3 px-8">{this.props.text}</div>
+        }
+      >
+        <div className="text-center p-2 sm:p-4 md:px-8">{this.props.text}</div>
       </div>
     );
   }

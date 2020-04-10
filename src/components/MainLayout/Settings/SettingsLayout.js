@@ -20,7 +20,7 @@ export class SettingsLayout extends React.Component {
     super(props);
     this.state = {
       anchorEl: null,
-      isAdmin: localStorage.isAdmin === "1"
+      isAdmin: localStorage.isAdmin === "1",
     };
     this.handleNotificationClick = this.handleNotificationClick.bind(this);
     this.handleNotificationClose = this.handleNotificationClose.bind(this);
@@ -42,8 +42,8 @@ export class SettingsLayout extends React.Component {
       ...this.state,
       profile: {
         ...this.state.profile,
-        [name]: value
-      }
+        [name]: value,
+      },
     });
   }
 
@@ -56,13 +56,13 @@ export class SettingsLayout extends React.Component {
       reader.onload = () => {
         this.setState({
           ...this.state,
-          profile: { ...this.state.profile, userImage: reader.result }
+          profile: { ...this.state.profile, userImage: reader.result },
         });
       };
     } else {
       this.setState({
         ...this.state,
-        profile: { ...this.state.profile, userImage: null }
+        profile: { ...this.state.profile, userImage: null },
       });
     }
   }
@@ -77,8 +77,8 @@ export class SettingsLayout extends React.Component {
     this.setState({
       settings: {
         ...this.state.settings,
-        [key]: value - 1
-      }
+        [key]: value - 1,
+      },
     });
   }
 
@@ -93,8 +93,8 @@ export class SettingsLayout extends React.Component {
     this.setState({
       settings: {
         ...this.state.settings,
-        [key]: value + 1
-      }
+        [key]: value + 1,
+      },
     });
   }
 
@@ -124,8 +124,8 @@ export class SettingsLayout extends React.Component {
         this.setState({
           settings: {
             ...this.state.settings,
-            [key]: parsedValue
-          }
+            [key]: parsedValue,
+          },
         });
       }
     }
@@ -151,15 +151,15 @@ export class SettingsLayout extends React.Component {
 
     axios
       .get(profilePath, {
-        headers: Util.authenticationHeaders()
+        headers: Util.authenticationHeaders(),
       })
-      .then(response => {
+      .then((response) => {
         this.setState({
           ...this.state,
-          profile: response.data
+          profile: response.data,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 401) {
           Util.signOut();
         }
@@ -171,9 +171,9 @@ export class SettingsLayout extends React.Component {
 
     axios
       .get(settingsPath, {
-        headers: Util.authenticationHeaders()
+        headers: Util.authenticationHeaders(),
       })
-      .then(response => {
+      .then((response) => {
         const settingList = response.data;
         const settings = {};
         for (let i = 0; i < settingList.length; i++) {
@@ -182,10 +182,10 @@ export class SettingsLayout extends React.Component {
 
         this.setState({
           ...this.state,
-          settings: settings
+          settings: settings,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 401) {
           Util.signOut();
         }
@@ -205,13 +205,13 @@ export class SettingsLayout extends React.Component {
           tenantId: this.state.profile.tenantId,
           userImage: this.state.profile.userImage,
           initialAuthorityPercent: this.state.profile.initialAuthorityPercent,
-          id: this.state.profile.id
+          id: this.state.profile.id,
         },
         {
-          headers: Util.authenticationHeaders()
+          headers: Util.authenticationHeaders(),
         }
       )
-      .then(response => {
+      .then((response) => {
         if (response.data.userImage) {
           localStorage.userImage = response.data.userImage;
         } else {
@@ -219,10 +219,10 @@ export class SettingsLayout extends React.Component {
         }
         this.setState({
           ...this.state,
-          profile: response.data
+          profile: response.data,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 401) {
           Util.signOut();
         }
@@ -237,7 +237,7 @@ export class SettingsLayout extends React.Component {
     const settingList = Object.entries(this.state.settings).map(
       ([key, value]) => ({
         key: key,
-        value: value
+        value: value,
       })
     );
 
@@ -246,10 +246,10 @@ export class SettingsLayout extends React.Component {
         settingsPath,
         { settings: settingList },
         {
-          headers: Util.authenticationHeaders()
+          headers: Util.authenticationHeaders(),
         }
       )
-      .then(response => {
+      .then((response) => {
         const settingList = response.data;
         const settings = {};
         for (let i = 0; i < settingList.length; i++) {
@@ -258,10 +258,10 @@ export class SettingsLayout extends React.Component {
 
         this.setState({
           ...this.state,
-          settings: settings
+          settings: settings,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 401) {
           Util.signOut();
         }
@@ -269,7 +269,7 @@ export class SettingsLayout extends React.Component {
 
     this.setState({
       ...this.state,
-      settings: null
+      settings: null,
     });
   }
 
@@ -280,9 +280,9 @@ export class SettingsLayout extends React.Component {
     return (
       <div>
         <LeftNavbar />
-        <div className="ml-24">
+        <div className="ml-16 px-8 md:px-20">
           <div className="flex flex-row justify-end pt-12 status-bar text-sm">
-            <div className="flex flex-row items-center mr-10">
+            <div className="flex flex-row items-center">
               <div variant="contained" onClick={this.handleNotificationClick}>
                 <img src={NotificationLogo} alt="notification logo" />
               </div>
@@ -292,14 +292,14 @@ export class SettingsLayout extends React.Component {
             </div>
           </div>
           {this.state.isAdmin && (
-            <div>
-              <div className="w-2/3 m-auto mt-12">
+            <div className="hidden md:block">
+              <div className="m-auto mt-12">
                 <Header text="Oylama Ayarları" />
               </div>
               <div className="mt-6">
                 <SettingsCard>
-                  <div className="flex flex-col w-1/3 p-5 text-gray-text">
-                    <p className="h-16">
+                  <div className="flex flex-col w-full p-5 text-gray-text">
+                    <p>
                       Oyların geçerli sayılabilmesi için gerekli minimum katılım
                       oranı
                     </p>
@@ -317,10 +317,8 @@ export class SettingsLayout extends React.Component {
                       }
                     />
                   </div>
-                  <div className="flex flex-col w-1/3 p-5 text-gray-text">
-                    <p className="h-16">
-                      Yetki dağılımı oylaması için tekrarlama sıklığı
-                    </p>
+                  <div className="flex flex-col w-full p-5 text-gray-text">
+                    <p>Yetki dağılımı oylaması için tekrarlama sıklığı</p>
                     <FormPlusMinus
                       plusClicked={this.plusClicked}
                       minusClicked={this.minusClicked}
@@ -331,8 +329,8 @@ export class SettingsLayout extends React.Component {
                       value={this.state.settings.VotingFrequency}
                     />
                   </div>
-                  <div className="flex flex-col w-1/3 p-5 text-gray-text">
-                    <p className="h-16">Oylama Süresi</p>
+                  <div className="flex flex-col w-full p-5 text-gray-text">
+                    <p>Oylama Süresi</p>
                     <FormPlusMinus
                       plusClicked={this.plusClicked}
                       minusClicked={this.minusClicked}
@@ -346,23 +344,24 @@ export class SettingsLayout extends React.Component {
                 </SettingsCard>
               </div>
 
-              <div className="w-1/6 ml-auto save-button mt-4">
+              <div className="ml-auto w-full save-button mt-4">
                 <Button onClick={this.updateSettings} text="Kaydet" />
               </div>
             </div>
           )}
-          <div className="w-2/3 m-auto mt-4">
+          <div className="m-auto mt-4">
             <Header text="Kişisel Ayarlar" />
           </div>
-          <div className="flex flex-row justify-between content-center items-center w-2/3 m-auto mt-6 text-sm">
-            <div className="flex flex-col justify-end bg-white border border-gray-light h-64 mr-8">
+          <div className="flex flex-col md:flex-row justify-between content-center items-center m-auto mt-6 text-sm">
+            <div className="flex flex-col justify-end bg-white border border-gray-light h-64 mb-8 md:mr-8 md:mb-0">
               {this.state.profile.userImage ? (
                 <div
                   style={{
                     width: "250px",
                     height: "250px",
-                    background: `url(${this.state.profile.userImage}) center center / cover`
-                  }}></div>
+                    background: `url(${this.state.profile.userImage}) center center / cover`,
+                  }}
+                ></div>
               ) : (
                 <img
                   src={UserPlaceholder}
@@ -370,7 +369,7 @@ export class SettingsLayout extends React.Component {
                   style={{
                     width: "250px",
                     height: "250px",
-                    padding: "20px"
+                    padding: "20px",
                   }}
                 />
               )}
@@ -378,11 +377,12 @@ export class SettingsLayout extends React.Component {
                 type="file"
                 className="mx-auto p-2 bg-white"
                 style={{ width: "250px" }}
-                onChange={this.imageChanged}></input>
+                onChange={this.imageChanged}
+              ></input>
             </div>
-            <div className="border border-gray-light bg-white flex-grow p-10 h-64">
-              <div className="flex flex-row">
-                <div className="w-1/2 mr-5 mb-5">
+            <div className="border border-gray-light w-full bg-white flex-grow p-10">
+              <div className="flex flex-col md:flex-row">
+                <div className="w-full md:w-1/2 mr-5 mb-5">
                   <FormBlock
                     labelText="Adı"
                     name="firstName"
@@ -390,7 +390,7 @@ export class SettingsLayout extends React.Component {
                     value={this.state.profile.firstName}
                   />
                 </div>
-                <div className="w-1/2 mb-5">
+                <div className="w-full md:w-1/2 mb-5">
                   <FormBlock
                     labelText="Soyadı"
                     name="lastName"
@@ -408,7 +408,7 @@ export class SettingsLayout extends React.Component {
               />
             </div>
           </div>
-          <div className="w-1/6 ml-auto save-button mt-4">
+          <div className="w-full ml-auto save-button mt-4">
             <Button onClick={this.updateProfile} text="Kaydet" />
           </div>
           {this.state.isAdmin && false && (

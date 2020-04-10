@@ -21,7 +21,7 @@ import Loader from "../Loader/Loader";
 import moment from "moment";
 import "moment/locale/tr";
 
-const logoForPollType = type => {
+const logoForPollType = (type) => {
   switch (type) {
     case "authorityPoll":
       return AuthorityLogo;
@@ -36,7 +36,7 @@ const logoForPollType = type => {
   }
 };
 
-const drawerForPollType = type => {
+const drawerForPollType = (type) => {
   switch (type) {
     case "authorityPoll":
       return "authvotemodal";
@@ -51,7 +51,7 @@ const drawerForPollType = type => {
   }
 };
 
-const statusTextForListType = listType => {
+const statusTextForListType = (listType) => {
   switch (listType) {
     case "completed":
       return "Tamamlandı";
@@ -66,7 +66,7 @@ const statusTextForListType = listType => {
   }
 };
 
-const statusColorForListType = listType => {
+const statusColorForListType = (listType) => {
   switch (listType) {
     case "completed":
       return "red";
@@ -92,7 +92,7 @@ class MainLayout extends React.Component {
       modalOpen: false,
       notificationOpen: false,
       anchorEl: null,
-      votingPoll: null
+      votingPoll: null,
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -121,10 +121,10 @@ class MainLayout extends React.Component {
   }
 
   vote(pollId) {
-    return event => {
+    return (event) => {
       event.persist();
 
-      const poll = this.state.polls.filter(poll => poll.pollId === pollId)[0];
+      const poll = this.state.polls.filter((poll) => poll.pollId === pollId)[0];
       this.setState({ ...this.state, votingPoll: poll }, () => {
         if (poll.listType === "userVoted") return;
 
@@ -132,9 +132,11 @@ class MainLayout extends React.Component {
           return this.toggleDrawer("pollresultmodal", "right", true)(event);
         }
         if (poll) {
-          return this.toggleDrawer(drawerForPollType(poll.type), "right", true)(
-            event
-          );
+          return this.toggleDrawer(
+            drawerForPollType(poll.type),
+            "right",
+            true
+          )(event);
         }
       });
     };
@@ -147,19 +149,19 @@ class MainLayout extends React.Component {
 
     axios
       .get(nextAuthorityPollDatePath, {
-        headers: Util.authenticationHeaders()
+        headers: Util.authenticationHeaders(),
       })
-      .then(response => {
+      .then((response) => {
         this.setState({
-          nextAuthorityPollDate: response.data
+          nextAuthorityPollDate: response.data,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 401) {
           Util.signOut();
           this.setState({
             ...this.state,
-            refresh: true
+            refresh: true,
           });
         }
       });
@@ -169,7 +171,7 @@ class MainLayout extends React.Component {
     if (withLoader) {
       this.setState({
         ...this.state,
-        polls: null
+        polls: null,
       });
     }
 
@@ -177,18 +179,18 @@ class MainLayout extends React.Component {
 
     axios
       .get(listPollsPath, {
-        headers: Util.authenticationHeaders()
+        headers: Util.authenticationHeaders(),
       })
-      .then(response => {
+      .then((response) => {
         this.setState({
           ...this.state,
-          polls: response.data
+          polls: response.data,
         });
       });
   }
 
   toggleDrawer(modalType, side, open) {
-    return event => {
+    return (event) => {
       if (
         event.type === "keydown" &&
         (event.key === "Tab" || event.key === "Shift")
@@ -199,13 +201,13 @@ class MainLayout extends React.Component {
       this.setState({
         ...this.state,
         [side]: open,
-        modalType: modalType
+        modalType: modalType,
       });
     };
   }
 
   openModal(modalTitle, modalText) {
-    return event => {
+    return (event) => {
       if (
         event.type === "keydown" &&
         (event.key === "Tab" || event.key === "Shift")
@@ -219,13 +221,13 @@ class MainLayout extends React.Component {
         modalText: modalText,
         modalOpen: true,
         right: false,
-        nextAuthorityPollDate: ""
+        nextAuthorityPollDate: "",
       });
     };
   }
 
   closeModal() {
-    return event => {
+    return (event) => {
       if (
         event.type === "keydown" &&
         (event.key === "Tab" || event.key === "Shift")
@@ -235,7 +237,7 @@ class MainLayout extends React.Component {
 
       this.setState({
         ...this.state,
-        modalOpen: false
+        modalOpen: false,
       });
     };
   }
@@ -244,7 +246,7 @@ class MainLayout extends React.Component {
     this.setState({
       ...this.state,
       anchorEl: event.currentTarget,
-      notificationOpen: true
+      notificationOpen: true,
     });
   }
 
@@ -252,7 +254,7 @@ class MainLayout extends React.Component {
     this.setState({
       ...this.setState,
       anchorEl: null,
-      notificationOpen: false
+      notificationOpen: false,
     });
   }
 
@@ -265,8 +267,8 @@ class MainLayout extends React.Component {
     return (
       <div className="pb-64">
         <LeftNavbar />
-        <div className="md:ml-24">
-          <div className="flex flex-row justify-end pt-12 status-bar text-sm">
+        <div className="ml-16 px-8 md:px-20">
+          <div className="flex flex-row w-full justify-between pt-12 status-bar text-sm">
             <div>
               <StatusIndicator
                 text={
@@ -289,101 +291,102 @@ class MainLayout extends React.Component {
               </a>
             </div>
           </div>
-          <div className="m-auto w-2/3 mt-16 text-sm">
+          <div className="m-auto w-full mt-16 text-sm">
             <Header text="Oylama Başlat" />
-            {this.state.polls.filter(poll => poll.type === "authorityPoll")
+            {this.state.polls.filter((poll) => poll.type === "authorityPoll")
               .length === 0 && (
               <div
-                className="flex flex-row w-full bg-white border border-gray-light p-1 h-32 mt-8 cursor-pointer"
-                onClick={this.toggleDrawer("authpollmodal", "right", true)}>
+                className="flex flex-row w-full bg-white border border-gray-light p-4 mt-8 cursor-pointer"
+                onClick={this.toggleDrawer("authpollmodal", "right", true)}
+              >
                 <div className="hidden lg:block">
                   <div className="flex items-center w-24 py-2 mx-4">
                     <img
                       src={AuthorityLogo}
                       alt="puzzle logo"
-                      className="w-full md:hidden lg:block"
+                      className="w-full"
                     />
                   </div>
                 </div>
-                <div className="flex flex-col w-5/6 my-auto lg:ml-auto md:mx-auto">
+                <div className="flex flex-col flex-1 md:my-auto lg:ml-auto md:mx-auto mx-5 mt-2">
                   <Header text="Yetki Dağılımı Oylaması" />
                   <SubHeader
+                    className="mt-1"
                     text="Aşağıdaki oylamalarda, grubunuzdaki her bireyin ne kadar söz hakkı olacağını belirleyin."
-                    className="hidden md:block"
                   />
                 </div>
               </div>
             )}
           </div>
-          <div className="flex flex-col md:flex-row m-auto w-2/3 mt-8 text-sm">
+          <div className="flex flex-col md:flex-row m-auto mt-0 md:mt-4 text-sm">
             <Link
               to="/policy"
-              className="flex flex-col bg-white border border-gray-light w-full md:w-1/2 h-24 md:h-64 mr-8">
-              <div className="flex flex-row md:flex-col p-1">
-                <div className="w-24 py-2 mx-4">
+              className="flex flex-col bg-white border border-gray-light w-full md:w-1/2 p-4"
+            >
+              <div className="flex flex-row md:flex-col p-1 h-full justify-center">
+                <div className="w-24 py-2 mx-4 hidden lg:block">
                   <img
                     src={PolicyLogo}
                     alt="Policy Logo"
-                    className="w-full block md:hidden lg:block"
+                    className="w-full block"
                   />
                 </div>
-                <div className="flex flex-col w-4/5 md:items-start justify-center">
-                  <div className="mx-5 mt-12">
+                <div className="flex flex-1 md:flex-grow-0 flex-col pr-1 md:items-start justify-center">
+                  <div className="mx-5 mt-2">
                     <Header text="Yönetmelik" />
-                    <SubHeader
-                      text="Yönetmeliği düzenleyin"
-                      className="hidden md:block"
-                    />
+                    <SubHeader className="mt-1" text="Yönetmeliği düzenleyin" />
                   </div>
                 </div>
               </div>
             </Link>
-            <div className="flex flex-col justify-between w-full md:w-1/2 h-32 md:h-64 mt-8 md:mt-0">
+            <div className="flex flex-col justify-between w-full md:w-1/2">
               <div
-                className="flex flex-row bg-white border border-gray-light p-1 mt-8 md:mt-0 cursor-pointer"
+                className="flex flex-row flex-1 bg-white border border-gray-light p-4 cursor-pointer"
                 onClick={this.toggleDrawer(
                   "firstmanagerpollmodal",
                   "right",
                   true
-                )}>
-                <div className="w-24 py-2 mx-4">
+                )}
+              >
+                <div className="w-24 py-2 mx-4 hidden lg:block">
                   <img
                     src={ManagerLogo}
                     alt="manager logo"
-                    className="w-full block md:hidden lg:block"
+                    className="w-full block"
                   />
                 </div>
-                <div className="flex flex-col w-4/5 items-left justify-center">
+                <div className="flex flex-1 flex-col pr-1 items-left justify-center">
                   <div className="ml-5">
                     <Header text="Yönetici Seç" />
                     <SubHeader
+                      className="mt-1"
                       text="Belirli bir görev için lider seçin"
-                      className="hidden md:block"
                     />
                   </div>
                 </div>
               </div>
 
               <div
-                className="flex flex-row bg-white border border-gray-light p-1 cursor-pointer"
+                className="flex flex-row flex-1 bg-white border border-gray-light p-4 cursor-pointer"
                 onClick={this.toggleDrawer(
                   "firstsharepollmodal",
                   "right",
                   true
-                )}>
-                <div className="w-24 py-2 mx-4">
+                )}
+              >
+                <div className="w-24 py-2 mx-4 hidden lg:block">
                   <img
                     src={PuzzleLogo}
                     alt="puzzle logo"
-                    className="w-full block md:hidden lg:block"
+                    className="w-full block"
                   />
                 </div>
-                <div className="flex flex-col w-4/5 items-left justify-center">
+                <div className="flex flex-1 flex-col pr-1 items-left justify-center">
                   <div className="ml-5">
                     <Header text="Paylaşım Oylaması" />
                     <SubHeader
-                      text="Gelir,mal,hak paylaşımı için oylama başlatın"
-                      className="hidden md:block"
+                      className="mt-1"
+                      text="Gelir, mal, hak paylaşımı için oylama başlatın"
                     />
                   </div>
                 </div>
@@ -391,12 +394,12 @@ class MainLayout extends React.Component {
             </div>
           </div>
           {this.state.polls.length !== 0 && (
-            <div className="w-2/3 m-auto mt-12 mb-6">
+            <div className="w-2/3 m-auto mt-2 mb-6">
               <Header text="Oylamalar" />
             </div>
           )}
 
-          {this.state.polls.map(poll => (
+          {this.state.polls.map((poll) => (
             <PollCard
               logo={logoForPollType(poll.type)}
               key={poll.pollId}

@@ -28,20 +28,20 @@ export class PolicyDiffLayout extends React.Component {
 
     axios
       .get(currentPolicyPath, {
-        headers: Util.authenticationHeaders()
+        headers: Util.authenticationHeaders(),
       })
-      .then(response => {
+      .then((response) => {
         this.setState({
           currentPolicy: response.data,
           editing: response.data.id === 0,
-          editable: true
+          editable: true,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 401) {
           Util.signOut();
           this.setState({
-            ...this.state
+            ...this.state,
           });
         }
       });
@@ -53,18 +53,18 @@ export class PolicyDiffLayout extends React.Component {
 
     axios
       .get(policyPath, {
-        headers: Util.authenticationHeaders()
+        headers: Util.authenticationHeaders(),
       })
-      .then(response => {
+      .then((response) => {
         this.setState({
-          newPolicy: response.data
+          newPolicy: response.data,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 401) {
           Util.signOut();
           this.setState({
-            ...this.state
+            ...this.state,
           });
         }
       });
@@ -78,7 +78,7 @@ export class PolicyDiffLayout extends React.Component {
       <div>
         <LeftNavbar />
         <div className="flex flex-row">
-          <div className="ml-24 w-full">
+          <div className="ml-16 w-full">
             <div className="flex flex-row justify-end pt-12 mr-32 ml-8 text-sm">
               <div className="flex flex-row items-center">
                 <a href="/home">
@@ -92,8 +92,9 @@ export class PolicyDiffLayout extends React.Component {
                 <div className="mt-8 mx-4 p-8 bg-white">
                   <span
                     dangerouslySetInnerHTML={{
-                      __html: this.state.currentPolicy.body
-                    }}></span>
+                      __html: this.state.currentPolicy.body,
+                    }}
+                  ></span>
                 </div>
               </div>
               <div className="flex-grow">
@@ -101,8 +102,9 @@ export class PolicyDiffLayout extends React.Component {
                 <div className="mt-8 mx-4 p-8 bg-white">
                   <span
                     dangerouslySetInnerHTML={{
-                      __html: this.state.newPolicy.body
-                    }}></span>
+                      __html: this.state.newPolicy.body,
+                    }}
+                  ></span>
                 </div>
               </div>
             </div>

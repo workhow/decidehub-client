@@ -49,7 +49,7 @@ export class PolicyPublicLayout extends React.Component {
     return (
       <div className="mt-20">
         <div className="flex flex-row">
-          <div className="ml-24 w-4/5">
+          <div className="ml-16 w-4/5">
             <div className="w-4/5 m-auto ">
               <div>
                 <Header text={Util.getSubdomain() + " Mevcut Yönetmelik"} />

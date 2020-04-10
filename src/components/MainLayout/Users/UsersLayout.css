@@ -18,7 +18,13 @@
 }
 
 .MuiDrawer-paper {
-  width: 40%;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .MuiDrawer-paper {
+    width: 600px;
+  }
 }
 
 .MuiButton-label {

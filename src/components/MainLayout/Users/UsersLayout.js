@@ -21,7 +21,7 @@ class UsersLayout extends React.Component {
     this.state = {
       right: false,
       users: [],
-      isAdmin: localStorage.isAdmin === "1"
+      isAdmin: localStorage.isAdmin === "1",
     };
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -40,11 +40,11 @@ class UsersLayout extends React.Component {
 
     axios
       .get(listUserPath, {
-        headers: Util.authenticationHeaders()
+        headers: Util.authenticationHeaders(),
       })
-      .then(response => {
+      .then((response) => {
         this.setState({
-          users: response.data
+          users: response.data,
         });
       });
   }
@@ -62,7 +62,7 @@ class UsersLayout extends React.Component {
   }
 
   editUser(id) {
-    const selectedUser = this.state.users.filter(d => d.id === id)[0];
+    const selectedUser = this.state.users.filter((d) => d.id === id)[0];
 
     if (selectedUser) {
       this.setState({
@@ -74,7 +74,7 @@ class UsersLayout extends React.Component {
         addEditIsAdmin: selectedUser.isAdmin,
         addEditUserInitialAuthorityPercent:
           selectedUser.initialAuthorityPercent,
-        right: true
+        right: true,
       });
     } else {
       this.setState({
@@ -85,7 +85,7 @@ class UsersLayout extends React.Component {
         addEditUserEmail: "",
         addEditIsAdmin: false,
         addEditUserInitialAuthorityPercent: 0,
-        right: true
+        right: true,
       });
     }
   }
@@ -110,18 +110,18 @@ class UsersLayout extends React.Component {
             ),
             isAdmin: this.state.addEditIsAdmin,
             tenantId: Util.getSubdomain(),
-            id: this.state.addEditUserId
+            id: this.state.addEditUserId,
           },
           { headers: Util.authenticationHeaders() }
         )
-        .then(response => {
+        .then((response) => {
           this.updateUserList();
           this.setState({
             ...this.state,
-            right: false
+            right: false,
           });
         })
-        .catch(error => {
+        .catch((error) => {
           if (error.response && error.response.status === 401) {
             Util.signOut();
           } else {
@@ -147,13 +147,13 @@ class UsersLayout extends React.Component {
 
         axios
           .delete(deleteUserPath, { headers: Util.authenticationHeaders() })
-          .then(response => {
+          .then((response) => {
             this.updateUserList();
             this.setState({
-              right: false
+              right: false,
             });
           })
-          .catch(error => {
+          .catch((error) => {
             if (error.response && error.response.status === 401) {
               Util.signOut();
             } else {
@@ -164,7 +164,7 @@ class UsersLayout extends React.Component {
     }
   }
 
-  toggleDrawer = (side, open) => event => {
+  toggleDrawer = (side, open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -174,16 +174,17 @@ class UsersLayout extends React.Component {
 
     this.setState({
       ...this.state,
-      [side]: open
+      [side]: open,
     });
   };
 
-  sideList = side => (
+  sideList = (side) => (
     <div
       style={{ width: 350 }}
       role="presentation"
       onClick={this.toggleDrawer(side, false)}
-      onKeyDown={this.toggleDrawer(side, false)}></div>
+      onKeyDown={this.toggleDrawer(side, false)}
+    ></div>
   );
 
   render() {
@@ -193,7 +194,7 @@ class UsersLayout extends React.Component {
     return (
       <div>
         <LeftNavbar />
-        <div className="ml-24">
+        <div className="ml-16">
           <div className="flex flex-row ml-16 md:ml-32 xl:ml-48 mt-16 lg:mt-32 m-8">
             <div className="flex items-center">
               <div className="text-2xl text-gray-dark inline ml-5">Üyeler</div>
@@ -201,15 +202,16 @@ class UsersLayout extends React.Component {
                 <div className="ml-4 border rounded border-green-500">
                   <DrawerButton
                     onClick={this.addUser}
-                    className="text-base text-gray-text inline">
+                    className="text-base text-gray-text inline"
+                  >
                     Yeni Ekle
                   </DrawerButton>
                 </div>
               )}
             </div>
           </div>
-          <div className="user-container mx-16 md:mx-32 xl:mx-48 mt-8">
-            {this.state.users.map(user => (
+          <div className="user-container mx-0 md:mx-32 xl:mx-48 mt-8">
+            {this.state.users.map((user) => (
               <Card
                 editable={this.state.isAdmin}
                 key={user.id}
@@ -227,7 +229,8 @@ class UsersLayout extends React.Component {
         <Drawer
           anchor="right"
           open={this.state.right}
-          onClose={this.toggleDrawer("right", false)}>
+          onClose={this.toggleDrawer("right", false)}
+        >
           {this.sideList("right")}
           <div className="m-4 md:m-12 lg:m-16 mb-6 bg-white">
             <img

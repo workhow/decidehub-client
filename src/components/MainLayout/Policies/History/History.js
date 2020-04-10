@@ -12,7 +12,7 @@ class History extends Component {
 
   render() {
     return (
-      <div className="fixed top-0 bottom-0 right-0 overflow-scroll w-1/6">
+      <div className="fixed top-0 bottom-0 right-0 overflow-scroll w-48 xl:w-64">
         <div className="bg-gray-dark text-white py-4 px-8">
           <p className="text-lg">Geçmiş</p>
         </div>
@@ -21,7 +21,8 @@ class History extends Component {
             className="w-full p-5 hover:bg-gray-light"
             onClick={() =>
               this.props.policySelected(this.props.currentPolicy.id)
-            }>
+            }
+          >
             <p className="text-gray-dark text-sm">Mevcut Yönetmelik</p>
             <SubHeader text={this.props.currentPolicy.userName} />
           </div>
@@ -31,12 +32,10 @@ class History extends Component {
               <div
                 key={policy.id}
                 className="w-full p-5 hover:bg-gray-light"
-                onClick={() => this.props.policySelected(policy.id)}>
+                onClick={() => this.props.policySelected(policy.id)}
+              >
                 <p className="text-gray-dark text-sm">
-                  {moment
-                    .utc(policy.createdAt)
-                    .local()
-                    .format("DD MMMM YYYY")}
+                  {moment.utc(policy.createdAt).local().format("DD MMMM YYYY")}
                 </p>
                 <SubHeader text={policy.userName} />
               </div>
