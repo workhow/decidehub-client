@@ -33,15 +33,15 @@ class ManagerVoteModal extends Component {
         votePath,
         {
           pollId: this.props.poll.pollId,
-          value: this.optionIndex
+          value: this.state.selectedIndex,
         },
         { headers: Util.authenticationHeaders() }
       )
-      .then(response => {
+      .then((response) => {
         this.props.openModal("Tebrikler! Harika!", "Oyunu kullandın.")(event);
         this.props.refreshData(true);
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 401) {
           Util.signOut();
         } else {
@@ -62,10 +62,7 @@ class ManagerVoteModal extends Component {
           <SubHeader text="Sonlanma Tarihi" />
           <p className="text-gray-dark text-base w-2/3 text-left">
             {Util.capitalize(
-              moment
-                .utc(this.props.poll.deadline)
-                .local()
-                .calendar()
+              moment.utc(this.props.poll.deadline).local().calendar()
             )}
           </p>
         </div>
@@ -83,7 +80,8 @@ class ManagerVoteModal extends Component {
                 key={index}
                 className={`hover:bg-green-100 ${
                   index === this.state.selectedIndex ? "bg-option-selected" : ""
-                }`}>
+                }`}
+              >
                 <Checkbox
                   text={option}
                   readOnly={true}
