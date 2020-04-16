@@ -9,7 +9,7 @@ class InfoContainer extends React.Component {
             <img src={this.props.logo} alt="logo" className="w-full" />
           </div>
           <div className="lg:pl-16 flex flex-col justify-center w-full text-justify">
-            <p className="text-2xl md:text-3xl pb-4">{this.props.title}</p>
+            <p className="text-2xl md:text-3xl pb-2">{this.props.title}</p>
             <p className="text-sm md:text-base mb-6">{this.props.text}</p>
           </div>
         </div>
