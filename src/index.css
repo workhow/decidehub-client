@@ -10471,6 +10471,12 @@ video {
   width: 100%;
 }
 
+.w-full-lp-img {
+  width: 100%;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
 .w-screen {
   width: 100vw;
 }
