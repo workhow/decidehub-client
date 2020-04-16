@@ -12,7 +12,7 @@ class RegisterStepOne extends React.Component {
                 </p>
                 <img src={image} alt="manager" className="m-auto mb-10"/>
                 <p className="text-center text-sm mb-10 mx-5 text-gray-dark">
-                    Her Grubu yanlızca bir yönetici oluşturur. Diğer üyeleri davet eder takımı
+                    Her takım yanlızca bir yönetici oluşturur ve yönetici diğer üyeleri davet eder. Takımı
                     sizden başka birinin yaratmadığından emin olun.
                 </p>
                 <div>
