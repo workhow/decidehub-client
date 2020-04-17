@@ -394,7 +394,7 @@ class MainLayout extends React.Component {
             </div>
           </div>
           {this.state.polls.length !== 0 && (
-            <div className="w-2/3 m-auto mt-2 mb-6">
+            <div className="m-auto mt-10 mb-6">
               <Header text="Oylamalar" />
             </div>
           )}
