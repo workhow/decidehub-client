@@ -3,8 +3,8 @@ import React from "react";
 import Util from "../../../util";
 import ProfilePic from "../../AccountLayout/Register/RegisterStepOne/manager.svg";
 import Loader from "../../Loader/Loader";
-import "../Users/UsersLayout.css";
 import Card from "./Card/Card";
+import "./MembersLayout.css";
 
 class MembersLayout extends React.Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class MembersLayout extends React.Component {
   }
 
   render() {
-    if (this.state.users.length === 0) {
+    if (this.state.members.length === 0) {
       return <Loader />;
     }
     return (
