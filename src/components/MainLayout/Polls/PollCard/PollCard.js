@@ -1,10 +1,8 @@
-import React from "react";
-import SettingsCard from "../../Settings/SettingsCard/SettingsCard";
-import StatusIndicator from "../../../SetupLayout/StatusIndicator/StatusIndicator";
-import SubHeader from "../../Settings/SubHeader/SubHeader";
-import Util from "../../../../util";
 import moment from "moment";
 import "moment/locale/tr";
+import React from "react";
+import Util from "../../../../util";
+import SettingsCard from "../../Settings/SettingsCard/SettingsCard";
 
 class PollCard extends React.Component {
   constructor(props) {
