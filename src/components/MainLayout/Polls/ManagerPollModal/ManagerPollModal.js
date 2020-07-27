@@ -1,9 +1,9 @@
-import React, { Component } from "react";
 import axios from "axios";
+import React, { Component } from "react";
 import Util from "../../../../util";
+import Button from "../../../AccountLayout/Register/Button/Button";
 import FormBlock from "../../../AccountLayout/Register/FormBlock/FormBlock";
 import TextArea from "../../../AccountLayout/Register/TextArea/TextArea";
-import Button from "../../../AccountLayout/Register/Button/Button";
 
 class ManagerPollModal extends Component {
   constructor(props) {
@@ -90,7 +90,7 @@ class ManagerPollModal extends Component {
   render() {
     return (
       <div className="flex flex-col px-3 mt-8">
-        <p className="text-2xl mt-4 text-gray-dark">Yönetici seçimi başlat</p>
+        <p className="text-2xl mt-4 text-gray-dark">Oylama Ayarları</p>
         <div className="mt-8">
           <FormBlock
             name="name"

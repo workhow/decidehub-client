@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import VotingPeople from "./Asset 7.svg";
 import Button from "../../../AccountLayout/Register/Button/Button";
+import VotingPeople from "./Asset 7.svg";
 
 class FirstManagerPollModal extends Component {
   render() {
     return (
       <div className="flex flex-col pr-3">
         <p className="text-2xl text-gray-dark w-full align-left pl-2">
-          Yönetici Seçimi Başlat
+          Çoktan Seçmeli Oylama Başlat
         </p>
         <div className="flex flex-col justify-center mt-12 px-4 items-center px-12">
           <img
@@ -17,18 +17,18 @@ class FirstManagerPollModal extends Component {
             alt="illustration of voting people"
           />
           <p className="text-base mt-12 text-gray-dark text-center">
-            Bir görev tanımına kimi getireceğinize bu çoktan seçmeli oylama ile
-            karar verebilirsiniz.
+            Bu oylama ile yapabilecekleriniz
           </p>
           <p className="text-xs mt-4 text-gray-dark text-left">
             <ul className="list-disc">
               <li>
-                Göreve ait yetki ve sorumlulukların önceden yönetmelikle net
-                şekilde tanımlanmış olmasını tavsiye ederiz.
+                Üye giriş - çıkış oylamaları
               </li>
               <li>
-                Bu oylamayı çoktan seçmeli her türlü oylamada karar almak için
-                de kullanabilirsiniz.
+                Yönetici seçimi oylamaları
+              </li>
+              <li>
+                Para transferi kabul - red oylamaları
               </li>
             </ul>
           </p>

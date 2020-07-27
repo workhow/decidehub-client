@@ -7,7 +7,7 @@ class CongratsManagerModal extends Component {
     return (
       <div className="flex flex-col pr-3 mt-8">
         <p className="text-2xl text-gray-dark w-1/2 align-left pl-2">
-          Tebrikler yönetici seçimi başlattın!
+          Tebrikler çoktan seçmeli oylamayı başlattın!
         </p>
         <div className="flex flex-col justify-center mt-24 px-4">
           <img src={ManagerCheck} alt="illustration authority" />

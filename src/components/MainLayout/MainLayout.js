@@ -1,25 +1,24 @@
-import React from "react";
 import axios from "axios";
+import moment from "moment";
+import "moment/locale/tr";
+import React from "react";
+import { Link, Redirect } from "react-router-dom";
 import Util from "../../util";
-import { Redirect } from "react-router-dom";
-import LeftNavbar from "./LeftNavbar/LeftNavbar";
+import Loader from "../Loader/Loader";
 import StatusIndicator from "../SetupLayout/StatusIndicator/StatusIndicator";
+import DrawerModal from "./DrawerModal/DrawerModal";
+import LeftNavbar from "./LeftNavbar/LeftNavbar";
+import Notifications from "./Notifications/Notifications";
+import PuzzleLogo from "./paylasim.svg";
+import FinalCongratsModal from "./Polls/FinalCongratsModal/FinalCongratsModal";
+import PollCard from "./Polls/PollCard/PollCard";
 import NotificationLogo from "./Settings/bildirim.svg";
 import LogoutLogo from "./Settings/cikis.svg";
 import Header from "./Settings/Header/Header";
 import SubHeader from "./Settings/SubHeader/SubHeader";
-import PollCard from "./Polls/PollCard/PollCard";
-import PolicyLogo from "./yonetmelik.svg";
-import PuzzleLogo from "./paylasim.svg";
-import ManagerLogo from "./yonetici.svg";
 import AuthorityLogo from "./yetki.svg";
-import DrawerModal from "./DrawerModal/DrawerModal";
-import { Link } from "react-router-dom";
-import FinalCongratsModal from "./Polls/FinalCongratsModal/FinalCongratsModal";
-import Notifications from "./Notifications/Notifications";
-import Loader from "../Loader/Loader";
-import moment from "moment";
-import "moment/locale/tr";
+import ManagerLogo from "./yonetici.svg";
+import PolicyLogo from "./yonetmelik.svg";
 
 const logoForPollType = (type) => {
   switch (type) {
@@ -357,10 +356,10 @@ class MainLayout extends React.Component {
                 </div>
                 <div className="flex flex-1 flex-col pr-1 items-left justify-center">
                   <div className="ml-5">
-                    <Header text="Yönetici Seç" />
+                    <Header text="Çoktan Seçmeli Oylama" />
                     <SubHeader
                       className="mt-1"
-                      text="Belirli bir görev için lider seçin"
+                      text="Seçenekler arasında tercih yapın."
                     />
                   </div>
                 </div>
