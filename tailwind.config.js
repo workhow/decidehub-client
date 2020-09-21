@@ -1,4 +1,11 @@
 module.exports = {
+  purge: {
+    enabled: true, content: [
+      './src/**/*.html',
+      './src/**/*.jsx',
+      './src/**/*.js',
+    ]
+  },
   theme: {
     extend: {
       colors: {
@@ -11,6 +18,10 @@ module.exports = {
         }
       },
     }
+  },
+  future: {
+    purgeLayersByDefault: true,
+    removeDeprecatedGapUtilities: true,
   },
   variants: {},
   plugins: []

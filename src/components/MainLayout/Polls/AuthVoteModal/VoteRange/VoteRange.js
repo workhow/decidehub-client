@@ -15,7 +15,7 @@ class VoteRange extends Component {
           type="range"
           name="amount"
           min="0"
-          data-userid={this.props.userId}
+          data-option={this.props.option}
           max={this.props.max}
           value={this.props.value}
           onChange={this.props.onChange}
@@ -24,7 +24,7 @@ class VoteRange extends Component {
           type="number"
           name="amount"
           min="0"
-          data-userid={this.props.userId}
+          data-option={this.props.option}
           max={this.props.max}
           value={this.props.value}
           onChange={this.props.onChange}

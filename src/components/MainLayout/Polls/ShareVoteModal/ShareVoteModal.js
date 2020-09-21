@@ -1,24 +1,21 @@
-import React, { Component } from "react";
 import axios from "axios";
-import Util from "../../../../util";
-import Button from "../../../AccountLayout/Register/Button/Button";
-import VoteRange from "../AuthVoteModal/VoteRange/VoteRange";
-import SubHeader from "../../Settings/SubHeader/SubHeader";
-import Loader from "../../../Loader/Loader";
 import moment from "moment";
 import "moment/locale/tr";
+import React, { Component } from "react";
+import Util from "../../../../util";
+import Button from "../../../AccountLayout/Register/Button/Button";
+import Loader from "../../../Loader/Loader";
+import SubHeader from "../../Settings/SubHeader/SubHeader";
+import VoteRange from "../AuthVoteModal/VoteRange/VoteRange";
 
 class ShareVoteModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { sum: 0 };
+    const options = JSON.parse(this.props.poll.multipleChoiceResult);
+    this.state = { sum: 0, votes: Object.fromEntries(options.map(option => [option, 0])) };
     this.voteChanged = this.voteChanged.bind(this);
     this.submitVote = this.submitVote.bind(this);
     moment.locale("tr");
-  }
-
-  componentDidMount() {
-    this.updateUserList();
   }
 
   submitVote(event) {
@@ -35,8 +32,8 @@ class ShareVoteModal extends Component {
         votePath,
         {
           pollId: this.props.poll.pollId,
-          users: Object.entries(this.state.votes).map(([key, value]) => ({
-            userId: key,
+          options: Object.entries(this.state.votes).map(([key, value]) => ({
+            option: key,
             sharePercent: value
           }))
         },
@@ -58,13 +55,13 @@ class ShareVoteModal extends Component {
   voteChanged(event) {
     const target = event.target;
     let value = parseInt(target.value);
-    const userId = target.dataset.userid;
+    const option = target.dataset.option;
 
-    if (this.state.sum + value - this.state.votes[userId] > 100) {
-      value = 100 - this.state.sum + this.state.votes[userId];
+    if (this.state.sum + value - this.state.votes[option] > 100) {
+      value = 100 - this.state.sum + this.state.votes[option];
     }
 
-    const newVotes = { ...this.state.votes, [userId]: value };
+    const newVotes = { ...this.state.votes, [option]: value };
 
     const sum = Object.values(newVotes).reduce(
       (a, b) => parseInt(a) + parseInt(b),
@@ -78,34 +75,8 @@ class ShareVoteModal extends Component {
     });
   }
 
-  updateUserList() {
-    const listUserPath = Util.pathForCurrentSubdomain("users?noImage=true");
-
-    axios
-      .get(listUserPath, {
-        headers: Util.authenticationHeaders()
-      })
-      .then(response => {
-        const userList = response.data.filter(
-          user => user.id !== localStorage.userId && user.isActive
-        );
-
-        const votes = {};
-
-        for (let i = 0; i < userList.length; i++) {
-          const user = userList[i];
-          votes[user.id] = 0;
-        }
-
-        this.setState({
-          users: userList,
-          votes: votes
-        });
-      });
-  }
-
   render() {
-    if (!this.state.users) {
+    if (!this.props.poll.multipleChoiceResult) {
       return <Loader />;
     }
     return (
@@ -133,16 +104,18 @@ class ShareVoteModal extends Component {
           </p>
         </div>
 
-        {this.state.users.map(user => (
-          <VoteRange
-            name={`${user.firstName} ${user.lastName}`}
-            userId={user.id}
-            key={user.id}
-            max="100"
-            value={this.state.votes[user.id]}
-            onChange={this.voteChanged}
-          />
-        ))}
+        {this.props.poll.multipleChoiceResult &&
+          JSON.parse(this.props.poll.multipleChoiceResult).map(
+            (option) => (
+              <VoteRange
+                name={option}
+                option={option}
+                key={option}
+                max="100"
+                value={this.state.votes[option]}
+                onChange={this.voteChanged}
+              />
+            ))}
         <div className="flex flex-col w-full mt-24">
           <Button text="Gönder" onClick={this.submitVote} />
         </div>
