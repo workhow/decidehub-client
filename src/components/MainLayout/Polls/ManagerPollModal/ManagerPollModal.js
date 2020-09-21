@@ -124,7 +124,7 @@ class ManagerPollModal extends Component {
 
             {index > 1 && (
               <button
-                className="bg-red-500 text-white font-bold uppercase py-3 px-4 text-xs  self-end "
+                className="bg-red-500 text-white font-bold uppercase py-3 px-4 text-xs self-end "
                 onClick={this.removeOption}
                 data-index={index}>
                 Sil

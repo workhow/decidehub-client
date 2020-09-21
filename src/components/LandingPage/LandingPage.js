@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import LandingNavbar from "./LandingNavbar/LandingNavbar";
-import InfoContainerRight from "./InfoContainerRight/InfoContainerRight";
-import InfoContainerLeft from "./InfoContainerLeft/InfoContainerLeft";
+import Util from "../../util";
 import Footer from "./Footer/Footer";
 import VotingLogo from "./Group 10.svg";
-import ManagerLogo from "./yonetici.svg";
-import PersonLogo from "./yetki.svg";
-import ShareLogo from "./paylasim.svg";
-import PolicyLogo from "./yonetmelik.svg";
+import InfoContainerLeft from "./InfoContainerLeft/InfoContainerLeft";
+import InfoContainerRight from "./InfoContainerRight/InfoContainerRight";
+import LandingNavbar from "./LandingNavbar/LandingNavbar";
 import "./LandingPage.css";
-import Util from "../../util";
+import ShareLogo from "./paylasim.svg";
+import PersonLogo from "./yetki.svg";
+import ManagerLogo from "./yonetici.svg";
+import PolicyLogo from "./yonetmelik.svg";
 
 class LandingPage extends Component {
   componentDidMount() {
@@ -31,7 +31,7 @@ class LandingPage extends Component {
         <div className="wrapper">
           <div className="bg-white pt-12">
             <div className="flex flex-col md:flex-row items-center slogan-text">
-              <div className="text-gray-dark pt-16 pb-8  md:px-4 lg:px-12 xl:px-24 w-2/3  text-justify">
+              <div className="text-gray-dark pt-16 pb-8 md:px-4 lg:px-12 xl:px-24 w-2/3 text-justify">
                 <div className="px-4 md:px-12 rounded">
                   <p className="text-2xl md:text-3xl pb-4">Decidehub nedir?</p>
                   <p className="text-base lg:text-lg pb-8">
