@@ -6,7 +6,7 @@ class VoteRange extends Component {
     return (
       <form
         name="voteForm"
-        className="flex flex-row my-4 justify-between items-center">
+        className="flex flex-row items-center justify-between my-4">
         <div className="w-1/2 align-left">
           <p className="text-lg text-gray-dark">{this.props.name}</p>
         </div>
@@ -15,6 +15,7 @@ class VoteRange extends Component {
           type="range"
           name="amount"
           min="0"
+          data-userid={this.props.userId}
           data-option={this.props.option}
           max={this.props.max}
           value={this.props.value}
@@ -24,6 +25,7 @@ class VoteRange extends Component {
           type="number"
           name="amount"
           min="0"
+          data-userid={this.props.userId}
           data-option={this.props.option}
           max={this.props.max}
           value={this.props.value}

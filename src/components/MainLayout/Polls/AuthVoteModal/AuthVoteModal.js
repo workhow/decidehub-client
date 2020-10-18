@@ -1,12 +1,12 @@
-import React, { Component } from "react";
 import axios from "axios";
-import Util from "../../../../util";
-import Button from "../../../AccountLayout/Register/Button/Button";
-import VoteRange from "./VoteRange/VoteRange";
-import SubHeader from "../../Settings/SubHeader/SubHeader";
-import Loader from "../../../Loader/Loader";
 import moment from "moment";
 import "moment/locale/tr";
+import React, { Component } from "react";
+import Util from "../../../../util";
+import Button from "../../../AccountLayout/Register/Button/Button";
+import Loader from "../../../Loader/Loader";
+import SubHeader from "../../Settings/SubHeader/SubHeader";
+import VoteRange from "./VoteRange/VoteRange";
 
 class AuthVoteModal extends Component {
   constructor(props) {
@@ -65,7 +65,7 @@ class AuthVoteModal extends Component {
     }
 
     const newVotes = { ...this.state.votes, [userId]: value };
-
+    
     const sum = Object.values(newVotes).reduce(
       (a, b) => parseInt(a) + parseInt(b),
       0
@@ -111,13 +111,13 @@ class AuthVoteModal extends Component {
     return (
       <div className="flex flex-col mt-8">
         <div className="flex flex-row justify-between mb-8">
-          <p className="text-2xl text-gray-dark w-1/2 align-left">
+          <p className="w-1/2 text-2xl text-gray-dark align-left">
             {this.props.poll.name}
           </p>
         </div>
         <div className="flex flex-row mb-24">
           <SubHeader text="Sonlanma Tarihi" />
-          <p className="text-gray-dark text-base ml-16">
+          <p className="ml-16 text-base text-gray-dark">
             {Util.capitalize(
               moment
                 .utc(this.props.poll.deadline)
