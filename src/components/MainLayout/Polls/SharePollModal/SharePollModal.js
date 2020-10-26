@@ -33,7 +33,7 @@ class SharePollModal extends Component {
       .post(
         startSharePollPath,
         {
-          name: this.state.title,
+          name: this.state.name,
           description: this.state.description,
           options: this.state.options,
         },
